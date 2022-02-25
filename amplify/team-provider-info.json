@@ -19,7 +19,7 @@
       "function": {
         "dashboardsLambda": {
           "deploymentBucketName": "amplify-canaryprivacy-dev-193748-deployment",
-          "s3Key": "amplify-builds/dashboardsLambda-3364336a344a5a767a5a-build.zip"
+          "s3Key": "amplify-builds/dashboardsLambda-4f56774d6f54536b4243-build.zip"
         }
       }
     }

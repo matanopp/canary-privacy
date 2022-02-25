@@ -58,13 +58,14 @@ const convertUrlType = (param, type) => {
  * HTTP Get method for list objects *
  ********************************/
 
- app.get(path, function(req, res) {
-  let params = {
-    TableName: tableName,
-    limit: 100
+app.get(path, function(req, res) {
+  console.log("userId: "+ req.query.userId);
+
+  let queryParams = {
+    TableName: tableName
   }
 
-  dynamodb.scan(params, (err, data) => {
+  dynamodb.scan(queryParams, (err, data) => {
     if (err) {
       res.statusCode = 500;
       res.json({error: 'Could not load items: ' + err});
@@ -73,7 +74,6 @@ const convertUrlType = (param, type) => {
     }
   });
 });
-
 /********************************
  * HTTP Get method for list objects *
  ********************************/
