@@ -1,0 +1,10 @@
+{
+  "resourceName": "dashboards",
+  "tableName": "dashboards",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

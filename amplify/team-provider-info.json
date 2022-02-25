@@ -9,11 +9,18 @@
       "UnauthRoleName": "amplify-canaryprivacy-dev-193748-unauthRole",
       "StackName": "amplify-canaryprivacy-dev-193748",
       "StackId": "arn:aws:cloudformation:us-east-2:154902149151:stack/amplify-canaryprivacy-dev-193748/2a2d9070-95d3-11ec-a3f9-06ef628537a2",
-      "AmplifyAppId": "d3dp9x4dbnxfrq"
+      "AmplifyAppId": "d3dp9x4dbnxfrq",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-canaryprivacy-dev-193748-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
         "canaryprivacy21cc3244": {}
+      },
+      "function": {
+        "dashboardsLambda": {
+          "deploymentBucketName": "amplify-canaryprivacy-dev-193748-deployment",
+          "s3Key": "amplify-builds/dashboardsLambda-3364336a344a5a767a5a-build.zip"
+        }
       }
     }
   }

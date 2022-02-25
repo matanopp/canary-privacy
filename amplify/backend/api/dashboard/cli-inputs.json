@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "paths": {
+    "/dashboards": {
+      "name": "/dashboards",
+      "lambdaFunction": "dashboardsLambda",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  }
+}

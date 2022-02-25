@@ -10,5 +10,30 @@ export type AmplifyDependentResourcesAttributes = {
             "AppClientID": "string",
             "CreatedSNSRole": "string"
         }
+    },
+    "storage": {
+        "dashboards": {
+            "Name": "string",
+            "Arn": "string",
+            "StreamArn": "string",
+            "PartitionKeyName": "string",
+            "PartitionKeyType": "string",
+            "Region": "string"
+        }
+    },
+    "function": {
+        "dashboardsLambda": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        }
+    },
+    "api": {
+        "dashboard": {
+            "RootUrl": "string",
+            "ApiName": "string",
+            "ApiId": "string"
+        }
     }
 }
