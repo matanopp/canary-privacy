@@ -5,18 +5,16 @@ import OverviewTile from './OverviewTile.js'
 import CookieTile from './CookieTile.js';
 import EmailTile from './EmailTile.js';
 import ChangeDetectionTile from './ChangeDetectionTile';
+import Dashboards from "./Dashboards";
 
-import { withAuthenticator } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
-
-import awsExports from './aws-exports';
+import awsExports from "./aws-exports";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
 Amplify.configure(awsExports);
 
 function App({ signOut, user }) {
     return (
         <div id="home-wrapper">
-            <h1>Hello {user.username}</h1>
-            <button onClick={signOut}>Sign out</button>
             <div id="home-sidebar">
                 <a href="/">
                     <img class="logoOnly" src={logoOnlyBlue} alt="Logo Only Blue" />
@@ -40,5 +38,4 @@ function App({ signOut, user }) {
         </div>
     );
 }
-
 export default withAuthenticator(App);
