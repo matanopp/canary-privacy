@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-canaryprivacy-dev-193748-authRole",
+      "UnauthRoleArn": "arn:aws:iam::154902149151:role/amplify-canaryprivacy-dev-193748-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::154902149151:role/amplify-canaryprivacy-dev-193748-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-canaryprivacy-dev-193748-deployment",
+      "UnauthRoleName": "amplify-canaryprivacy-dev-193748-unauthRole",
+      "StackName": "amplify-canaryprivacy-dev-193748",
+      "StackId": "arn:aws:cloudformation:us-east-2:154902149151:stack/amplify-canaryprivacy-dev-193748/2a2d9070-95d3-11ec-a3f9-06ef628537a2",
+      "AmplifyAppId": "d3dp9x4dbnxfrq"
+    }
+  }
+}
