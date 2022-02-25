@@ -58,6 +58,26 @@ const convertUrlType = (param, type) => {
  * HTTP Get method for list objects *
  ********************************/
 
+ app.get(path, function(req, res) {
+  let params = {
+    TableName: tableName,
+    limit: 100
+  }
+
+  dynamodb.scan(params, (err, data) => {
+    if (err) {
+      res.statusCode = 500;
+      res.json({error: 'Could not load items: ' + err});
+    } else {
+      res.json(data.Items);
+    }
+  });
+});
+
+/********************************
+ * HTTP Get method for list objects *
+ ********************************/
+
 app.get(path + hashKeyPath, function(req, res) {
   var condition = {}
   condition[partitionKeyName] = {
