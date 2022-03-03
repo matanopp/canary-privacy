@@ -11,16 +11,16 @@ function EmailTile(props) {
                 </div>
                 <div className="email-priority-list">
                     <div className="email-priority-column">
-                        <div className="priority-dot" style={{ 'backgroundColor': 'green' }} />
                         <div className="priority-dot" style={{ 'backgroundColor': '#B43940' }} />
+                        <div className="priority-dot" style={{ 'backgroundColor': 'green' }} />
                     </div>
                     <div className="email-priority-column priority-categories">
-                        <p>Successfully Unsubscribed</p>
                         <p>Emails Received After Grace Period</p>
+                        <p>Emails Received Within Grace Period</p>
                     </div>
                     <div className="email-priority-column">
-                        <b>20</b>
-                        <b>3</b>
+                        <b>{props.afterGracePeriod}</b>
+                        <b>{props.withinGracePeriod}</b>
                     </div>
                 </div>
             </div>
