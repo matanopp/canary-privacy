@@ -1,6 +1,10 @@
 import './App.css';
 import { Amplify } from 'aws-amplify';
-import logoOnlyBlue from './logo/logo-only-blue.png';
+import logoOnlyBlue from './images/logo/logo-only-blue.png';
+import changeDetectionIcon from './images/change-detection.png';
+import cookieIcon from './images/cookie.png';
+import emailIcon from './images/email.png';
+import homeIcon from './images/home.png';
 import OverviewTile from './OverviewTile.js'
 import CookieTile from './CookieTile.js';
 import EmailTile from './EmailTile.js';
@@ -37,9 +41,19 @@ class App extends React.Component {
         return (
             <div id="home-wrapper">
                 <div id="home-sidebar">
-                    <a href="/">
-                        <img className="logoOnly" src={logoOnlyBlue} alt="Logo Only Blue" />
-                    </a>
+                    <img className="logoOnly" src={logoOnlyBlue} alt="Logo Only Blue" />
+                    <div className="iconBackground">
+                        <img className="icon" src={homeIcon} alt="Logo Only Blue" />
+                    </div>
+                    <div className="iconBackground">
+                        <img className="icon" src={cookieIcon} alt="Logo Only Blue" />
+                    </div>
+                    <div className="iconBackground">
+                        <img className="icon" src={emailIcon} alt="Logo Only Blue" />
+                    </div>
+                    <div className="iconBackground">
+                        <img className="icon" src={changeDetectionIcon} alt="Logo Only Blue" />
+                    </div>
                 </div>
                 <div id="home">
                     <div className="header">
