@@ -38,7 +38,7 @@ class App extends React.Component {
             <div id="home-wrapper">
                 <div id="home-sidebar">
                     <a href="/">
-                        <img class="logoOnly" src={logoOnlyBlue} alt="Logo Only Blue" />
+                        <img className="logoOnly" src={logoOnlyBlue} alt="Logo Only Blue" />
                     </a>
                 </div>
                 <div id="home">
@@ -100,18 +100,18 @@ class App extends React.Component {
 
     getCookies() {
         return {
-            overviewCookies: 10,
-            highPriorityCookies: 5,
-            mediumPriorityCookies: 2,
-            lowPriorityCookies: 3,
+            overviewCookies: 11,
+            highPriorityCookies: 3,
+            mediumPriorityCookies: 3,
+            lowPriorityCookies: 5,
         };
     }
 
     getEmails() {
         return {
-            overviewEmails: 24,
-            emailsAfterGracePeriod: 5,
-            emailsWithinGracePeriod: 19,
+            overviewEmails: 8,
+            emailsAfterGracePeriod: 3,
+            emailsWithinGracePeriod: 5,
         }
     }
 

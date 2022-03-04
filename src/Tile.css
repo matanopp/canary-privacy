@@ -1,14 +1,14 @@
-.change-detection-tile {
-    width: 100%;
-    min-height: 300px;
-    margin: 20px;
-}
-
 .tile {
     flex-grow: 1;
     background-color: white;
     border-radius: 20px;
     padding: 20px;
+}
+
+.change-detection-tile {
+    width: 100%;
+    min-height: 300px;
+    margin: 20px;
 }
 
 .cookie-tile {
@@ -21,62 +21,48 @@
 
 .tile-body {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    height: 70%;
+    gap: 20px;
     align-items: center;
+    justify-content: flex-start;
 }
 
-.score {
+.data-box {
+    height: 90%;
+    width: 30%;
+    border-radius: 10%;
+    padding: 10px;
+
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
 }
 
-.score p {
-    border: 1px solid blue;
-    width: 150px;
-    height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.data-count {
+    font-size: 48px;
+    font-weight: bolder;
 }
 
-.cookie-priority-list {
-    min-height: 100px;
-    width: 60%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.high-priority {
+    background-color: rgb(236, 185, 179);
+    color: rgb(113, 38, 39)
 }
 
-.cookie-priority-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+.medium-priority {
+    background-color: rgb(249, 218, 191);
+    color: rgb(157, 92, 43);
 }
 
-.priority-dot {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
+.low-priority {
+    background-color: rgb(194, 221, 189);
+    color: rgb(62, 109, 51);
 }
 
-.email-priority-list {
-    min-height: 100px;
-    width: 80%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.email-priority-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.priority-categories {
-    flex-grow: 1;
-    align-items: flex-start;
+.view-report-button {
+    background-color: rgb(51, 68, 213);
+    color: white;
+    padding: 5px 20px;
+    border-radius: 10px;
+    border: none;
 }

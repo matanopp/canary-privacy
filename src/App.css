@@ -41,6 +41,6 @@ h1, h2, h3, p {
     min-height: 300px;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 20px;
 }

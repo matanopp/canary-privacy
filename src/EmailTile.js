@@ -1,29 +1,28 @@
 import './Tile.css';
-import tempimg from './logo/logo-only-blue.png';
+import DataBox from './DataBox.js';
 
 function EmailTile(props) {
     return (
         <div className="email-tile tile">
             <h3>Email Opt-Out</h3>
+            <p>Emails received after the grace period</p>
             <div className="tile-body">
-                <div className="email-score score">
-                    <p>Email Score</p>
-                </div>
-                <div className="email-priority-list">
-                    <div className="email-priority-column">
-                        <div className="priority-dot" style={{ 'backgroundColor': '#B43940' }} />
-                        <div className="priority-dot" style={{ 'backgroundColor': 'green' }} />
-                    </div>
-                    <div className="email-priority-column priority-categories">
-                        <p>Emails Received After Grace Period</p>
-                        <p>Emails Received Within Grace Period</p>
-                    </div>
-                    <div className="email-priority-column">
-                        <b>{props.afterGracePeriod}</b>
-                        <b>{props.withinGracePeriod}</b>
-                    </div>
-                </div>
+                <DataBox
+                    priorityLevel={"high-priority"}
+                    count={props.afterGracePeriod}
+                    dataType={"Emails Received"}
+                    priorityLabel={"after grace period"}
+                />
+                <DataBox
+                    priorityLevel={"low-priority"}
+                    count={props.withinGracePeriod}
+                    dataType={"Emails Received"}
+                    priorityLabel={"within grace period"}
+                />
             </div>
+            <button className="view-report-button">
+                View Full Report
+            </button>
         </div>
     );
 }

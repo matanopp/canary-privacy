@@ -1,32 +1,34 @@
 import './Tile.css';
-import tempimg from './logo/logo-only-blue.png'
+import DataBox from './DataBox.js';
 
 function CookieTile(props) {
     return (
         <div className="cookie-tile tile">
             <h3>Cookie Compliance</h3>
+            <p>We found cookies after opting out</p>
             <div className="tile-body">
-                <div className="cookie-score score">
-                    <p>Cookie Score</p>
-                </div>
-                <div className="cookie-priority-list">
-                    <div className="cookie-priority-column">
-                        <div className="priority-dot" style={{ 'backgroundColor': '#B43940' }} />
-                        <div className="priority-dot" style={{ 'backgroundColor': '#F1B760' }} />
-                        <div className="priority-dot" style={{ 'backgroundColor': '#0592EC' }} />
-                    </div>
-                    <div className="cookie-priority-column priority-categories">
-                        <p>High Priority</p>
-                        <p>Medium Priority</p>
-                        <p>Low Priority</p>
-                    </div>
-                    <div className="cookie-priority-column">
-                        <b>{props.highPriority}</b>
-                        <b>{props.mediumPriority}</b>
-                        <b>{props.lowPriority}</b>
-                    </div>
-                </div>
+                <DataBox
+                    priorityLevel={"high-priority"}
+                    count={props.highPriority}
+                    dataType={"Cookies"}
+                    priorityLabel={"High Priority"}
+                />
+                <DataBox
+                    priorityLevel={"medium-priority"}
+                    count={props.mediumPriority}
+                    dataType={"Cookies"}
+                    priorityLabel={"Medium Priority"}
+                />
+                <DataBox
+                    priorityLevel={"low-priority"}
+                    count={props.lowPriority}
+                    dataType={"Cookies"}
+                    priorityLabel={"Low Priority"}
+                />
             </div>
+            <button className="view-report-button">
+                View Full Report
+            </button>
         </div>
     );
 }
