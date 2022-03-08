@@ -1,5 +1,5 @@
 import './App.css';
-import { Amplify } from 'aws-amplify';
+import { Amplify, API } from 'aws-amplify';
 import logoOnlyBlue from './images/logo/logo-only-blue.png';
 import changeDetectionIcon from './images/change-detection.png';
 import cookieIcon from './images/cookie.png';
@@ -9,14 +9,13 @@ import OverviewTile from './OverviewTile.js'
 import CookieTile from './CookieTile.js';
 import EmailTile from './EmailTile.js';
 import ChangeDetectionTile from './ChangeDetectionTile';
-import Dashboards from "./Dashboards";
 
 import awsExports from "./aws-exports";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import React from 'react';
-Amplify.configure(awsExports);
 
+Amplify.configure(awsExports);
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -80,8 +79,30 @@ class App extends React.Component {
             </div>
         );
     }
+    async fetchDashboardDataFromAPI() {
+        const apiName = "dashboard";
+        const path = "/dashboards";
+        const userId = "1985" // TODO: get from the auth component
+        try {
+            const response = await API.get(apiName, path);
+            let userResults = response.filter(r=>r.userId === userId);
+            if(userResults.length > 0) {
+                return userResults[0]
+            } else {
+                return null;
+            }
+        } catch (error) {
+            console.log(error);
+            throw error.response.data;
+        }
+    }
+    
+    async getDashboardData() {    
+        if(!this.state.dashboardData) {
+            let dashboardData = await this.fetchDashboardDataFromAPI();
+            this.setState({dashboardData : dashboardData});
+        } 
 
-    getDashboardData() {
         let {
             overviewCookies,
             highPriorityCookies,
@@ -113,19 +134,21 @@ class App extends React.Component {
     }
 
     getCookies() {
+        let cookiesData = this.state.dashboardData.tests.cookies;
         return {
-            overviewCookies: 11,
-            highPriorityCookies: 3,
-            mediumPriorityCookies: 3,
-            lowPriorityCookies: 5,
+            overviewCookies: cookiesData.highPriorityCount + cookiesData.mediumPriorityCount + cookiesData.lowPriorityCount,
+            highPriorityCookies: cookiesData.highPriorityCount,
+            mediumPriorityCookies: cookiesData.mediumPriorityCount,
+            lowPriorityCookies: cookiesData.lowPriorityCount,
         };
     }
 
     getEmails() {
+        let emailsData = this.state.dashboardData.tests.emails;
         return {
-            overviewEmails: 8,
-            emailsAfterGracePeriod: 3,
-            emailsWithinGracePeriod: 5,
+            overviewEmails: emailsData.nonCompliantEmailsAfterGracePeriod.length + emailsData.nonCompliantEmailsWithinGracePeriod.length,
+            emailsAfterGracePeriod: emailsData.nonCompliantEmailsAfterGracePeriod.length,
+            emailsWithinGracePeriod: emailsData.nonCompliantEmailsWithinGracePeriod.length ,
         }
     }
 
