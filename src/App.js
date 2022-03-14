@@ -1,19 +1,16 @@
-import './App.css';
-import { Amplify } from 'aws-amplify';
-import OverviewTile from './OverviewTile.js'
-import CookieTile from './CookieTile.js';
-import EmailTile from './EmailTile.js';
-import ChangeDetectionTile from './ChangeDetectionTile';
-import Dashboards from "./Dashboards";
-import { Link } from "react-router-dom";
-import Sidebar from './Sidebar.js';
-
+import "./App.css";
+import { Amplify, API, Auth } from "aws-amplify";
+import Sidebar from "./Sidebar";
+import OverviewTile from "./OverviewTile.js";
+import CookieTile from "./CookieTile.js";
+import EmailTile from "./EmailTile.js";
+import ChangeDetectionTile from "./ChangeDetectionTile";
 import awsExports from "./aws-exports";
-import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
-import React from 'react';
-Amplify.configure(awsExports);
+import React from "react";
 
+
+Amplify.configure(awsExports);
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -26,7 +23,8 @@ class App extends React.Component {
             lowPriorityCookies: null,
             emailsAfterGracePeriod: null,
             emailsWithinGracePeriod: null,
-
+            companyName: null,
+            user: props.user
         };
     }
 
@@ -63,24 +61,38 @@ class App extends React.Component {
             </div>
         );
     }
+    async fetchDashboardDataFromAPI() {
+        const apiName = "dashboard";
+        const path = "/dashboards";
+        const username = this.state.user.username
+        try {
+            const response = await API.get(apiName, path);
+            return response.find((r) => r.username === username);
+        } catch (error) {
+            console.log(error);
+            throw error.response.data;
+        }
+    }
 
-    getDashboardData() {
+    async getDashboardData() {
+        if (!this.state.dashboardData) {
+            let dashboardData = await this.fetchDashboardDataFromAPI();
+            this.setState({ dashboardData: dashboardData });
+        }
+
         let {
             overviewCookies,
             highPriorityCookies,
             mediumPriorityCookies,
-            lowPriorityCookies
+            lowPriorityCookies,
         } = this.getCookies();
 
-        let {
-            overviewEmails,
-            emailsAfterGracePeriod,
-            emailsWithinGracePeriod,
-        } = this.getEmails();
+        let { overviewEmails, emailsAfterGracePeriod, emailsWithinGracePeriod } =
+            this.getEmails();
 
-        let {
-            overviewChanges
-        } = this.getChanges();
+        let { overviewChanges } = this.getChanges();
+
+        let companyName = this.state.dashboardData.companyName;
 
         this.setState({
             overviewCookies,
@@ -91,32 +103,59 @@ class App extends React.Component {
             lowPriorityCookies,
             emailsAfterGracePeriod,
             emailsWithinGracePeriod,
+            companyName,
         });
-
     }
 
     getCookies() {
+        let cookiesData = this.state.dashboardData.domains[0].tests.cookies;
         return {
-            overviewCookies: 11,
-            highPriorityCookies: 3,
-            mediumPriorityCookies: 3,
-            lowPriorityCookies: 5,
+            overviewCookies:
+                cookiesData.highPriorityCount +
+                cookiesData.mediumPriorityCount +
+                cookiesData.lowPriorityCount,
+            highPriorityCookies: cookiesData.highPriorityCount,
+            mediumPriorityCookies: cookiesData.mediumPriorityCount,
+            lowPriorityCookies: cookiesData.lowPriorityCount,
         };
     }
 
     getEmails() {
+        let emailsData = this.state.dashboardData.domains[0].tests.emails;
         return {
-            overviewEmails: 8,
-            emailsAfterGracePeriod: 3,
-            emailsWithinGracePeriod: 5,
-        }
+            overviewEmails:
+                emailsData.nonCompliantEmailsAfterGracePeriod.length +
+                emailsData.nonCompliantEmailsWithinGracePeriod.length,
+            emailsAfterGracePeriod:
+                emailsData.nonCompliantEmailsAfterGracePeriod.length,
+            emailsWithinGracePeriod:
+                emailsData.nonCompliantEmailsWithinGracePeriod.length,
+        };
     }
 
     getChanges() {
+        let changeDetectionData =
+            this.state.dashboardData.domains[0].tests.changeDetection;
+
+        let existingPages = changeDetectionData.pages.existing;
+        let newPages = changeDetectionData.pages.new;
+
+        let existingScripts = changeDetectionData.scripts.existing;
+        let newScripts = changeDetectionData.scripts.new;
+
+        let existingForms = changeDetectionData.forms.existing;
+        let newForms = changeDetectionData.forms.new;
+
         return {
-            overviewChanges: 30,
+            overviewChanges:
+                existingPages.length +
+                newPages.length +
+                existingScripts.length +
+                newScripts.length +
+                existingForms.length +
+                newForms.length,
         };
     }
 }
 
-export default withAuthenticator(App);
+export default App;

@@ -11,16 +11,20 @@ import reportWebVitals from './reportWebVitals';
 import CookiesPage from './CookiesPage.js';
 import EmailsPage from './EmailsPage.js';
 import ChangeDetectionPage from './ChangeDetectionPage.js';
-import Sidebar from './Sidebar.js';
-// import Amplify from "aws-amplify";
-// import awsExports from "./aws-exports";
-// Amplify.configure(awsExports);
+import awsExports from "./aws-exports";
+import { Authenticator } from "@aws-amplify/ui-react";
 
 const rootElement = document.getElementById("root");
 render(
     <BrowserRouter>
         <Routes>
-            <Route path="/" element={<App />} />
+            <Route path="/" element={
+                <Authenticator>
+                    {({ signOut, user }) => (
+                        <App user={user} />
+                    )}
+                </Authenticator>
+            } />
             <Route path="cookies" element={
                 <CookiesPage
                     mismanagedCookies={3}
