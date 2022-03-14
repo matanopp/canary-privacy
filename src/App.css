@@ -2,29 +2,33 @@ h1, h2, h3, p {
     margin: 0;
 }
 
-#home-wrapper {
+.page-wrapper {
     min-height: 100vh;
     display: flex;
     flex-direction: row;
     align-items: stretch;
     justify-content: space-between;
+    background-color: rgb(245, 245, 245);
 }
 
-#home-sidebar {
+.sidebar {
     background-color: white;
+    height: 100%;
     width: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: fixed;
 }
 
-#home {
-    background-color: rgb(245, 245, 245);
+.page-content {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 50px;
+    margin-left: 100px;
+    max-width: 1000px;
 }
 
 .logoOnly {
@@ -62,4 +66,9 @@ h1, h2, h3, p {
     flex-flow: row wrap;
     justify-content: space-between;
     gap: 20px;
+}
+
+.vertical-divider {
+    border: 1px solid #999999;
+    width: 0px;
 }

@@ -1,4 +1,5 @@
 import './Tile.css';
+import { Link } from 'react-router-dom';
 import DataBox from './DataBox.js';
 
 function EmailTile(props) {
@@ -20,9 +21,9 @@ function EmailTile(props) {
                     priorityLabel={"within grace period"}
                 />
             </div>
-            <button className="view-report-button">
+            <Link className="view-report-button" to="/emails">
                 View Full Report
-            </button>
+            </Link>
         </div>
     );
 }

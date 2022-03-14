@@ -1,4 +1,5 @@
 import './Tile.css';
+import { Link } from 'react-router-dom';
 import DataBox from './DataBox.js';
 
 function CookieTile(props) {
@@ -26,9 +27,9 @@ function CookieTile(props) {
                     priorityLabel={"Low Priority"}
                 />
             </div>
-            <button className="view-report-button">
+            <Link className="view-report-button" to="/cookies">
                 View Full Report
-            </button>
+            </Link>
         </div>
     );
 }

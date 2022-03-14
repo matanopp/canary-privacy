@@ -3,6 +3,9 @@
     background-color: white;
     border-radius: 20px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .change-detection-tile {
@@ -62,7 +65,10 @@
 .view-report-button {
     background-color: rgb(51, 68, 213);
     color: white;
+    width: max-content;
+    text-align: center;
     padding: 5px 20px;
     border-radius: 10px;
     border: none;
+    text-decoration: none;
 }

@@ -1,15 +1,12 @@
 import './App.css';
 import { Amplify } from 'aws-amplify';
-import logoOnlyBlue from './images/logo/logo-only-blue.png';
-import changeDetectionIcon from './images/change-detection.png';
-import cookieIcon from './images/cookie.png';
-import emailIcon from './images/email.png';
-import homeIcon from './images/home.png';
 import OverviewTile from './OverviewTile.js'
 import CookieTile from './CookieTile.js';
 import EmailTile from './EmailTile.js';
 import ChangeDetectionTile from './ChangeDetectionTile';
 import Dashboards from "./Dashboards";
+import { Link } from "react-router-dom";
+import Sidebar from './Sidebar.js';
 
 import awsExports from "./aws-exports";
 import { withAuthenticator } from "@aws-amplify/ui-react";
@@ -39,23 +36,9 @@ class App extends React.Component {
 
     render() {
         return (
-            <div id="home-wrapper">
-                <div id="home-sidebar">
-                    <img className="logoOnly" src={logoOnlyBlue} alt="Logo Only Blue" />
-                    <div className="iconBackground">
-                        <img className="icon" src={homeIcon} alt="Logo Only Blue" />
-                    </div>
-                    <div className="iconBackground">
-                        <img className="icon" src={cookieIcon} alt="Logo Only Blue" />
-                    </div>
-                    <div className="iconBackground">
-                        <img className="icon" src={emailIcon} alt="Logo Only Blue" />
-                    </div>
-                    <div className="iconBackground">
-                        <img className="icon" src={changeDetectionIcon} alt="Logo Only Blue" />
-                    </div>
-                </div>
-                <div id="home">
+            <div className="page-wrapper">
+                <Sidebar thisPage="home" />
+                <div className="page-content">
                     <div className="header">
                         <h1>Company Name</h1>
                     </div>
