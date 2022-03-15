@@ -1,7 +1,8 @@
 import "./App.css";
 import { Amplify, API, Auth } from "aws-amplify";
-import Sidebar from "./Sidebar";
-import OverviewTile from "./OverviewTile.js";
+import Header from './Header.js';
+import Sidebar from "./Sidebar.js";
+import Overview from "./Overview.js";
 import CookieTile from "./CookieTile.js";
 import EmailTile from "./EmailTile.js";
 import ChangeDetectionTile from "./ChangeDetectionTile";
@@ -34,31 +35,34 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="page-wrapper">
+            <>
                 <Sidebar thisPage="home" />
-                <div className="page-content">
-                    <div className="header">
-                        <h1>Company Name</h1>
-                    </div>
-                    <OverviewTile
-                        cookies={this.state.overviewCookies}
-                        emails={this.state.overviewEmails}
-                        changes={this.state.overviewChanges}
-                    />
-                    <div className="tests-wrapper">
+                <div className="page-wrapper">
+                    <Header domains={['domain1', 'domain2', 'domain3']} />
+                    <div className="page-content">
+                        <Overview
+                            pages={5}
+                            pagesTotal={13}
+                            scripts={3}
+                            scriptsTotal={10}
+                            forms={0}
+                            formsTotal={7}
+                        />
+                        {/* <div className="tests-wrapper"> */}
                         <CookieTile
-                            highPriority={this.state.highPriorityCookies}
-                            mediumPriority={this.state.mediumPriorityCookies}
-                            lowPriority={this.state.lowPriorityCookies}
+                            highPriority={5 /*this.state.highPriorityCookies*/}
+                            mediumPriority={7 /*this.state.mediumPriorityCookies*/}
+                            lowPriority={2 /*this.state.lowPriorityCookies*/}
                         />
                         <EmailTile
-                            afterGracePeriod={this.state.emailsAfterGracePeriod}
-                            withinGracePeriod={this.state.emailsWithinGracePeriod}
+                            afterGracePeriod={4 /*this.state.emailsAfterGracePeriod*/}
+                            withinGracePeriod={6 /*this.state.emailsWithinGracePeriod*/}
                         />
+                        {/* </div> */}
+                        {/* <ChangeDetectionTile /> */}
                     </div>
-                    <ChangeDetectionTile />
                 </div>
-            </div>
+            </>
         );
     }
     async fetchDashboardDataFromAPI() {

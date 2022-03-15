@@ -4,30 +4,33 @@ h1, h2, h3, p {
 
 .page-wrapper {
     min-height: 100vh;
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     align-items: stretch;
-    justify-content: space-between;
-    background-color: rgb(245, 245, 245);
+    justify-content: space-between; */
+    margin-left: 250px;
+    background-color: rgb(237, 241, 253);
 }
 
 .sidebar {
     background-color: white;
     height: 100%;
-    width: 100px;
+    width: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: fixed;
+    /* box-shadow: 5px 0 5px lightgray; */
+    /* border-right: 1px solid lightgray; */
 }
 
 .page-content {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    gap: 20px;
     padding: 50px;
-    margin-left: 100px;
     max-width: 1000px;
 }
 
@@ -41,22 +44,40 @@ h1, h2, h3, p {
     /* margin: 20px; */
 }
 
-.iconBackground {
+.icon-background {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 10px;
     align-items: center;
-    border-radius: 50%;
-    width: 50px;
+    border-radius: 20px;
+    width: 220px;
     height: 50px;
     margin: 5px;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    /* font-size: 14px; */
 }
 
-.iconBackground:hover {
+.icon-background:hover {
     background-color: rgb(172, 199, 246);
+}
+
+.sidebar-text-selected {
+    color: rgb(57, 73, 214);
+    font-weight: bold;
 }
 
 .header {
     width: 100%;
+    height: 100px;
+    background-color: white; /* lightblue; */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    padding: 0 50px;
 }
 
 .tests-wrapper {
@@ -71,4 +92,20 @@ h1, h2, h3, p {
 .vertical-divider {
     border: 1px solid #999999;
     width: 0px;
+}
+
+.domain-dropdown {
+    background-color: lightblue;
+    width: 400px;
+    padding-left: 20px;
+    border-radius: 20px;
+}
+
+.domain-dropdown-content {
+    display: none;
+}
+
+.domain-dropdown-content-show {
+    display: block;
+    position: absolute;
 }

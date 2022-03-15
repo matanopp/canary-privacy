@@ -1,11 +1,13 @@
 .tile {
-    flex-grow: 1;
+    /* flex-grow: 1; */
+    min-width: 600px;
     background-color: white;
     border-radius: 20px;
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 10px;
 }
 
 .change-detection-tile {
@@ -34,7 +36,7 @@
 .data-box {
     height: 90%;
     width: 30%;
-    border-radius: 10%;
+    border-radius: 10px;
     padding: 10px;
 
     display: flex;
@@ -48,27 +50,33 @@
 }
 
 .high-priority {
-    background-color: rgb(236, 185, 179);
-    color: rgb(113, 38, 39)
+    background-color: rgb(166, 66, 66);
+    color: white;
 }
 
 .medium-priority {
-    background-color: rgb(249, 218, 191);
-    color: rgb(157, 92, 43);
+    background-color: rgb(192, 112, 51);
+    color: white;
 }
 
 .low-priority {
-    background-color: rgb(194, 221, 189);
-    color: rgb(62, 109, 51);
+    background-color: rgb(217, 183, 81);
+    color: white;
 }
 
-.view-report-button {
-    background-color: rgb(51, 68, 213);
-    color: white;
+.view-details-button {
+    color: rgb(51, 68, 213);
     width: max-content;
-    text-align: center;
-    padding: 5px 20px;
     border-radius: 10px;
-    border: none;
     text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.view-details-image {
+    height: 12px;
+    width: auto;
 }

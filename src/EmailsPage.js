@@ -4,12 +4,14 @@ import Sidebar from './Sidebar.js';
 class EmailsPage extends React.Component {
     render() {
         return (
-            <div className="page-wrapper">
+            <>
                 <Sidebar thisPage="emails" />
-                <div className="page-content">
-                    Emails
+                <div className="page-wrapper">
+                    <div className="page-content">
+                        Emails
+                    </div>
                 </div>
-            </div>
+            </>
         );
     }
 }

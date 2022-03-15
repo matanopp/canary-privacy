@@ -1,29 +1,27 @@
 import './Tile.css';
 import { Link } from 'react-router-dom';
 import DataBox from './DataBox.js';
+import ViewDetailsLink from './ViewDetailsLink.js';
+import viewDetailsImage from './images/view-details.svg'
 
 function EmailTile(props) {
     return (
         <div className="email-tile tile">
             <h3>Email Opt-Out</h3>
-            <p>Emails received after the grace period</p>
+            <p>Illegal emails received</p>
             <div className="tile-body">
                 <DataBox
                     priorityLevel={"high-priority"}
                     count={props.afterGracePeriod}
-                    dataType={"Emails Received"}
-                    priorityLabel={"after grace period"}
+                    priorityLabel={"Illegal Emails"}
                 />
                 <DataBox
-                    priorityLevel={"low-priority"}
+                    priorityLevel={"medium-priority"}
                     count={props.withinGracePeriod}
-                    dataType={"Emails Received"}
-                    priorityLabel={"within grace period"}
+                    priorityLabel={"Emails Sent"}
                 />
             </div>
-            <Link className="view-report-button" to="/emails">
-                View Full Report
-            </Link>
+            <ViewDetailsLink to="/emails" />
         </div>
     );
 }

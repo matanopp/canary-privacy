@@ -4,12 +4,14 @@ import Sidebar from './Sidebar.js';
 class ChangeDetectionPage extends React.Component {
     render() {
         return (
-            <div className="page-wrapper">
+            <>
                 <Sidebar thisPage="changeDetection" />
-                <div className="page-content">
-                    Change Detection
+                <div className="page-wrapper">
+                    <div className="page-content">
+                        Change Detection
+                    </div>
                 </div>
-            </div>
+            </>
         );
     }
 }

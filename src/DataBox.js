@@ -7,9 +7,6 @@ function DataBox(props) {
                 <p className={"data-count " + props.priorityLevel}>
                     {props.count}
                 </p>
-                <p>
-                    {props.dataType}
-                </p>
                 <p style={{ fontWeight: "bolder" }}>
                     {props.priorityLabel}
                 </p>

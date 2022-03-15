@@ -23,32 +23,56 @@ class Sidebar extends React.Component {
         return (
             <div className="sidebar">
                 <img className="logoOnly" src={logoOnlyBlue} alt="Logo Only Blue" />
-                <Link className="iconBackground" to="/">
+                <Link className="icon-background" to="/">
                     {this.state.selectedPage === 'home' ?
-                        <img className="icon" src={homeIconBlue} alt="Home Icon Blue" />
+                        <>
+                            <img className="icon" src={homeIconBlue} alt="Home Icon Blue" />
+                            <p className="sidebar-text-selected">Dashboard</p>
+                        </>
                         :
-                        <img className="icon" src={homeIcon} alt="Home Icon" />
+                        <>
+                            <img className="icon" src={homeIcon} alt="Home Icon" />
+                            <p className="sidebar-text">Dashboard</p>
+                        </>
                     }
                 </Link>
-                <Link className="iconBackground" to="/cookies">
+                <Link className="icon-background" to="/cookies">
                     {this.state.selectedPage === 'cookies' ?
-                        <img className="icon" src={cookiesIconBlue} alt="Cookies Icon Blue" />
+                        <>
+                            <img className="icon" src={cookiesIconBlue} alt="Cookies Icon Blue" />
+                            <p className="sidebar-text-selected">Cookie Compliance</p>
+                        </>
                         :
-                        <img className="icon" src={cookiesIcon} alt="Cookies Icon" />
+                        <>
+                            <img className="icon" src={cookiesIcon} alt="Cookies Icon" />
+                            <p className="sidebar-text">Cookie Compliance</p>
+                        </>
                     }
                 </Link>
-                <Link className="iconBackground" to="/emails">
+                <Link className="icon-background" to="/emails">
                     {this.state.selectedPage === 'emails' ?
-                        <img className="icon" src={emailsIconBlue} alt="Emails Icon Blue" />
+                        <>
+                            <img className="icon" src={emailsIconBlue} alt="Emails Icon Blue" />
+                            <p className="sidebar-text-selected">Email Opt Out</p>
+                        </>
                         :
-                        <img className="icon" src={emailsIcon} alt="Emails Icon" />
+                        <>
+                            <img className="icon" src={emailsIcon} alt="Emails Icon" />
+                            <p className="sidebar-text">Email Opt Out</p>
+                        </>
                     }
                 </Link>
-                <Link className="iconBackground" to="/changeDetection">
+                <Link className="icon-background" to="/changeDetection">
                     {this.state.selectedPage === 'changeDetection' ?
-                        <img className="icon" src={changeDetectionIconBlue} alt="Change Detection Icon Blue" />
+                        <>
+                            <img className="icon" src={changeDetectionIconBlue} alt="Change Detection Icon Blue" />
+                            <p className="sidebar-text-selected">Change Detection</p>
+                        </>
                         :
-                        <img className="icon" src={changeDetectionIcon} alt="Change Detection Icon" />
+                        <>
+                            <img className="icon" src={changeDetectionIcon} alt="Change Detection Icon" />
+                            <p className="sidebar-text">Change Detection</p>
+                        </>
                     }
                 </Link>
             </div>
