@@ -7,7 +7,7 @@ function CookieTile(props) {
     return (
         <div className="cookie-tile tile">
             <h3>Cookie Compliance</h3>
-            <p>Non-compmliant cookies detected</p>
+            <p>Non-compliant cookies detected</p>
             <div className="tile-body">
                 <DataBox
                     priorityLevel={"high-priority"}

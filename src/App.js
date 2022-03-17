@@ -18,12 +18,16 @@ class App extends React.Component {
         this.state = {
             overviewCookies: null,
             overviewEmails: null,
-            overviewChanges: null,
-            highPriorityCookies: null,
-            mediumPriorityCookies: null,
-            lowPriorityCookies: null,
-            emailsAfterGracePeriod: null,
-            emailsWithinGracePeriod: null,
+            highPriorityCookiesCount: null,
+            mediumPriorityCookiesCount: null,
+            lowPriorityCookiesCount: null,
+            emailsAfterGracePeriod: [],
+            existingPages: [],
+            newPages: [],
+            existingScripts : [],
+            newScripts : [],
+            existingForms : [],
+            newForms : [],
             companyName: null,
             user: props.user
         };
@@ -41,22 +45,22 @@ class App extends React.Component {
                     <Header domains={['domain1', 'domain2', 'domain3']} />
                     <div className="page-content">
                         <Overview
-                            pages={5}
-                            pagesTotal={13}
-                            scripts={3}
-                            scriptsTotal={10}
-                            forms={0}
-                            formsTotal={7}
+                            pages={this.state.newPages.length}
+                            pagesTotal={this.state.newPages.length + this.state.existingPages.length}
+                            scripts={this.state.newScripts.length}
+                            scriptsTotal={this.state.newScripts.length + this.state.existingScripts.length}
+                            forms={this.state.newForms.length}
+                            formsTotal={this.state.newForms.length + this.state.existingForms.length}
                         />
                         {/* <div className="tests-wrapper"> */}
                         <CookieTile
-                            highPriority={5 /*this.state.highPriorityCookies*/}
-                            mediumPriority={7 /*this.state.mediumPriorityCookies*/}
-                            lowPriority={2 /*this.state.lowPriorityCookies*/}
+                            highPriority={this.state.highPriorityCookiesCount}
+                            mediumPriority={this.state.mediumPriorityCookiesCount}
+                            lowPriority={this.state.lowPriorityCookiesCount}
                         />
                         <EmailTile
-                            afterGracePeriod={4 /*this.state.emailsAfterGracePeriod*/}
-                            withinGracePeriod={6 /*this.state.emailsWithinGracePeriod*/}
+                            afterGracePeriod={this.state.emailsAfterGracePeriod.length}
+                            withinGracePeriod={0}
                         />
                         {/* </div> */}
                         {/* <ChangeDetectionTile /> */}
@@ -84,80 +88,66 @@ class App extends React.Component {
             this.setState({ dashboardData: dashboardData });
         }
 
-        let {
-            overviewCookies,
-            highPriorityCookies,
-            mediumPriorityCookies,
-            lowPriorityCookies,
-        } = this.getCookies();
+        let cookiesData = this.getCookies();
+        let highPriorityCookiesCount = cookiesData.highPriorityCount
+        let mediumPriorityCookiesCount = cookiesData.mediumPriorityCount;
+        let lowPriorityCookiesCount = cookiesData.lowPriorityCount;
 
-        let { overviewEmails, emailsAfterGracePeriod, emailsWithinGracePeriod } =
-            this.getEmails();
+        let emailsAfterGracePeriod = this.getEmails();
 
-        let { overviewChanges } = this.getChanges();
+        let { existingPages, newPages, existingScripts,newScripts, existingForms, newForms } = this.getChanges();
 
         let companyName = this.state.dashboardData.companyName;
 
         this.setState({
-            overviewCookies,
-            overviewEmails,
-            overviewChanges,
-            highPriorityCookies,
-            mediumPriorityCookies,
-            lowPriorityCookies,
-            emailsAfterGracePeriod,
-            emailsWithinGracePeriod,
-            companyName,
+            highPriorityCookiesCount : highPriorityCookiesCount,
+            mediumPriorityCookiesCount : mediumPriorityCookiesCount,
+            lowPriorityCookiesCount : lowPriorityCookiesCount,
+            emailsAfterGracePeriod : emailsAfterGracePeriod,
+            existingPages: existingPages,
+            newPages: newPages,
+            existingScripts : existingScripts,
+            newScripts : newScripts,
+            existingForms : existingForms,
+            newForms : newForms,
+            companyName : companyName
         });
     }
 
     getCookies() {
         let cookiesData = this.state.dashboardData.domains[0].tests.cookies;
         return {
-            overviewCookies:
-                cookiesData.highPriorityCount +
-                cookiesData.mediumPriorityCount +
-                cookiesData.lowPriorityCount,
-            highPriorityCookies: cookiesData.highPriorityCount,
-            mediumPriorityCookies: cookiesData.mediumPriorityCount,
-            lowPriorityCookies: cookiesData.lowPriorityCount,
+            highPriorityCount: cookiesData.highPriorityCount,
+            mediumPriorityCount: cookiesData.mediumPriorityCount,
+            lowPriorityCount: cookiesData.lowPriorityCount,
         };
     }
 
     getEmails() {
         let emailsData = this.state.dashboardData.domains[0].tests.emails;
-        return {
-            overviewEmails:
-                emailsData.nonCompliantEmailsAfterGracePeriod.length +
-                emailsData.nonCompliantEmailsWithinGracePeriod.length,
-            emailsAfterGracePeriod:
-                emailsData.nonCompliantEmailsAfterGracePeriod.length,
-            emailsWithinGracePeriod:
-                emailsData.nonCompliantEmailsWithinGracePeriod.length,
-        };
+        return emailsData;
     }
 
     getChanges() {
         let changeDetectionData =
             this.state.dashboardData.domains[0].tests.changeDetection;
 
-        let existingPages = changeDetectionData.pages.existing;
-        let newPages = changeDetectionData.pages.new;
+        let existingPages = changeDetectionData.pages.filter(p=>p.status === "existing");
+        let newPages = changeDetectionData.pages.filter(p=>p.status === "new");
 
-        let existingScripts = changeDetectionData.scripts.existing;
-        let newScripts = changeDetectionData.scripts.new;
+        let existingScripts = changeDetectionData.scripts.filter(p=>p.status === "existing");
+        let newScripts = changeDetectionData.scripts.filter(p=>p.status === "new");
 
-        let existingForms = changeDetectionData.forms.existing;
-        let newForms = changeDetectionData.forms.new;
+        let existingForms = changeDetectionData.forms.filter(p=>p.status === "existing");
+        let newForms = changeDetectionData.forms.filter(p=>p.status === "new");
 
         return {
-            overviewChanges:
-                existingPages.length +
-                newPages.length +
-                existingScripts.length +
-                newScripts.length +
-                existingForms.length +
-                newForms.length,
+            existingPages: existingPages,
+            newPages: newPages,
+            existingScripts : existingScripts,
+            newScripts : newScripts,
+            existingForms : existingForms,
+            newForms : newForms
         };
     }
 }
