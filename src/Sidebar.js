@@ -14,9 +14,6 @@ import React from 'react';
 class Sidebar extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            'selectedPage': props.thisPage
-        };
     }
 
     render() {
@@ -24,7 +21,7 @@ class Sidebar extends React.Component {
             <div className="sidebar">
                 <img className="logoOnly" src={logoOnlyBlue} alt="Logo Only Blue" />
                 <Link className="icon-background" to="/">
-                    {this.state.selectedPage === 'home' ?
+                    {this.props.thisPage === 'home' ?
                         <>
                             <img className="icon" src={homeIconBlue} alt="Home Icon Blue" />
                             <p className="sidebar-text-selected">Dashboard</p>
@@ -37,7 +34,7 @@ class Sidebar extends React.Component {
                     }
                 </Link>
                 <Link className="icon-background" to="/cookies">
-                    {this.state.selectedPage === 'cookies' ?
+                    {this.props.thisPage === 'cookies' ?
                         <>
                             <img className="icon" src={cookiesIconBlue} alt="Cookies Icon Blue" />
                             <p className="sidebar-text-selected">Cookie Compliance</p>
@@ -50,7 +47,7 @@ class Sidebar extends React.Component {
                     }
                 </Link>
                 <Link className="icon-background" to="/emails">
-                    {this.state.selectedPage === 'emails' ?
+                    {this.props.thisPage === 'emails' ?
                         <>
                             <img className="icon" src={emailsIconBlue} alt="Emails Icon Blue" />
                             <p className="sidebar-text-selected">Email Opt Out</p>
@@ -63,7 +60,7 @@ class Sidebar extends React.Component {
                     }
                 </Link>
                 <Link className="icon-background" to="/changeDetection">
-                    {this.state.selectedPage === 'changeDetection' ?
+                    {this.props.thisPage === 'changeDetection' ?
                         <>
                             <img className="icon" src={changeDetectionIconBlue} alt="Change Detection Icon Blue" />
                             <p className="sidebar-text-selected">Change Detection</p>

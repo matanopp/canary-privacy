@@ -98,7 +98,7 @@ h1, h2, h3, p {
     background-color: lightblue;
     width: 400px;
     padding-left: 20px;
-    border-radius: 20px;
+    border-radius: 8px;
 }
 
 .domain-dropdown-content {

@@ -8,6 +8,7 @@ import {
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import PageWrapper from './PageWrapper.js';
 import CookiesPage from './CookiesPage.js';
 import EmailsPage from './EmailsPage.js';
 import ChangeDetectionPage from './ChangeDetectionPage.js';
@@ -21,21 +22,29 @@ render(
             <Route path="/" element={
                 <Authenticator>
                     {({ signOut, user }) => (
-                        <App user={user} />
+                        <PageWrapper thisPage="home" page={
+                            <App user={user} />
+                        } />
                     )}
                 </Authenticator>
             } />
             <Route path="cookies" element={
-                <CookiesPage
-                    mismanagedCookies={3}
-                    misclassifiedCookies={5}
-                />
+                <PageWrapper thisPage="cookies" page={
+                    <CookiesPage
+                        mismanagedCookies={3}
+                        misclassifiedCookies={5}
+                    />
+                } />
             } />
             <Route path="emails" element={
-                <EmailsPage />
+                <PageWrapper thisPage="emails" page={
+                    <EmailsPage />
+                } />
             } />
             <Route path="changeDetection" element={
-                <ChangeDetectionPage />
+                <PageWrapper thisPage="changeDetection" page={
+                    <ChangeDetectionPage />
+                } />
             } />
         </Routes>
     </BrowserRouter>,
