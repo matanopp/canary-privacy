@@ -1,5 +1,5 @@
 import React from 'react';
-import Table from './Table.js';
+import CookiesTable from './CookiesTable.js';
 import './App.css';
 import './CookiesPage.css';
 
@@ -40,32 +40,33 @@ class CookiesPage extends React.Component {
         return (
             <>
                 <h1>Cookie Compliance</h1>
-                <Table
-                    data={{
-                        headerLabels: [
-                            'Risk',
-                            'Name',
-                            'Status',
-                            'Classification',
-                            'Domain',
-                        ],
-                        rows: [
-                            [
-                                'High',
-                                'abc',
-                                'Mismanaged',
-                                'Marketing',
-                                'mywebsite.com',
-                            ],
-                            [
-                                'Medium',
-                                'abc',
-                                'Misclassified',
-                                'Analytics',
-                                'mywebsite.com',
-                            ],
-                        ]
-                    }}
+                <CookiesTable
+                    data={[
+                        {
+                            risk: 'High',
+                            name: 'abc',
+                            status: ['Mismanaged', 'Misclassified'],
+                            classificationExpected: 'Marketing',
+                            classificationActual: 'Functional',
+                            domain: 'mywebsite.com',
+                        },
+                        {
+                            risk: 'Medium',
+                            name: 'abc',
+                            status: ['Misclassified'],
+                            classificationExpected: 'Analytics',
+                            classificationActual: 'Functional',
+                            domain: 'mywebsite.com',
+                        },
+                        {
+                            risk: 'Low',
+                            name: 'abc',
+                            status: ['Mismanaged'],
+                            classificationExpected: 'Marketing',
+                            classificationActual: 'Marketing',
+                            domain: 'mywebsite.com',
+                        },
+                    ]}
                 />
                 {/* <div className="cookie-page-overview">
                     <div className="cookie-page-overview-section">

@@ -19,16 +19,102 @@
     padding: 8px;
 }
 
-.table-header {
+.table-wrapper thead {
     background-color: rgb(237, 241, 253);
 }
 
-.table-header th:first-child {
+.table-wrapper thead tr {
+    align-items: start;
+
+}
+
+.table-wrapper thead tr:first-child th:first-child {
     border-top-left-radius: 10px;
+}
+
+.table-wrapper thead tr:last-child th:first-child {
     border-bottom-left-radius: 10px;
 }
 
-.table-header th:last-child {
+.table-wrapper thead tr:first-child th:last-child {
     border-top-right-radius: 10px;
+}
+
+.table-wrapper thead tr:last-child th:last-child {
     border-bottom-right-radius: 10px;
+}
+
+.cookie-table-classifications {
+    display: flex;
+    flex-direction: row;
+}
+
+.cookie-table-classifications p {
+    flex-grow: 1;
+    font-weight: normal;
+}
+
+.cookies-table-wrapper .risk p {
+    color: white;
+    border-radius: 5px;
+    width: 80%;
+    text-align: center;
+    font-weight: bold;
+    padding: 2px 10px;
+}
+
+.cookies-table-wrapper .risk .high {
+    background-color: rgb(167, 66, 68);
+}
+
+.cookies-table-wrapper .risk .medium {
+    background-color: rgb(192, 111, 51);
+}
+
+.cookies-table-wrapper .risk .low {
+    background-color: rgb(217, 182, 81);
+}
+
+.cookies-table-wrapper .status {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.cookies-table-wrapper .status p {
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    padding: 2px 10px;
+}
+
+.cookies-table-wrapper .status .misclassified {
+    background-color: rgb(242, 185, 204);
+    color: rgb(191, 75, 112);
+}
+
+.cookies-table-wrapper .status .mismanaged {
+    background-color: rgb(198, 194, 249);
+    color: rgb(95, 89, 195);
+}
+
+.emails-table-wrapper .status p {
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    padding: 2px 10px;
+}
+
+.emails-table-wrapper .status .alert {
+    background-color: rgb(167, 66, 68);
+}
+
+.emails-table-wrapper .status .ok {
+    background-color: rgb(63, 163, 58);
+}
+
+.emails-table-wrapper .status .no-data {
+    background-color: rgb(141, 151, 155);
 }
