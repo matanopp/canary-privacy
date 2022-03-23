@@ -12,7 +12,6 @@ import PageWrapper from './PageWrapper.js';
 import CookiesPage from './CookiesPage.js';
 import EmailsPage from './EmailsPage.js';
 import ChangeDetectionPage from './ChangeDetectionPage.js';
-import Table from './Table.js';
 import awsExports from "./aws-exports";
 import { Authenticator } from "@aws-amplify/ui-react";
 
@@ -49,26 +48,17 @@ render(
             } />
             <Route path="pages" element={
                 <PageWrapper thisPage="pages" page={
-                    <>
-                        <h1>Pages</h1>
-                        <Table />
-                    </>
+                    <ChangeDetectionPage selectedPage="pages" />
                 } />
             } />
             <Route path="forms" element={
                 <PageWrapper thisPage="forms" page={
-                    <>
-                        <h1>Forms</h1>
-                        <Table />
-                    </>
+                    <ChangeDetectionPage selectedPage="forms" />
                 } />
             } />
             <Route path="scripts" element={
                 <PageWrapper thisPage="scripts" page={
-                    <>
-                        <h1>Scripts</h1>
-                        <Table />
-                    </>
+                    <ChangeDetectionPage selectedPage="scripts" />
                 } />
             } />
         </Routes>

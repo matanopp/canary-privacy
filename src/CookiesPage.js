@@ -1,7 +1,6 @@
 import React from 'react';
 import Table from './Table.js';
 import './App.css';
-import './CookiesPage.css';
 import { IconTexture } from '@aws-amplify/ui-react';
 
 class CookiesPage extends React.Component {
