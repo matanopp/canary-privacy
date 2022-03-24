@@ -11,7 +11,7 @@ import reportWebVitals from './reportWebVitals';
 import PageWrapper from './PageWrapper.js';
 import CookiesPage from './CookiesPage.js';
 import EmailsPage from './EmailsPage.js';
-import ChangeDetectionPage from './ChangeDetectionPage.js';
+import PagesPage from './PagesPage.js';
 import awsExports from "./aws-exports";
 import { Authenticator } from "@aws-amplify/ui-react";
 
@@ -41,24 +41,19 @@ render(
                     <EmailsPage />
                 } />
             } />
-            <Route path="changeDetection" element={
-                <PageWrapper thisPage="changeDetection" page={
-                    <ChangeDetectionPage />
-                } />
-            } />
             <Route path="pages" element={
                 <PageWrapper thisPage="pages" page={
-                    <ChangeDetectionPage selectedPage="pages" />
+                    <PagesPage />
                 } />
             } />
             <Route path="forms" element={
                 <PageWrapper thisPage="forms" page={
-                    <ChangeDetectionPage selectedPage="forms" />
+                    <PagesPage selectedPage="forms" />
                 } />
             } />
             <Route path="scripts" element={
                 <PageWrapper thisPage="scripts" page={
-                    <ChangeDetectionPage selectedPage="scripts" />
+                    <PagesPage selectedPage="scripts" />
                 } />
             } />
         </Routes>

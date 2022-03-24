@@ -1,6 +1,6 @@
 import './App.css';
 import { Link } from "react-router-dom";
-import logoOnlyBlue from './images/logo/logo-only-blue.png';
+import logoTextBlue from './images/logo/logo-text-blue.png';
 // import changeDetectionIconBlue from './images/sidebar/change-detection-blue.svg';
 // import changeDetectionIconGray from './images/sidebar/change-detection-gray.svg';
 import cookieIconBlue from './images/sidebar/blue/cookie-blue.svg';
@@ -25,7 +25,7 @@ class Sidebar extends React.Component {
     render() {
         return (
             <div className="sidebar">
-                <img className="logoOnly" src={logoOnlyBlue} alt="Logo Only Blue" />
+                <img className="logo" src={logoTextBlue} alt="Logo Text Blue" />
                 <Link className="icon-background" to="/">
                     {this.props.thisPage === 'home' ?
                         <>
@@ -40,6 +40,7 @@ class Sidebar extends React.Component {
                     }
                 </Link>
                 <div style={{ height: '2px', width: '90%', backgroundColor: 'lightgray' }} />
+                <h1>COMPLIANCE TESTING</h1>
                 <Link className="icon-background" to="/cookies">
                     {this.props.thisPage === 'cookies' ?
                         <>
@@ -67,6 +68,7 @@ class Sidebar extends React.Component {
                     }
                 </Link>
                 <div style={{ height: '2px', width: '90%', backgroundColor: 'lightgray' }} />
+                <h1>CHANGE DETECTION</h1>
                 <Link className="icon-background" to="/pages">
                     {this.props.thisPage === 'pages' ?
                         <>

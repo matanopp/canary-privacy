@@ -1,13 +1,25 @@
 .tile {
-    /* flex-grow: 1; */
-    min-width: 600px;
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    flex-direction: column;
     background-color: white;
     border-radius: 20px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 10px;
+    /* 50% of the whole container width - 2 * margins(20px) */
+    width: calc((100% - 40px) / 3 * 2 + 20px);
+    min-width: 470px;
+    max-width: 580px;
+    line-height: 100%;
+    box-shadow: 0px 0px 2px rgba(42, 46, 59, 0.08), 0px 4px 8px rgba(133, 141, 166, 0.16);
+}
+
+.tile h1 {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+}
+
+.tile p {
+    margin: 0;
 }
 
 .change-detection-tile {
@@ -26,57 +38,70 @@
 
 .tile-body {
     display: flex;
-    flex-direction: row;
-    height: 70%;
-    gap: 20px;
-    align-items: center;
-    justify-content: flex-start;
+    gap: 10px;
+    color: white;
 }
 
 .data-box {
-    height: 90%;
-    width: 30%;
-    border-radius: 10px;
-    padding: 10px;
-
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    padding: 15px;
+    width: calc((100% - 20px) / 3);
+    min-width: 120px;
+    max-width: 160px;
+    border-radius: 10px;
+    justify-content: space-between;
+    gap: 30px;
 }
 
-.data-count {
+.data-box h1 {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+}
+
+.data-box h2 {
     font-size: 48px;
-    font-weight: bolder;
+    margin: 10px 0 0 0;
+}
+
+.data-box h3 {
+    font-size: 16px;
+    margin: 10px 0 0 0;
 }
 
 .high-priority {
-    background-color: rgb(166, 66, 66);
+    background-color: #B43940;
     color: white;
 }
 
 .medium-priority {
-    background-color: rgb(192, 112, 51);
+    background-color: #CC6B1F;
     color: white;
 }
 
 .low-priority {
-    background-color: rgb(217, 183, 81);
+    background-color: #C99700;
+    color: white;
+}
+
+.zero-issues {
+    background-color: #2B6F2A;
     color: white;
 }
 
 .view-details-button {
-    color: rgb(51, 68, 213);
-    width: max-content;
-    border-radius: 10px;
-    text-decoration: none;
+    color: #363CDE;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
     gap: 10px;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
 }
 
-.view-details-image {
-    height: 12px;
-    width: auto;
+.view-details-button p {
+    margin: 0;
+}
+
+.view-details-button img {
+    width: 13px;
 }

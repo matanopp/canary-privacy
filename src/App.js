@@ -10,6 +10,33 @@ import awsExports from "./aws-exports";
 import "@aws-amplify/ui-react/styles.css";
 import React from "react";
 
+/*
+Email Compliance
+Status
+Test Email
+Test Date
+Test Page
+Number of Emails Received
+Sender Address
+
+Change Detection Scripts
+Status
+Date Detected
+Script URL
+Page URL
+
+Change Detection Forms
+Status
+Date Detected
+Form ID URL
+Privacy Policy Exists
+
+Pages
+Status
+Date Detected
+Page URL
+*/
+
 
 Amplify.configure(awsExports);
 class App extends React.Component {

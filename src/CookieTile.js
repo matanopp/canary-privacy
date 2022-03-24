@@ -6,8 +6,10 @@ import viewDetailsImage from './images/view-details.svg'
 function CookieTile(props) {
     return (
         <div className="cookie-tile tile">
-            <h3>Cookie Compliance</h3>
-            <p>Non-compliant cookies detected</p>
+            <div>
+                <h1>Cookie Compliance</h1>
+                <p>Non-compliant cookies detected</p>
+            </div>
             <div className="tile-body">
                 <DataBox
                     priorityLevel={"high-priority"}

@@ -5,7 +5,7 @@ function ViewDetailsLink(props) {
     return (
         <Link className="view-details-button" to={props.to}>
             <p>View Details</p>
-            <img className="view-details-image" src={viewDetailsImage} />
+            <img src={viewDetailsImage} />
         </Link>
     );
 }
