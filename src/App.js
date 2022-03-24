@@ -1,41 +1,21 @@
 import "./App.css";
 import { Amplify, API, Auth } from "aws-amplify";
-import Header from './Header.js';
-import Sidebar from "./Sidebar.js";
-import Overview from "./Overview.js";
-import CookieTile from "./CookieTile.js";
-import EmailTile from "./EmailTile.js";
-import ChangeDetectionTile from "./ChangeDetectionTile";
 import awsExports from "./aws-exports";
 import "@aws-amplify/ui-react/styles.css";
 import React from "react";
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+} from "react-router-dom";
 
-/*
-Email Compliance
-Status
-Test Email
-Test Date
-Test Page
-Number of Emails Received
-Sender Address
-
-Change Detection Scripts
-Status
-Date Detected
-Script URL
-Page URL
-
-Change Detection Forms
-Status
-Date Detected
-Form ID URL
-Privacy Policy Exists
-
-Pages
-Status
-Date Detected
-Page URL
-*/
+import PageWrapper from './PageWrapper.js';
+import Dashboard from './Dashboard.js';
+import CookiesPage from './CookiesPage.js';
+import EmailsPage from './EmailsPage.js';
+import PagesPage from './PagesPage.js';
+import ScriptsPage from './ScriptsPage.js';
+import FormsPage from './FormsPage.js';
 
 
 Amplify.configure(awsExports);
@@ -70,33 +50,64 @@ class App extends React.Component {
 
     render() {
         return (
-            this.state.isLoading ? <h1>Loading...</h1> :
-                <>
-                    <h1>Analytics Overview</h1>
-                    <Overview
-                        pages={this.state.newPages.length}
-                        pagesTotal={this.state.newPages.length + this.state.existingPages.length}
-                        scripts={this.state.newScripts.length}
-                        scriptsTotal={this.state.newScripts.length + this.state.existingScripts.length}
-                        forms={this.state.newForms.length}
-                        formsTotal={this.state.newForms.length + this.state.existingForms.length}
-                    />
-                    {/* <div className="tests-wrapper"> */}
-                    <h1>Compliance Tracking</h1>
-                    <CookieTile
-                        highPriority={this.state.highPriorityCookiesCount}
-                        mediumPriority={this.state.mediumPriorityCookiesCount}
-                        lowPriority={this.state.lowPriorityCookiesCount}
-                    />
-                    <EmailTile
-                        afterGracePeriod={this.state.emailsAfterGracePeriod.length}
-                        withinGracePeriod={0}
-                    />
-                    {/* </div> */}
-                    {/* <ChangeDetectionTile /> */}
-                </>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={
+                        <PageWrapper thisPage="dashboard" page={
+                            this.state.isLoading ?
+                                <h1>Loading...</h1> :
+                                <Dashboard data={{
+                                    newPages: this.state.newPages,
+                                    existingPages: this.state.existingPages,
+                                    newScripts: this.state.newScripts,
+                                    existingScripts: this.state.existingScripts,
+                                    newForms: this.state.newForms,
+                                    existingForms: this.state.existingForms,
+                                    highPriorityCookiesCount: this.state.highPriorityCookiesCount,
+                                    mediumPriorityCookiesCount: this.state.mediumPriorityCookiesCount,
+                                    lowPriorityCookiesCount: this.state.lowPriorityCookiesCount,
+                                    emailsAfterGracePeriod: this.state.emailsAfterGracePeriod,
+                                }} />
+                        } />
+                    } />
+                    <Route path="cookies" element={
+                        <PageWrapper thisPage="cookies" page={
+                            <CookiesPage
+                                mismanagedCookies={3}
+                                misclassifiedCookies={5}
+                            />
+                        } />
+                    } />
+                    <Route path="emails" element={
+                        <PageWrapper thisPage="emails" page={
+                            <EmailsPage />
+                        } />
+                    } />
+                    <Route path="pages" element={
+                        <PageWrapper thisPage="pages" page={
+                            <PagesPage />
+                        } />
+                    } />
+                    <Route path="scripts" element={
+                        <PageWrapper thisPage="scripts" page={
+                            <ScriptsPage />
+                        } />
+                    } />
+                    <Route path="forms" element={
+                        <PageWrapper thisPage="forms" page={
+                            <FormsPage />
+                        } />
+                    } />
+                </Routes>
+            </BrowserRouter>
+
         );
     }
+
+    updateCurrentPage(newPage) {
+        this.setState({ currentPage: newPage });
+    }
+
     async fetchDashboardDataFromAPI() {
         const apiName = "dashboard";
         const path = "/dashboards";

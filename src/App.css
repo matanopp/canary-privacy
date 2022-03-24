@@ -8,10 +8,7 @@ p {
 
 .page-wrapper {
     min-height: 100vh;
-    /* display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: space-between; */
+    overflow: hidden;
     margin-left: 250px;
     background-color: rgb(237, 241, 253);
 }

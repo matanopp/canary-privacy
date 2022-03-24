@@ -5,27 +5,32 @@ import './ChangeDetection.css';
 class PagesPage extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            keys: [
+                'done',
+                'url',
+                'privacyPolicy',
+                'version',
+            ],
+            headers: {
+                'done': 'Done',
+                'url': 'URL',
+                'privacyPolicy': 'Privacy Policy',
+                'version': 'Version',
+            },
+        };
     }
 
     render() {
         return (
             <>
-                <h1>Change Detection</h1>
+                <h1>Pages</h1>
                 <Table
                     tableType="pages"
                     data={{
-                        'keys': [
-                            'done',
-                            'url',
-                            'privacyPolicy',
-                            'version',
-                        ],
-                        'headers': {
-                            'done': 'Done',
-                            'url': 'URL',
-                            'privacyPolicy': 'Privacy Policy',
-                            'version': 'Version',
-                        },
+                        'keys': this.state.keys,
+                        'headers': this.state.headers,
                         'rows': [
                             {
                                 'done': false,

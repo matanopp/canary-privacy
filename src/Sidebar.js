@@ -27,7 +27,7 @@ class Sidebar extends React.Component {
             <div className="sidebar">
                 <img className="logo" src={logoTextBlue} alt="Logo Text Blue" />
                 <Link className="icon-background" to="/">
-                    {this.props.thisPage === 'home' ?
+                    {this.props.thisPage === 'dashboard' ?
                         <>
                             <img className="icon" src={dashboardIconBlue} alt="Dashboard Icon Blue" />
                             <p className="sidebar-text-selected">Dashboard</p>

@@ -8,7 +8,7 @@ function PageWrapper(props) {
         <>
             <Sidebar thisPage={props.thisPage} />
             <div className="page-wrapper">
-                <Header domains={['domain1', 'domain2', 'domain3']} />
+                <Header domains={props.domains} />
                 <div className="page-content">
                     {props.page}
                 </div>
