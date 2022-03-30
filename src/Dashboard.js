@@ -27,8 +27,8 @@ class Dashboard extends React.Component {
                     lowPriority={this.props.data.cookies.filter(c => c.risk.toUpperCase() === 'LOW').length}
                 />
                 <EmailTile
-                    afterGracePeriod={this.props.data.emails.filter(e => e.status.toUpperCase() === 'ALERT').length}
-                    withinGracePeriod={this.props.data.emails.filter(e => e.status.toUpperCase() === 'OK').length}
+                    afterGracePeriod={this.props.data.emails.filter(e => e.priority.toUpperCase() === 'ALERT').length}
+                    withinGracePeriod={this.props.data.emails.filter(e => e.priority.toUpperCase() === 'OK').length}
                 />
             </>
 

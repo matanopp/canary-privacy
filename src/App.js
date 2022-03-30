@@ -192,7 +192,7 @@ class App extends React.Component {
         let emails = this.getEmails();
         let { existingPages, newPages, existingScripts, newScripts, existingForms, newForms } = this.getChanges();
         let companyName = this.state.dashboardData.companyName;
-        console.log(cookies);
+
         this.setState({
             cookies: cookies,
             emails: emails,
@@ -231,13 +231,12 @@ class App extends React.Component {
     getEmails() {
         let _formatEmail = (e) => {
             return {
-                status: e.status.toUpperCase(),
-                testEmail: e.testEmail,
-                overdueEmails: e.numberOfEmailsReceived,
-                daysOverdue: 'TODO', //TODO: days overdue
-                dateFirstEmailReceived: 'TODO', //TODO: date first email received
-                senderAddress: e.senderAddress,
+                priority: e.status.toUpperCase(),
+                testAddress: e.testEmail,
                 testDate: e.testDate,
+                testPage: e.testPage,
+                emailsReceived: e.numberOfEmailsReceived,
+                senderAddress: e.senderAddress,
             };
         }
         return this.state.dashboardData.domains[this.state.selectedDomain].tests.emails.map(_formatEmail);
@@ -249,10 +248,11 @@ class App extends React.Component {
 
         let _formatPage = (p) => {
             return {
-                'done': false, //TODO: what is this for?
+                // 'done': false, //TODO: what is this for?
                 'url': p.url,
-                'privacyPolicy': 'ABSENT', //TODO: what is this for?
-                'version': '1.0', //TODO: what is this for?
+                // 'privacyPolicy': 'ABSENT', //TODO: what is this for?
+                // 'version': '1.0', //TODO: what is this for?
+                'dateDetected': p.dateDetected,
             };
         }
 

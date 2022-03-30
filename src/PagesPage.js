@@ -3,17 +3,19 @@ import Table from './Table.js';
 import './ChangeDetection.css';
 
 let keys = [
-    'done',
+    // 'done',
     'url',
-    'privacyPolicy',
-    'version',
+    // 'privacyPolicy',
+    // 'version',
+    'dateDetected',
 ];
 
 let headers = {
     'done': 'Done',
-    'url': 'URL',
+    'url': 'Page URL',
     'privacyPolicy': 'Privacy Policy',
     'version': 'Version',
+    'dateDetected': 'Date Detected',
 };
 
 class PagesPage extends React.Component {

@@ -9,9 +9,9 @@ let keys = [
 ];
 
 let headers = {
-    'dateDetected': 'Date Detected',
     'scriptURL': 'Script URL',
     'page': 'Page',
+    'dateDetected': 'Date Detected',
 };
 
 class PagesPage extends React.Component {

@@ -3,10 +3,10 @@ import Table from './Table.js';
 import './ChangeDetection.css';
 
 let keys = [
-    'dateDetected',
-    'formId',
     'url',
-    'policyExists',
+    'dateDetected',
+    // 'formId',
+    // 'policyExists',
 ];
 
 let headers = {
