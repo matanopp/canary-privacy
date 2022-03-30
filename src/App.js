@@ -28,7 +28,7 @@ class App extends React.Component {
             overviewCookies: null,
             overviewEmails: null,
             cookies: [],
-            emailsAfterGracePeriod: [],
+            emails: [],
             existingPages: [],
             newPages: [],
             existingScripts: [],
@@ -51,7 +51,7 @@ class App extends React.Component {
         return (
             this.state.isLoading ?
                 <div className="loading-container">
-                    <img className="loading-image" src={logoOnlyBlue} />
+                    <img className="loading-image" src={logoOnlyBlue} alt="Loading..." />
                 </div>
                 :
                 <BrowserRouter>
@@ -69,7 +69,7 @@ class App extends React.Component {
                                         newForms: this.state.newForms,
                                         existingForms: this.state.existingForms,
                                         cookies: this.state.cookies,
-                                        emailsAfterGracePeriod: this.state.emailsAfterGracePeriod,
+                                        emails: this.state.emails,
                                     }} />
                                 } />
                         } />
@@ -90,7 +90,9 @@ class App extends React.Component {
                                 thisPage="emails"
                                 domains={this.state.dashboardData && this.state.dashboardData.domains}
                                 page={
-                                    <EmailsPage />
+                                    <EmailsPage
+                                        emails={this.state.emails}
+                                    />
                                 } />
                         } />
                         <Route path="pages" element={
@@ -98,7 +100,10 @@ class App extends React.Component {
                                 thisPage="pages"
                                 domains={this.state.dashboardData && this.state.dashboardData.domains}
                                 page={
-                                    <PagesPage />
+                                    <PagesPage
+                                        newPages={this.state.newPages}
+                                        existingPages={this.state.existingPages}
+                                    />
                                 } />
                         } />
                         <Route path="scripts" element={
@@ -106,7 +111,10 @@ class App extends React.Component {
                                 thisPage="scripts"
                                 domains={this.state.dashboardData && this.state.dashboardData.domains}
                                 page={
-                                    <ScriptsPage />
+                                    <ScriptsPage
+                                        newScripts={this.state.newScripts}
+                                        existingScripts={this.state.existingScripts}
+                                    />
                                 } />
                         } />
                         <Route path="forms" element={
@@ -114,7 +122,10 @@ class App extends React.Component {
                                 thisPage="forms"
                                 domains={this.state.dashboardData && this.state.dashboardData.domains}
                                 page={
-                                    <FormsPage />
+                                    <FormsPage
+                                        newForms={this.state.newForms}
+                                        existingForms={this.state.existingForms}
+                                    />
                                 } />
                         } />
                     </Routes>
@@ -141,14 +152,14 @@ class App extends React.Component {
             this.setState({ dashboardData: dashboardData });
         }
 
-        let cookiesData = this.getCookies();
-        let emailsAfterGracePeriod = this.getEmails();
+        let cookies = this.getCookies();
+        let emails = this.getEmails();
         let { existingPages, newPages, existingScripts, newScripts, existingForms, newForms } = this.getChanges();
         let companyName = this.state.dashboardData.companyName;
 
         this.setState({
-            cookies: cookiesData,
-            emailsAfterGracePeriod: emailsAfterGracePeriod,
+            cookies: cookies,
+            emails: emails,
             existingPages: existingPages,
             newPages: newPages,
             existingScripts: existingScripts,
@@ -164,9 +175,9 @@ class App extends React.Component {
         let cookiesData = this.state.dashboardData.domains[0].tests.cookies;
         let _formatCookie = (c) => {
             return {
-                risk: c.priority,
+                risk: c.priority.toUpperCase(),
                 name: c.name,
-                status: 'TODO', //TODO: calculate status (High, Medium, Low)
+                status: 'TODO', //TODO: calculate status (HIGH, MEDIUM, LOW)
                 classificationExpected: 'TODO', //TODO: calculate expected classification
                 classificationActual: c.type,
                 domain: c.domain,
@@ -179,27 +190,63 @@ class App extends React.Component {
         cookiesData.nonCompliantCookiesPerCategory.Functional.forEach(c => formattedCookies.push(_formatCookie(c)));
         cookiesData.nonCompliantCookiesPerCategory.Analytics.forEach(c => formattedCookies.push(_formatCookie(c)));
         cookiesData.nonCompliantCookiesPerCategory.Marketing.forEach(c => formattedCookies.push(_formatCookie(c)));
-
+        console.log(cookiesData);
         return formattedCookies;
     }
 
     getEmails() {
-        let emailsData = this.state.dashboardData.domains[0].tests.emails;
-        return emailsData;
+        let _formatEmail = (e) => {
+            return {
+                status: e.status.toUpperCase(),
+                testEmail: e.testEmail,
+                overdueEmails: e.numberOfEmailsReceived,
+                daysOverdue: 'TODO', //TODO: days overdue
+                dateFirstEmailReceived: 'TODO', //TODO: date first email received
+                senderAddress: e.senderAddress,
+                testDate: e.testDate,
+            };
+        }
+        return this.state.dashboardData.domains[0].tests.emails.map(_formatEmail);
     }
 
     getChanges() {
         let changeDetectionData =
             this.state.dashboardData.domains[0].tests.changeDetection;
 
-        let existingPages = changeDetectionData.pages.filter(p => p.status === "existing");
-        let newPages = changeDetectionData.pages.filter(p => p.status === "new");
+        let _formatPage = (p) => {
+            return {
+                'done': false, //TODO: what is this for?
+                'url': p.url,
+                'privacyPolicy': 'ABSENT', //TODO: what is this for?
+                'version': '1.0', //TODO: what is this for?
+            };
+        }
 
-        let existingScripts = changeDetectionData.scripts.filter(p => p.status === "existing");
-        let newScripts = changeDetectionData.scripts.filter(p => p.status === "new");
+        let _formatScript = (s) => {
+            return {
+                'dateDetected': s.dateDetected,
+                'scriptURL': s.scriptUrl,
+                'page': [s.pageUrl],  //TODO: this should be updated to list of pages once updated in database
+            };
+        }
 
-        let existingForms = changeDetectionData.forms.filter(p => p.status === "existing");
-        let newForms = changeDetectionData.forms.filter(p => p.status === "new");
+        let _formatForm = (f) => {
+            return {
+                'dateDetected': f.dateDetected,
+                'formId': f.formID,
+                'url': f.url,
+                'policyExists': f.privacyPolicyExists,
+            };
+        }
+
+        let existingPages = changeDetectionData.pages.filter(p => p.status === "existing").map(_formatPage);
+        let newPages = changeDetectionData.pages.filter(p => p.status === "new").map(_formatPage);
+
+        let existingScripts = changeDetectionData.scripts.filter(p => p.status === "existing").map(_formatScript);
+        let newScripts = changeDetectionData.scripts.filter(p => p.status === "new").map(_formatScript);
+
+        let existingForms = changeDetectionData.forms.filter(p => p.status === "existing").map(_formatForm);
+        let newForms = changeDetectionData.forms.filter(p => p.status === "new").map(_formatForm);
 
         return {
             existingPages: existingPages,

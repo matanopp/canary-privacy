@@ -22,13 +22,13 @@ class Dashboard extends React.Component {
                 />
                 <h1>Compliance Tracking</h1>
                 <CookieTile
-                    highPriority={this.props.data.cookies.filter(c => c.risk == 'High').length}
-                    mediumPriority={this.props.data.cookies.filter(c => c.risk == 'Medium').length}
-                    lowPriority={this.props.data.cookies.filter(c => c.risk == 'Low').length}
+                    highPriority={this.props.data.cookies.filter(c => c.risk.toUpperCase() === 'HIGH').length}
+                    mediumPriority={this.props.data.cookies.filter(c => c.risk.toUpperCase() === 'MEDIUM').length}
+                    lowPriority={this.props.data.cookies.filter(c => c.risk.toUpperCase() === 'LOW').length}
                 />
                 <EmailTile
-                    afterGracePeriod={this.props.data.emailsAfterGracePeriod.length}
-                    withinGracePeriod={0}
+                    afterGracePeriod={this.props.data.emails.filter(e => e.status.toUpperCase() === 'ALERT').length}
+                    withinGracePeriod={this.props.data.emails.filter(e => e.status.toUpperCase() === 'OK').length}
                 />
             </>
 

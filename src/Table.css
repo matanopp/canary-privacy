@@ -22,6 +22,17 @@
 
 .table-wrapper thead {
     background-color: rgb(237, 241, 253);
+    border-radius: 10px;
+}
+
+.table-wrapper thead th:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.table-wrapper thead th:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .cookies-table-wrapper .risk p,
