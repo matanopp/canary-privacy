@@ -8,16 +8,15 @@ class PagesPage extends React.Component {
 
         this.state = {
             keys: [
-                'status',
-                'dateDetected',
                 'scriptURL',
-                'pageURL',
+                'page',
+                'dateDetected',
             ],
             headers: {
                 'status': 'Status',
                 'dateDetected': 'Date Detected',
                 'scriptURL': 'Script URL',
-                'pageURL': 'Page URL',
+                'page': 'Page',
             },
         };
     }
@@ -36,31 +35,31 @@ class PagesPage extends React.Component {
                                 'status': 'status',
                                 'dateDetected': '3/24/22',
                                 'scriptURL': 'www.scripturl.com',
-                                'pageURL': 'www.pageurl.com',
+                                'page': ['www.pageurl.com', 'www.pageurl.com', 'www.pageurl.com'],
                             },
                             {
                                 'status': 'status',
                                 'dateDetected': '3/24/22',
                                 'scriptURL': 'www.scripturl.com',
-                                'pageURL': 'www.pageurl.com',
+                                'page': ['www.pageurl.com'],
                             },
                             {
                                 'status': 'status',
                                 'dateDetected': '3/24/22',
                                 'scriptURL': 'www.scripturl.com',
-                                'pageURL': 'www.pageurl.com',
+                                'page': [],
                             },
                             {
                                 'status': 'status',
                                 'dateDetected': '3/24/22',
                                 'scriptURL': 'www.scripturl.com',
-                                'pageURL': 'www.pageurl.com',
+                                'page': ['www.page1.com', 'www.page2.com', 'www.page3.com', 'www.page4.com', 'www.page5.com', 'www.page6.com', 'www.page7.com', 'www.page8.com', 'www.page9.com'],
                             },
                             {
                                 'status': 'status',
                                 'dateDetected': '3/24/22',
                                 'scriptURL': 'www.scripturl.com',
-                                'pageURL': 'www.pageurl.com',
+                                'page': ['www.pageurl.com'],
                             },
                         ],
                     }}
