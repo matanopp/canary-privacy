@@ -146,9 +146,26 @@ class App extends React.Component {
         }
     }
 
+    async fetchDashboardDataFromS3() {
+        const username = this.state.user.username;
+        let path = `https://canary-scan-results.s3.us-east-2.amazonaws.com/${username}.json`
+        let res = await fetch(path)
+        .then((res) => res.json())
+        .then(
+            (result) => {
+                return result;
+            },
+            (error) => {
+                console.log(error);
+                throw error.response.data;
+            }
+        );
+        return res;
+    }
+
     async getDashboardData() {
         if (!this.state.dashboardData) {
-            let dashboardData = await this.fetchDashboardDataFromAPI();
+            let dashboardData = await this.fetchDashboardDataFromS3();
             this.setState({ dashboardData: dashboardData });
         }
 
@@ -179,17 +196,17 @@ class App extends React.Component {
                 name: c.name,
                 status: 'TODO', //TODO: calculate status (HIGH, MEDIUM, LOW)
                 classificationExpected: 'TODO', //TODO: calculate expected classification
-                classificationActual: c.type,
+                classificationActual: c.type, //TODO on load cookies 
                 domain: c.domain,
             };
         }
 
         var formattedCookies = [];
         cookiesData.nonCompliantCookiesAfterRejection.forEach(c => formattedCookies.push(_formatCookie(c)));
-        cookiesData.nonCompliantCookiesOnPageLoad.forEach(c => formattedCookies.push(_formatCookie(c)));
         cookiesData.nonCompliantCookiesPerCategory.Functional.forEach(c => formattedCookies.push(_formatCookie(c)));
         cookiesData.nonCompliantCookiesPerCategory.Analytics.forEach(c => formattedCookies.push(_formatCookie(c)));
         cookiesData.nonCompliantCookiesPerCategory.Marketing.forEach(c => formattedCookies.push(_formatCookie(c)));
+        if(cookiesData.nonCompliantCookiesOnPageLoad) cookiesData.nonCompliantCookiesOnPageLoad.forEach(c => formattedCookies.push(_formatCookie(c)));
         console.log(cookiesData);
         return formattedCookies;
     }
