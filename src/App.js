@@ -218,10 +218,10 @@ class App extends React.Component {
 
         var formattedCookies = [];
         cookiesData.nonCompliantCookiesAfterRejection.forEach(c => formattedCookies.push(_formatCookie(c)));
-        cookiesData.nonCompliantCookiesOnPageLoad.forEach(c => formattedCookies.push(_formatCookie(c, true)));
         cookiesData.nonCompliantCookiesPerCategory.Functional.forEach(c => formattedCookies.push(_formatCookie(c)));
         cookiesData.nonCompliantCookiesPerCategory.Analytics.forEach(c => formattedCookies.push(_formatCookie(c)));
         cookiesData.nonCompliantCookiesPerCategory.Marketing.forEach(c => formattedCookies.push(_formatCookie(c)));
+        if(cookiesData.nonCompliantCookiesOnPageLoad) cookiesData.nonCompliantCookiesOnPageLoad.forEach(c => formattedCookies.push(_formatCookie(c, true)));
         return formattedCookies;
     }
 
