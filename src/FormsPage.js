@@ -4,6 +4,8 @@ import './ChangeDetection.css';
 
 let keys = [
     'url',
+    'formId',
+    'formText',
     'dateDetected',
     // 'formId',
     // 'policyExists',
@@ -12,6 +14,7 @@ let keys = [
 let headers = {
     'dateDetected': 'Date Detected',
     'formId': 'Form ID',
+    'formText': 'Form Text',
     'url': 'URL',
     'policyExists': 'Privacy Policy Exists',
 };

@@ -2,7 +2,6 @@ import './Tile.css';
 import { Link } from 'react-router-dom';
 import DataBox from './DataBox.js';
 import ViewDetailsLink from './ViewDetailsLink.js';
-import viewDetailsImage from './images/view-details.svg'
 
 function EmailTile(props) {
     return (
@@ -12,15 +11,18 @@ function EmailTile(props) {
             <div className="tile-body">
                 <DataBox
                     priorityLevel={"high-priority"}
-                    count={props.afterGracePeriod}
-                    priorityLabel={"Illegal Emails"}
+                    count={props.nonCompliant}
+                    priorityLabel={"Non-Compliant Emails"}
                 />
-                <DataBox
+                {/* <DataBox
                     priorityLevel={"medium-priority"}
-                    count={props.withinGracePeriod}
-                    priorityLabel={"Emails Sent"}
-                />
+                    count={props.activeTests}
+                    priorityLabel={"Active Email Tests"}
+                /> */}
             </div>
+            <b className="overview-tile-total">
+                {props.activeTests} Active Email Test{props.activeTests === 1 ? '' : 's'}
+            </b>
             <ViewDetailsLink to="/emails" />
         </div>
     );

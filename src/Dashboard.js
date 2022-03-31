@@ -21,15 +21,19 @@ class Dashboard extends React.Component {
                     formsTotal={this.props.data.newForms.length + this.props.data.existingForms.length}
                 />
                 <h1>Compliance Tracking</h1>
-                <CookieTile
-                    highPriority={this.props.data.cookies.filter(c => c.risk.toUpperCase() === 'HIGH').length}
-                    mediumPriority={this.props.data.cookies.filter(c => c.risk.toUpperCase() === 'MEDIUM').length}
-                    lowPriority={this.props.data.cookies.filter(c => c.risk.toUpperCase() === 'LOW').length}
-                />
-                <EmailTile
-                    afterGracePeriod={this.props.data.emails.filter(e => e.priority.toUpperCase() === 'ALERT').length}
-                    withinGracePeriod={this.props.data.emails.filter(e => e.priority.toUpperCase() === 'OK').length}
-                />
+                <div className="tests-wrapper">
+                    <CookieTile
+                        highPriority={this.props.data.cookies.filter(c => c.risk.toUpperCase() === 'HIGH').length}
+                        mediumPriority={this.props.data.cookies.filter(c => c.risk.toUpperCase() === 'MEDIUM').length}
+                        lowPriority={this.props.data.cookies.filter(c => c.risk.toUpperCase() === 'LOW').length}
+                    />
+                    <EmailTile
+                        // nonCompliant={this.props.data.emails.filter(e => e.priority.toUpperCase() === 'ALERT').length} //TODO: how do we calculate these?
+                        // activeTests={this.props.data.emails.filter(e => e.priority.toUpperCase() === 'OK').length} //TODO: how do we calculate these?
+                        nonCompliant={0}
+                        activeTests={3}
+                    />
+                </div>
             </>
 
         );

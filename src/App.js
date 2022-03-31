@@ -208,20 +208,22 @@ class App extends React.Component {
 
     getCookies() {
         let cookiesData = this.state.dashboardData.domains[this.state.selectedDomain].tests.cookies;
-        let _formatCookie = (c) => {
+
+        let _formatCookie = (c, onPageLoad = false) => {
             return {
                 risk: c.priority.toUpperCase(),
                 name: c.name,
                 status: 'TODO', //TODO: calculate status (HIGH, MEDIUM, LOW)
                 classificationExpected: 'TODO', //TODO: calculate expected classification
                 classificationActual: c.type,
+                beforeOptIn: onPageLoad,
                 domain: c.domain,
             };
         }
 
         var formattedCookies = [];
         cookiesData.nonCompliantCookiesAfterRejection.forEach(c => formattedCookies.push(_formatCookie(c)));
-        cookiesData.nonCompliantCookiesOnPageLoad.forEach(c => formattedCookies.push(_formatCookie(c)));
+        cookiesData.nonCompliantCookiesOnPageLoad.forEach(c => formattedCookies.push(_formatCookie(c, true)));
         cookiesData.nonCompliantCookiesPerCategory.Functional.forEach(c => formattedCookies.push(_formatCookie(c)));
         cookiesData.nonCompliantCookiesPerCategory.Analytics.forEach(c => formattedCookies.push(_formatCookie(c)));
         cookiesData.nonCompliantCookiesPerCategory.Marketing.forEach(c => formattedCookies.push(_formatCookie(c)));
@@ -248,10 +250,7 @@ class App extends React.Component {
 
         let _formatPage = (p) => {
             return {
-                // 'done': false, //TODO: what is this for?
                 'url': p.url,
-                // 'privacyPolicy': 'ABSENT', //TODO: what is this for?
-                // 'version': '1.0', //TODO: what is this for?
                 'dateDetected': p.dateDetected,
             };
         }
@@ -260,7 +259,8 @@ class App extends React.Component {
             return {
                 'dateDetected': s.dateDetected,
                 'scriptURL': s.scriptUrl,
-                'page': [s.pageUrl],  //TODO: this should be updated to list of pages once updated in database
+                'pageURL': s.pageUrl instanceof Array ? s.pageUrl : [s.pageUrl],  //TODO: this should be updated to list of pages once updated in database
+                'baseDomain': s.scriptBaseDomain, //TODO: this doesn't exist yet but will soon
             };
         }
 
@@ -268,6 +268,7 @@ class App extends React.Component {
             return {
                 'dateDetected': f.dateDetected,
                 'formId': f.formID,
+                'formText': f.formText, //TODO: this doesn't exist yet but will soon
                 'url': f.url,
                 'policyExists': f.privacyPolicyExists,
             };
