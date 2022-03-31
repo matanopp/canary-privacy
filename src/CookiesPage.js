@@ -9,6 +9,7 @@ let keys = [
     'status',
     'classificationExpected',
     'classificationActual',
+    'beforeOptIn',
     'domain',
 ];
 
@@ -18,6 +19,7 @@ let headers = {
     'status': 'Status',
     'classificationExpected': 'Expected Classification',
     'classificationActual': 'Actual Classification',
+    'beforeOptIn': 'Served Before Opt-In',
     'domain': 'Domain',
 };
 

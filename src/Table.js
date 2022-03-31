@@ -29,6 +29,11 @@ class Table extends React.Component {
                                                 {row[key]}
                                             </p>
                                         }
+                                        {typeof row[key] === 'number' &&
+                                            <p className={"number-" + row[key]}>
+                                                {row[key]}
+                                            </p>
+                                        }
                                         {typeof row[key] === 'boolean' &&
                                             <div className={(row[key]).toString()} >
                                                 {row[key] ?
@@ -45,7 +50,8 @@ class Table extends React.Component {
                                                 {row[key].length === 1 ?
                                                     <p>{row[key][0]}</p>
                                                     :
-                                                    <TableList items={row[key]} />
+                                                    // <TableList items={row[key]} />
+                                                    <p>{row[key].length} Pages</p>
                                                 }
                                             </div>
                                         }

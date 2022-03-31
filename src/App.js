@@ -23,8 +23,8 @@ Amplify.configure(awsExports);
 class App extends React.Component {
     constructor(props) {
         super(props);
+        this.updateSelectedDomain.bind(this);
         this.state = {
-            isLoading: true,
             overviewCookies: null,
             overviewEmails: null,
             cookies: [],
@@ -36,20 +36,18 @@ class App extends React.Component {
             existingForms: [],
             newForms: [],
             companyName: null,
+            selectedDomain: 0,
             user: props.user,
         };
     }
 
     componentDidMount() {
-        this.setState(
-            { isLoading: true },
-            () => this.getDashboardData()
-        );
+        this.getDashboardData();
     }
 
     render() {
         return (
-            this.state.isLoading ?
+            !this.state.dashboardData ?
                 <div className="loading-container">
                     <img className="loading-image" src={logoOnlyBlue} alt="Loading..." />
                 </div>
@@ -59,7 +57,9 @@ class App extends React.Component {
                         <Route path="/" element={
                             <PageWrapper
                                 thisPage="dashboard"
-                                domains={this.state.dashboardData && this.state.dashboardData.domains}
+                                domains={this.state.dashboardData.domains}
+                                selectedDomain={this.state.selectedDomain}
+                                updateSelectedDomain={this.updateSelectedDomain}
                                 page={
                                     <Dashboard data={{
                                         newPages: this.state.newPages,
@@ -76,7 +76,9 @@ class App extends React.Component {
                         <Route path="cookies" element={
                             <PageWrapper
                                 thisPage="cookies"
-                                domains={this.state.dashboardData && this.state.dashboardData.domains}
+                                domains={this.state.dashboardData.domains}
+                                selectedDomain={this.state.selectedDomain}
+                                updateSelectedDomain={this.updateSelectedDomain}
                                 page={
                                     <>
                                         <CookiesPage
@@ -88,7 +90,9 @@ class App extends React.Component {
                         <Route path="emails" element={
                             <PageWrapper
                                 thisPage="emails"
-                                domains={this.state.dashboardData && this.state.dashboardData.domains}
+                                domains={this.state.dashboardData.domains}
+                                selectedDomain={this.state.selectedDomain}
+                                updateSelectedDomain={this.updateSelectedDomain}
                                 page={
                                     <EmailsPage
                                         emails={this.state.emails}
@@ -98,7 +102,9 @@ class App extends React.Component {
                         <Route path="pages" element={
                             <PageWrapper
                                 thisPage="pages"
-                                domains={this.state.dashboardData && this.state.dashboardData.domains}
+                                domains={this.state.dashboardData.domains}
+                                selectedDomain={this.state.selectedDomain}
+                                updateSelectedDomain={this.updateSelectedDomain}
                                 page={
                                     <PagesPage
                                         newPages={this.state.newPages}
@@ -109,7 +115,9 @@ class App extends React.Component {
                         <Route path="scripts" element={
                             <PageWrapper
                                 thisPage="scripts"
-                                domains={this.state.dashboardData && this.state.dashboardData.domains}
+                                domains={this.state.dashboardData.domains}
+                                selectedDomain={this.state.selectedDomain}
+                                updateSelectedDomain={this.updateSelectedDomain}
                                 page={
                                     <ScriptsPage
                                         newScripts={this.state.newScripts}
@@ -120,7 +128,9 @@ class App extends React.Component {
                         <Route path="forms" element={
                             <PageWrapper
                                 thisPage="forms"
-                                domains={this.state.dashboardData && this.state.dashboardData.domains}
+                                domains={this.state.dashboardData.domains}
+                                selectedDomain={this.state.selectedDomain}
+                                updateSelectedDomain={this.updateSelectedDomain}
                                 page={
                                     <FormsPage
                                         newForms={this.state.newForms}
@@ -132,6 +142,10 @@ class App extends React.Component {
                 </BrowserRouter>
         );
     }
+
+    updateSelectedDomain = (newDomain) => {
+        this.setState({ selectedDomain: newDomain }, () => this.getDashboardData());
+    };
 
     async fetchDashboardDataFromAPI() {
         const apiName = "dashboard";
@@ -184,58 +198,55 @@ class App extends React.Component {
             existingForms: existingForms,
             newForms: newForms,
             companyName: companyName,
-            isLoading: false,
         });
     }
 
     getCookies() {
-        let cookiesData = this.state.dashboardData.domains[0].tests.cookies;
-        let _formatCookie = (c) => {
+        let cookiesData = this.state.dashboardData.domains[this.state.selectedDomain].tests.cookies;
+
+        let _formatCookie = (c, onPageLoad = false) => {
             return {
                 risk: c.priority.toUpperCase(),
                 name: c.name,
                 status: 'TODO', //TODO: calculate status (HIGH, MEDIUM, LOW)
                 classificationExpected: 'TODO', //TODO: calculate expected classification
-                classificationActual: c.type, //TODO on load cookies 
+                classificationActual: c.type,
+                beforeOptIn: onPageLoad,
                 domain: c.domain,
             };
         }
 
         var formattedCookies = [];
         cookiesData.nonCompliantCookiesAfterRejection.forEach(c => formattedCookies.push(_formatCookie(c)));
+        cookiesData.nonCompliantCookiesOnPageLoad.forEach(c => formattedCookies.push(_formatCookie(c, true)));
         cookiesData.nonCompliantCookiesPerCategory.Functional.forEach(c => formattedCookies.push(_formatCookie(c)));
         cookiesData.nonCompliantCookiesPerCategory.Analytics.forEach(c => formattedCookies.push(_formatCookie(c)));
         cookiesData.nonCompliantCookiesPerCategory.Marketing.forEach(c => formattedCookies.push(_formatCookie(c)));
-        if(cookiesData.nonCompliantCookiesOnPageLoad) cookiesData.nonCompliantCookiesOnPageLoad.forEach(c => formattedCookies.push(_formatCookie(c)));
-        console.log(cookiesData);
         return formattedCookies;
     }
 
     getEmails() {
         let _formatEmail = (e) => {
             return {
-                status: e.status.toUpperCase(),
-                testEmail: e.testEmail,
-                overdueEmails: e.numberOfEmailsReceived,
-                daysOverdue: 'TODO', //TODO: days overdue
-                dateFirstEmailReceived: 'TODO', //TODO: date first email received
-                senderAddress: e.senderAddress,
+                priority: e.status.toUpperCase(),
+                testAddress: e.testEmail,
                 testDate: e.testDate,
+                testPage: e.testPage,
+                emailsReceived: e.numberOfEmailsReceived,
+                senderAddress: e.senderAddress,
             };
         }
-        return this.state.dashboardData.domains[0].tests.emails.map(_formatEmail);
+        return this.state.dashboardData.domains[this.state.selectedDomain].tests.emails.map(_formatEmail);
     }
 
     getChanges() {
         let changeDetectionData =
-            this.state.dashboardData.domains[0].tests.changeDetection;
+            this.state.dashboardData.domains[this.state.selectedDomain].tests.changeDetection;
 
         let _formatPage = (p) => {
             return {
-                'done': false, //TODO: what is this for?
                 'url': p.url,
-                'privacyPolicy': 'ABSENT', //TODO: what is this for?
-                'version': '1.0', //TODO: what is this for?
+                'dateDetected': p.dateDetected,
             };
         }
 
@@ -243,7 +254,8 @@ class App extends React.Component {
             return {
                 'dateDetected': s.dateDetected,
                 'scriptURL': s.scriptUrl,
-                'page': [s.pageUrl],  //TODO: this should be updated to list of pages once updated in database
+                'pageURL': s.pageUrl instanceof Array ? s.pageUrl : [s.pageUrl],  //TODO: this should be updated to list of pages once updated in database
+                'baseDomain': s.scriptBaseDomain, //TODO: this doesn't exist yet but will soon
             };
         }
 
@@ -251,6 +263,7 @@ class App extends React.Component {
             return {
                 'dateDetected': f.dateDetected,
                 'formId': f.formID,
+                'formText': f.formText, //TODO: this doesn't exist yet but will soon
                 'url': f.url,
                 'policyExists': f.privacyPolicyExists,
             };

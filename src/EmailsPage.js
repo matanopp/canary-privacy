@@ -2,22 +2,20 @@ import React from 'react';
 import Table from './Table.js';
 
 let keys = [
-    'status',
-    'testEmail',
-    'overdueEmails',
-    'daysOverdue',
-    'dateFirstEmailedReceived',
-    'senderAddress',
+    'priority',
+    'testAddress',
     'testDate',
+    'testPage',
+    'emailsReceived',
+    'senderAddress',
 ];
 let headers = {
-    'status': 'Status',
-    'testEmail': 'Test Email',
-    'overdueEmails': 'Overdue Emails Received',
-    'daysOverdue': 'Days Overdue',
-    'dateFirstEmailReceived': 'Date First Email Received',
-    'senderAddress': 'Sender Address',
+    'priority': 'Priority',
+    'testAddress': 'Test Address',
     'testDate': 'Test Date',
+    'testPage': 'Opt-In Page',
+    'emailsReceived': 'Emails Received After Opt-Out',
+    'senderAddress': 'Sender Address',
 };
 
 class EmailsPage extends React.Component {

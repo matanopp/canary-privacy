@@ -3,15 +3,18 @@ import Table from './Table.js';
 import './ChangeDetection.css';
 
 let keys = [
-    'dateDetected',
-    'formId',
     'url',
-    'policyExists',
+    'formId',
+    'formText',
+    'dateDetected',
+    // 'formId',
+    // 'policyExists',
 ];
 
 let headers = {
     'dateDetected': 'Date Detected',
     'formId': 'Form ID',
+    'formText': 'Form Text',
     'url': 'URL',
     'policyExists': 'Privacy Policy Exists',
 };
