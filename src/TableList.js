@@ -1,6 +1,5 @@
 import React from 'react';
-
-let numItemsPerPage = 5;
+import expandIcon from './images/expand.svg';
 
 class TableListItem extends React.Component {
     constructor(props) {
@@ -8,7 +7,6 @@ class TableListItem extends React.Component {
 
         this.state = {
             showItems: false,
-            itemsPage: 0,
         };
     }
 
@@ -16,24 +14,22 @@ class TableListItem extends React.Component {
         return (
             <>
                 {!this.state.showItems &&
-                    <button onClick={() => this.setState({ showItems: true })}>
+                    <div>
+                        <button className="array-button" onClick={() => this.setState({ showItems: true })}>
+                            <img className="icon" src={expandIcon} />
+                        </button>
                         {this.props.items.length} Pages
-                    </button>
+                    </div>
                 }
-                {this.state.showItems && <div>
-                    <button onClick={() => this.setState({ showItems: false })}>
-                        Close
-                    </button>
-                    <br />
-                    {this.props.items.slice(numItemsPerPage * this.state.itemsPage, numItemsPerPage * (this.state.itemsPage + 1)).map(s => <p>{s}</p>)}
-                    <br />
-                    <button onClick={() => this.setState(prevState => ({ itemsPage: prevState.itemsPage - 1 }))}>
-                        Previous
-                    </button>
-                    <button onClick={() => this.setState(prevState => ({ itemsPage: prevState.itemsPage + 1 }))}>
-                        Next
-                    </button>
-                </div>}
+                {this.state.showItems &&
+                    <>
+                        <button className="array-button" onClick={() => this.setState({ showItems: false })}>
+                            Close
+                        </button>
+                        <br />
+                        {this.props.items.map(s => <p>{s}</p>)}
+                    </>
+                }
             </>
         );
     }

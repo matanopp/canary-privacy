@@ -79,3 +79,9 @@
 .icon {
     height: 100%;
 }
+
+.array-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}

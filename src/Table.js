@@ -7,7 +7,6 @@ import alertIcon from './images/alert.svg';
 class Table extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props.data);
     }
 
     render() {
@@ -43,7 +42,7 @@ class Table extends React.Component {
     }
 
     formatTableData(row, key, newOrExistingColumn = null) {
-        let newLabel = <b className="new-label">NEW - </b>;
+        let newLabel = <b className="new-label">NEW </b>;
         return (
             <td className={key}>
                 {typeof row[key] === 'string' &&
@@ -76,8 +75,8 @@ class Table extends React.Component {
                         {row[key].length === 1 ?
                             <p>{row[key][0]}</p>
                             :
-                            // <TableList items={row[key]} />
-                            <p>{row[key].length} Pages</p>
+                            <TableList items={row[key]} />
+                            // <p>{row[key].length} Pages</p>
                         }
                     </div>
                 }

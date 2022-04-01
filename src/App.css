@@ -138,6 +138,7 @@ p {
     position: fixed;
     top: 0;
     box-shadow: 0 2px 2px #ddd;
+    z-index: 10;
 }
 
 .tests-wrapper {

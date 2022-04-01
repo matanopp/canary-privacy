@@ -164,16 +164,16 @@ class App extends React.Component {
         const username = this.state.user.username;
         let path = `https://canary-scan-results.s3.us-east-2.amazonaws.com/${username}.json`
         let res = await fetch(path)
-        .then((res) => res.json())
-        .then(
-            (result) => {
-                return result;
-            },
-            (error) => {
-                console.log(error);
-                throw error.response.data;
-            }
-        );
+            .then((res) => res.json())
+            .then(
+                (result) => {
+                    return result;
+                },
+                (error) => {
+                    console.log(error);
+                    throw error.response.data;
+                }
+            );
         return res;
     }
 
@@ -221,7 +221,7 @@ class App extends React.Component {
         cookiesData.nonCompliantCookiesPerCategory.Functional.forEach(c => formattedCookies.push(_formatCookie(c)));
         cookiesData.nonCompliantCookiesPerCategory.Analytics.forEach(c => formattedCookies.push(_formatCookie(c)));
         cookiesData.nonCompliantCookiesPerCategory.Marketing.forEach(c => formattedCookies.push(_formatCookie(c)));
-        if(cookiesData.nonCompliantCookiesOnPageLoad) cookiesData.nonCompliantCookiesOnPageLoad.forEach(c => formattedCookies.push(_formatCookie(c, true)));
+        if (cookiesData.nonCompliantCookiesOnPageLoad) cookiesData.nonCompliantCookiesOnPageLoad.forEach(c => formattedCookies.push(_formatCookie(c, true)));
         return formattedCookies;
     }
 
@@ -246,13 +246,13 @@ class App extends React.Component {
         let _formatPage = (p) => {
             return {
                 'url': p.url,
-                'dateDetected': p.dateDetected,
+                'dateDetected': new Date(p.dateDetected * 1000).toLocaleDateString(),
             };
         }
 
         let _formatScript = (s) => {
             return {
-                'dateDetected': s.dateDetected,
+                'dateDetected': new Date(s.dateDetected * 1000).toLocaleDateString(),
                 'scriptURL': s.scriptUrl,
                 'pageURL': s.pageUrl instanceof Array ? s.pageUrl : [s.pageUrl],  //TODO: this should be updated to list of pages once updated in database
                 'baseDomain': s.scriptBaseDomain, //TODO: this doesn't exist yet but will soon
@@ -261,7 +261,7 @@ class App extends React.Component {
 
         let _formatForm = (f) => {
             return {
-                'dateDetected': f.dateDetected,
+                'dateDetected': new Date(f.dateDetected * 1000).toLocaleDateString(),
                 'formId': f.formID,
                 'formText': f.formText, //TODO: this doesn't exist yet but will soon
                 'url': f.url,
