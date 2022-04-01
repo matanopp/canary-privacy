@@ -19,6 +19,17 @@ import FormsPage from './FormsPage.js';
 import logoOnlyBlue from './images/logo/logo-only-blue.png';
 import _ from 'lodash';
 
+const HIGH_RISK = "HIGH";
+const MEDIUM_RISK = "MEDIUM"
+const LOW_RISK = "LOW"
+const UNKNOWN_RISK = "UNKNOWN"
+const STRICTLY_NECESSARY_CATEGORY = "Stricly Necessary"
+const FUNCTIONAL_CATEGORY = "Functional"
+const ANALYTICS_CATEGORY = "Analytics"
+const MARKETING_CATEGORY = "Marketing"
+const MISMANAGED_STATUS = "Mismanaged"
+const MISCLASSIFIED_STATUS = "Misclassified"
+
 Amplify.configure(awsExports);
 class App extends React.Component {
     constructor(props) {
@@ -231,6 +242,36 @@ class App extends React.Component {
         return cookie1.name === cookie2.name && cookie1.domain === cookie2.domain
     }
 
+    setCookiesRisk(cookies) {
+        for(let cookie of cookies) {
+            if(
+            (cookie.beforeOptIn) ||
+            (cookie.classificationExpected === MARKETING_CATEGORY && (cookie.status === MISMANAGED_STATUS || cookie.status === MISCLASSIFIED_STATUS)) ||
+            (cookie.classificationExpected === ANALYTICS_CATEGORY && 
+                (cookie.status === MISMANAGED_STATUS || 
+                (cookie.status === MISCLASSIFIED_STATUS && [FUNCTIONAL_CATEGORY, STRICTLY_NECESSARY_CATEGORY].includes(cookie.classificationActual))))) {
+                cookie.risk = HIGH_RISK;
+                continue;
+            }
+
+            if(
+            (cookie.classificationExpected === FUNCTIONAL_CATEGORY && 
+            (cookie.status === MISMANAGED_STATUS || (cookie.status === MISCLASSIFIED_STATUS && cookie.classificationActual === STRICTLY_NECESSARY_CATEGORY)))) {
+                cookie.risk = MEDIUM_RISK;
+                continue;
+            }
+
+            if(
+            (cookie.classificationExpected === ANALYTICS_CATEGORY && 
+                (cookie.status === MISCLASSIFIED_STATUS && cookie.classificationActual === STRICTLY_NECESSARY_CATEGORY)) ||
+            (cookie.classificationExpected === FUNCTIONAL_CATEGORY && cookie.status === MISCLASSIFIED_STATUS && [ANALYTICS_CATEGORY, MARKETING_CATEGORY].includes(cookie.classificationActual))) {
+                cookie.risk = LOW_RISK;
+                continue;
+            }
+            cookie.risk = UNKNOWN_RISK;
+        }
+    }
+
     getCookies() {
         let cookiesData = this.state.dashboardData.domains[this.state.selectedDomain].tests.cookies;
 
@@ -239,21 +280,21 @@ class App extends React.Component {
                 risk: c.priority.toUpperCase(),
                 name: c.name,
                 status: status,
-                classificationExpected: status === "Misclassified" ? c.type : '',
-                classificationActual:  status === "Misclassified" ? classificationActual : '',
+                classificationExpected: c.type,
+                classificationActual:  status === MISCLASSIFIED_STATUS ? classificationActual : '',
                 beforeOptIn: nonCompliantCookiesOnPageLoad && this.isCookieInList(c, nonCompliantCookiesOnPageLoad),
                 domain: c.domain,
             };
         }
 
         var formattedCookies = [];
-        cookiesData.nonCompliantCookiesPerCategory["Strictly Necessary"] = cookiesData.nonCompliantCookiesAfterRejection;
+        cookiesData.nonCompliantCookiesPerCategory[STRICTLY_NECESSARY_CATEGORY] = cookiesData.nonCompliantCookiesAfterRejection;
         let mismangedCookies = this.getMismanagedCookies(cookiesData.nonCompliantCookiesPerCategory);
-        mismangedCookies.forEach(c => formattedCookies.push(_formatCookie(c, "", "Mismanaged", cookiesData.nonCompliantCookiesOnPageLoad)));
-        cookiesData.nonCompliantCookiesAfterRejection.filter(c=>!this.isCookieInList(c,mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, "Strictly Necessary", "Misclassified", cookiesData.nonCompliantCookiesOnPageLoad)));
-        cookiesData.nonCompliantCookiesPerCategory.Functional.filter(c=>!this.isCookieInList(c,mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, "Functional", "Misclassified", cookiesData.nonCompliantCookiesOnPageLoad)));
-        cookiesData.nonCompliantCookiesPerCategory.Analytics.filter(c=>!this.isCookieInList(c,mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, "Analytics", "Misclassified", cookiesData.nonCompliantCookiesOnPageLoad)));
-        cookiesData.nonCompliantCookiesPerCategory.Marketing.filter(c=>!this.isCookieInList(c,mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, "Marketing", "Misclassified", cookiesData.nonCompliantCookiesOnPageLoad)));
+        mismangedCookies.forEach(c => formattedCookies.push(_formatCookie(c, "", MISMANAGED_STATUS, cookiesData.nonCompliantCookiesOnPageLoad)));
+        cookiesData.nonCompliantCookiesAfterRejection.filter(c=>!this.isCookieInList(c,mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, STRICTLY_NECESSARY_CATEGORY, MISCLASSIFIED_STATUS, cookiesData.nonCompliantCookiesOnPageLoad)));
+        cookiesData.nonCompliantCookiesPerCategory.Functional.filter(c=>!this.isCookieInList(c,mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, FUNCTIONAL_CATEGORY, MISCLASSIFIED_STATUS, cookiesData.nonCompliantCookiesOnPageLoad)));
+        cookiesData.nonCompliantCookiesPerCategory.Analytics.filter(c=>!this.isCookieInList(c,mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, ANALYTICS_CATEGORY, MISCLASSIFIED_STATUS, cookiesData.nonCompliantCookiesOnPageLoad)));
+        cookiesData.nonCompliantCookiesPerCategory.Marketing.filter(c=>!this.isCookieInList(c,mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, MARKETING_CATEGORY, MISCLASSIFIED_STATUS, cookiesData.nonCompliantCookiesOnPageLoad)));
         if(cookiesData.nonCompliantCookiesOnPageLoad) {
             cookiesData.nonCompliantCookiesOnPageLoad.forEach(c => {
                 if(!this.isCookieInList(c,formattedCookies)) {
@@ -263,6 +304,7 @@ class App extends React.Component {
                 }
             });
         }
+        this.setCookiesRisk(formattedCookies);
         return formattedCookies;
     }
 
