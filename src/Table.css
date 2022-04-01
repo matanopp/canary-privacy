@@ -19,6 +19,9 @@
 .table-wrapper td,
 .table-wrapper th {
     padding: 8px;
+    word-break: break-word;
+    min-width: 100px;
+    max-width: 1000px;
 }
 
 .table-wrapper thead {
@@ -36,11 +39,16 @@
     border-bottom-right-radius: 10px;
 }
 
+.table-wrapper tbody tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
 .new-label {
     color: rgb(51, 68, 213);
 }
 
 .cookies-table-wrapper .risk p,
+.cookies-table-wrapper .status p,
 .emails-table-wrapper .priority p,
 .pages-table-wrapper .privacyPolicy p {
     color: white;
@@ -50,6 +58,7 @@
     font-weight: bold;
     padding: 2px 10px;
     width: 100%;
+    min-width: max-content;
 }
 
 .cookies-table-wrapper .risk .high,
@@ -76,6 +85,34 @@
     background-color: rgb(141, 151, 155);
 }
 
-.icon {
+.cookies-table-wrapper .status .misclassified {
+    color: rgb(118, 27, 56);
+    background-color: rgb(254, 207, 222);
+}
+
+.cookies-table-wrapper .status .mismanaged {
+    color: rgb(43, 40, 117);
+    background-color: rgb(198, 194, 249);
+}
+
+.array-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.array-button .icon {
     height: 100%;
+    margin-right: 10px;
+}
+
+.array-items {
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background-color: transparent;
+
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
 }

@@ -32,7 +32,7 @@ class FormsPage extends React.Component {
                 <h1>Forms</h1>
                 {(this.props.newForms.length > 0 || this.props.existingForms.length > 0) &&
                     <Table
-                        tableType="pages"
+                        tableType="forms"
                         data={{
                             keys,
                             headers,

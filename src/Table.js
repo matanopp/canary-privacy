@@ -7,7 +7,6 @@ import alertIcon from './images/alert.svg';
 class Table extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props.data);
     }
 
     render() {
@@ -43,7 +42,7 @@ class Table extends React.Component {
     }
 
     formatTableData(row, key, newOrExistingColumn = null) {
-        let newLabel = <b className="new-label">NEW - </b>;
+        let newLabel = <b className="new-label">NEW </b>;
         return (
             <td className={key}>
                 {typeof row[key] === 'string' &&
@@ -61,12 +60,8 @@ class Table extends React.Component {
                 {typeof row[key] === 'boolean' &&
                     <div className={(row[key]).toString()} >
                         {row[key] ?
-                            // placeholder for green checkmark or something
-                            // <div style={{ 'width': '10px', 'height': '10px', 'backgroundColor': 'green', 'borderRadius': '50%' }} />
                             <img className="icon" src={alertIcon} alt="alert" />
                             :
-                            // placeholder for red X or something
-                            // <div style={{ 'width': '10px', 'height': '10px', 'backgroundColor': 'red', 'borderRadius': '50%' }} />
                             '-'
                         }
                     </div>
@@ -76,8 +71,8 @@ class Table extends React.Component {
                         {row[key].length === 1 ?
                             <p>{row[key][0]}</p>
                             :
-                            // <TableList items={row[key]} />
-                            <p>{row[key].length} Pages</p>
+                            <TableList items={row[key]} />
+                            // <p>{row[key].length} Pages</p>
                         }
                     </div>
                 }

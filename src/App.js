@@ -164,16 +164,16 @@ class App extends React.Component {
         const username = this.state.user.username;
         let path = `https://canary-scan-results.s3.us-east-2.amazonaws.com/${username}.json`
         let res = await fetch(path)
-        .then((res) => res.json())
-        .then(
-            (result) => {
-                return result;
-            },
-            (error) => {
-                console.log(error);
-                throw error.response.data;
-            }
-        );
+            .then((res) => res.json())
+            .then(
+                (result) => {
+                    return result;
+                },
+                (error) => {
+                    console.log(error);
+                    throw error.response.data;
+                }
+            );
         return res;
     }
 
@@ -287,37 +287,37 @@ class App extends React.Component {
         let _formatPage = (p) => {
             return {
                 'url': p.url,
-                'dateDetected': p.dateDetected,
+                'dateDetected': new Date(p.dateDetected * 1000).toLocaleDateString(),
             };
         }
 
         let _formatScriptsList = (scriptBaseDomain, scripts) => {
             return {
-                'baseDomain' : scriptBaseDomain,
-                'urls' : scripts.map(s=>s.pageUrl) ,
-                'scriptName' : _.first(scripts).scriptName,
-                'scriptUrl' : _.first(scripts).scriptUrl.substring(0, 50) + "...",
-                'dateDetected' : _.first(scripts).dateDetected,
+                'baseDomain': scriptBaseDomain,
+                'urls': scripts.map(s => s.pageUrl),
+                'scriptName': _.first(scripts).scriptName,
+                'scriptUrl': _.first(scripts).scriptUrl.substring(0, 50) + "...",
+                'dateDetected': new Date(_.first(scripts).dateDetected * 1000).toLocaleDateString(),
             }
         }
 
         let _formatFormsList = (formId, forms) => {
             return {
-                'formId' : formId,
-                'urls' : forms.map(f=>f.url),
-                'formText' : _.first(forms).formText,
-                'dateDetected' : _.first(forms).dateDetected
+                'formId': formId,
+                'urls': forms.map(f => f.url),
+                'formText': _.first(forms).formText,
+                'dateDetected': new Date(_.first(forms).dateDetected * 1000).toLocaleDateString(),
             }
         }
 
         let groupBy = (items, field, formatFunc) => {
-            let groupedItems = _.groupBy(items, field)   
-            return Object.keys(groupedItems).map(function(itemId) {
+            let groupedItems = _.groupBy(items, field)
+            return Object.keys(groupedItems).map(function (itemId) {
                 let itemInnerList = groupedItems[itemId]
                 return formatFunc(itemId, itemInnerList);
             });
         }
-        
+
         let existingPages = changeDetectionData.pages.filter(p => p.status === "existing").map(_formatPage);
         let newPages = changeDetectionData.pages.filter(p => p.status === "new").map(_formatPage);
 
@@ -326,7 +326,7 @@ class App extends React.Component {
 
         let existingForms = groupBy(changeDetectionData.forms.filter(p => p.status === "existing"), "formID", _formatFormsList);
         let newForms = groupBy(changeDetectionData.forms.filter(p => p.status === "new"), "formID", _formatFormsList);
-        
+
         return {
             existingPages: existingPages,
             newPages: newPages,
