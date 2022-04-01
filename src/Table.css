@@ -39,11 +39,16 @@
     border-bottom-right-radius: 10px;
 }
 
+.table-wrapper tbody tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
 .new-label {
     color: rgb(51, 68, 213);
 }
 
 .cookies-table-wrapper .risk p,
+.cookies-table-wrapper .status p,
 .emails-table-wrapper .priority p,
 .pages-table-wrapper .privacyPolicy p {
     color: white;
@@ -78,6 +83,16 @@
 
 .emails-table-wrapper .priority .no-data {
     background-color: rgb(141, 151, 155);
+}
+
+.cookies-table-wrapper .status .misclassified {
+    color: rgb(118, 27, 56);
+    background-color: rgb(254, 207, 222);
+}
+
+.cookies-table-wrapper .status .mismanaged {
+    color: rgb(43, 40, 117);
+    background-color: rgb(198, 194, 249);
 }
 
 .array-button {
