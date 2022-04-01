@@ -200,28 +200,69 @@ class App extends React.Component {
             companyName: companyName,
         });
     }
+    getMismanagedCookies(nonCompliantCookiesPerCategory) {
+        let mismanagedCookies = []
+        for(let category of Object.keys(nonCompliantCookiesPerCategory)) {
+            let cookiesForCategory = nonCompliantCookiesPerCategory[category];
+            for(let cookie of cookiesForCategory) {
+                if(this.isCookieInOtherCategory(cookie, category, nonCompliantCookiesPerCategory)) {
+                    if(!this.isCookieInList(cookie, mismanagedCookies)){
+                        mismanagedCookies.push(cookie)
+                    }
+                }
+            }
+        }
+        return mismanagedCookies;
+    }
+
+    isCookieInOtherCategory(cookie, category, nonCompliantCookiesPerCategory) {
+        for(let cat of Object.keys(nonCompliantCookiesPerCategory).filter(c=>c!==category)) {
+            let cookiesInCategory = nonCompliantCookiesPerCategory[cat];
+            if(this.isCookieInList(cookie, cookiesInCategory)) {
+                return true;
+            }
+        }
+    }
+
+    isCookieInList(cookie, cookiesList) {
+        return (cookiesList.filter(c=>this.cookiesEqual(c,cookie)).length > 0)
+    }
+    cookiesEqual(cookie1, cookie2) {
+        return cookie1.name === cookie2.name && cookie1.domain === cookie2.domain
+    }
 
     getCookies() {
         let cookiesData = this.state.dashboardData.domains[this.state.selectedDomain].tests.cookies;
 
-        let _formatCookie = (c, onPageLoad = false) => {
+        let _formatCookie = (c, classificationActual, status, nonCompliantCookiesOnPageLoad) => {    
             return {
                 risk: c.priority.toUpperCase(),
                 name: c.name,
-                status: 'TODO', //TODO: calculate status (HIGH, MEDIUM, LOW)
-                classificationExpected: 'TODO', //TODO: calculate expected classification
-                classificationActual: c.type,
-                beforeOptIn: onPageLoad,
+                status: status,
+                classificationExpected: status === "Misclassified" ? c.type : '',
+                classificationActual:  status === "Misclassified" ? classificationActual : '',
+                beforeOptIn: nonCompliantCookiesOnPageLoad && this.isCookieInList(c, nonCompliantCookiesOnPageLoad),
                 domain: c.domain,
             };
         }
 
         var formattedCookies = [];
-        cookiesData.nonCompliantCookiesAfterRejection.forEach(c => formattedCookies.push(_formatCookie(c)));
-        cookiesData.nonCompliantCookiesPerCategory.Functional.forEach(c => formattedCookies.push(_formatCookie(c)));
-        cookiesData.nonCompliantCookiesPerCategory.Analytics.forEach(c => formattedCookies.push(_formatCookie(c)));
-        cookiesData.nonCompliantCookiesPerCategory.Marketing.forEach(c => formattedCookies.push(_formatCookie(c)));
-        if(cookiesData.nonCompliantCookiesOnPageLoad) cookiesData.nonCompliantCookiesOnPageLoad.forEach(c => formattedCookies.push(_formatCookie(c, true)));
+        cookiesData.nonCompliantCookiesPerCategory["Strictly Necessary"] = cookiesData.nonCompliantCookiesAfterRejection;
+        let mismangedCookies = this.getMismanagedCookies(cookiesData.nonCompliantCookiesPerCategory);
+        mismangedCookies.forEach(c => formattedCookies.push(_formatCookie(c, "", "Mismanaged", cookiesData.nonCompliantCookiesOnPageLoad)));
+        cookiesData.nonCompliantCookiesAfterRejection.filter(c=>!this.isCookieInList(c,mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, "Strictly Necessary", "Misclassified", cookiesData.nonCompliantCookiesOnPageLoad)));
+        cookiesData.nonCompliantCookiesPerCategory.Functional.filter(c=>!this.isCookieInList(c,mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, "Functional", "Misclassified", cookiesData.nonCompliantCookiesOnPageLoad)));
+        cookiesData.nonCompliantCookiesPerCategory.Analytics.filter(c=>!this.isCookieInList(c,mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, "Analytics", "Misclassified", cookiesData.nonCompliantCookiesOnPageLoad)));
+        cookiesData.nonCompliantCookiesPerCategory.Marketing.filter(c=>!this.isCookieInList(c,mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, "Marketing", "Misclassified", cookiesData.nonCompliantCookiesOnPageLoad)));
+        if(cookiesData.nonCompliantCookiesOnPageLoad) {
+            cookiesData.nonCompliantCookiesOnPageLoad.forEach(c => {
+                if(!this.isCookieInList(c,formattedCookies)) {
+                    let formattedCookie = _formatCookie(c)
+                    formattedCookie.beforeOptIn = true;
+                    formattedCookies.push(formattedCookie)
+                }
+            });
+        }
         return formattedCookies;
     }
 
