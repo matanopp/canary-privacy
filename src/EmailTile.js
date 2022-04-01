@@ -6,8 +6,12 @@ import ViewDetailsLink from './ViewDetailsLink.js';
 function EmailTile(props) {
     return (
         <div className="email-tile tile">
-            <h3>Email Opt-Out</h3>
-            <p>Illegal emails received</p>
+            <div>
+                <h1>Email Opt-Out</h1>
+                <p className="tile-subhead">
+                    <b>{props.activeTests}</b> Active Email Test{props.activeTests === 1 ? '' : 's'}
+                </p>
+            </div>
             <div className="tile-body">
                 <DataBox
                     priorityLevel={"high-priority"}
@@ -20,9 +24,6 @@ function EmailTile(props) {
                     priorityLabel={"Active Email Tests"}
                 /> */}
             </div>
-            <b className="overview-tile-total">
-                {props.activeTests} Active Email Test{props.activeTests === 1 ? '' : 's'}
-            </b>
             <ViewDetailsLink to="/emails" />
         </div>
     );

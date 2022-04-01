@@ -16,7 +16,8 @@
     width: 100%;
 }
 
-.table-wrapper td, .table-wrapper th {
+.table-wrapper td,
+.table-wrapper th {
     padding: 8px;
 }
 
@@ -35,6 +36,10 @@
     border-bottom-right-radius: 10px;
 }
 
+.new-label {
+    color: rgb(51, 68, 213);
+}
+
 .cookies-table-wrapper .risk p,
 .emails-table-wrapper .priority p,
 .pages-table-wrapper .privacyPolicy p {
@@ -47,7 +52,7 @@
     width: 100%;
 }
 
-.cookies-table-wrapper .risk .high, 
+.cookies-table-wrapper .risk .high,
 .emails-table-wrapper .priority .alert,
 .pages-table-wrapper .privacyPolicy .absent {
     background-color: rgb(167, 66, 68);
@@ -71,3 +76,6 @@
     background-color: rgb(141, 151, 155);
 }
 
+.icon {
+    height: 100%;
+}

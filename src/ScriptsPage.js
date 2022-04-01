@@ -16,7 +16,9 @@ let headers = {
     'dateDetected': 'Date Detected',
 };
 
-class PagesPage extends React.Component {
+let newOrExistingColumn = 'dateDetected';
+
+class ScriptsPage extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -25,35 +27,21 @@ class PagesPage extends React.Component {
         return (
             <>
                 <h1>Scripts</h1>
-                {this.props.newScripts.length > 0 &&
-                    <>
-                        <h2>New</h2>
-                        <Table
-                            tableType="scripts"
-                            data={{
-                                keys: keys,
-                                headers: headers,
-                                rows: this.props.newScripts,
-                            }}
-                        />
-                    </>
-                }
-                {this.props.existingScripts.length > 0 &&
-                    <>
-                        <h2>Existing</h2>
-                        <Table
-                            tableType="scripts"
-                            data={{
-                                keys: keys,
-                                headers: headers,
-                                rows: this.props.existingScripts,
-                            }}
-                        />
-                    </>
+                {(this.props.newScripts.length > 0 || this.props.existingScripts.length > 0) &&
+                    <Table
+                        tableType="scripts"
+                        data={{
+                            keys,
+                            headers,
+                            newRows: this.props.newScripts,
+                            existingRows: this.props.existingScripts,
+                            newOrExistingColumn,
+                        }}
+                    />
                 }
             </>
         );
     }
 }
 
-export default PagesPage;
+export default ScriptsPage;

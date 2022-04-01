@@ -1,12 +1,15 @@
 .tile {
-    display: flex;
     padding: 20px;
-    gap: 20px;
-    flex-direction: column;
-    background-color: white;
     border-radius: 20px;
+    background-color: white;
+    height: 275px;
+
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     /* 50% of the whole container width - 2 * margins(20px) */
-    
+
     /* max-width: 580px; */
     line-height: 100%;
     box-shadow: 0px 0px 2px rgba(42, 46, 59, 0.08), 0px 4px 8px rgba(133, 141, 166, 0.16);
@@ -37,6 +40,10 @@
     min-width: 100px;
 }
 
+.tile-subhead {
+    color: rgb(51, 68, 213);
+}
+
 .tile-body {
     display: flex;
     gap: 10px;
@@ -48,9 +55,10 @@
     flex-direction: column;
     padding: 15px;
     width: calc((100% - 20px) / 3);
-    flex-grow: 1;
-    min-width: 120px;
-    /* max-width: 160px; */
+    /* flex-grow: 1; */
+    min-width: 150px;
+    max-width: 160px;
+    min-height: 140px;
     border-radius: 10px;
     justify-content: space-between;
     gap: 30px;
@@ -89,6 +97,15 @@
 .zero-issues {
     background-color: #2B6F2A;
     color: white;
+}
+
+.compliant {
+    height: 140px;
+    line-height: 140px;
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    border-radius: 10px;
 }
 
 .view-details-button {

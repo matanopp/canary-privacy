@@ -19,6 +19,8 @@ let headers = {
     'policyExists': 'Privacy Policy Exists',
 };
 
+let newOrExistingColumn = 'dateDetected';
+
 class FormsPage extends React.Component {
     constructor(props) {
         super(props);
@@ -28,31 +30,17 @@ class FormsPage extends React.Component {
         return (
             <>
                 <h1>Forms</h1>
-                {this.props.newForms.length > 0 &&
-                    <>
-                        <h2>New</h2>
-                        <Table
-                            tableType="pages"
-                            data={{
-                                keys: keys,
-                                headers: headers,
-                                rows: this.props.newForms,
-                            }}
-                        />
-                    </>
-                }
-                {this.props.existingForms.length > 0 &&
-                    <>
-                        <h2>Existing</h2>
-                        <Table
-                            tableType="pages"
-                            data={{
-                                keys: keys,
-                                headers: headers,
-                                rows: this.props.existingForms,
-                            }}
-                        />
-                    </>
+                {(this.props.newForms.length > 0 || this.props.existingForms.length > 0) &&
+                    <Table
+                        tableType="pages"
+                        data={{
+                            keys,
+                            headers,
+                            newRows: this.props.newForms,
+                            existingRows: this.props.existingForms,
+                            newOrExistingColumn,
+                        }}
+                    />
                 }
             </>
         );

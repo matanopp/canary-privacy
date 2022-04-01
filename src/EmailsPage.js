@@ -29,7 +29,7 @@ class EmailsPage extends React.Component {
                         {
                             keys: keys,
                             headers: headers,
-                            rows: this.props.emails,
+                            existingRows: this.props.emails,
                         }
                     } />
             </>

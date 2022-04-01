@@ -11,7 +11,7 @@ class Dashboard extends React.Component {
     render() {
         return (
             <>
-                <h1>Analytics Overview</h1>
+                <h1>Change Detection</h1>
                 <Overview
                     pages={this.props.data.newPages.length}
                     pagesTotal={this.props.data.newPages.length + this.props.data.existingPages.length}
@@ -26,12 +26,15 @@ class Dashboard extends React.Component {
                         highPriority={this.props.data.cookies.filter(c => c.risk.toUpperCase() === 'HIGH').length}
                         mediumPriority={this.props.data.cookies.filter(c => c.risk.toUpperCase() === 'MEDIUM').length}
                         lowPriority={this.props.data.cookies.filter(c => c.risk.toUpperCase() === 'LOW').length}
+                    // highPriority={0}
+                    // mediumPriority={0}
+                    // lowPriority={0}
                     />
                     <EmailTile
-                        // nonCompliant={this.props.data.emails.filter(e => e.priority.toUpperCase() === 'ALERT').length} //TODO: how do we calculate these?
-                        // activeTests={this.props.data.emails.filter(e => e.priority.toUpperCase() === 'OK').length} //TODO: how do we calculate these?
-                        nonCompliant={0}
-                        activeTests={3}
+                        nonCompliant={this.props.data.emails.filter(e => e.priority.toUpperCase() === 'ALERT').length} //TODO: how do we calculate these?
+                        activeTests={this.props.data.emails.filter(e => e.priority.toUpperCase() === 'OK').length} //TODO: how do we calculate these?
+                    // nonCompliant={1}
+                    // activeTests={3}
                     />
                 </div>
             </>

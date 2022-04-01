@@ -18,6 +18,8 @@ let headers = {
     'dateDetected': 'Date Detected',
 };
 
+let newOrExistingColumn = 'dateDetected';
+
 class PagesPage extends React.Component {
     constructor(props) {
         super(props);
@@ -27,31 +29,17 @@ class PagesPage extends React.Component {
         return (
             <>
                 <h1>Pages</h1>
-                {this.props.newPages.length > 0 &&
-                    <>
-                        <h2>New</h2>
-                        <Table
-                            tableType="pages"
-                            data={{
-                                keys: keys,
-                                headers: headers,
-                                rows: this.props.newPages,
-                            }}
-                        />
-                    </>
-                }
-                {this.props.existingPages.length > 0 &&
-                    <>
-                        <h2>Existing</h2>
-                        <Table
-                            tableType="pages"
-                            data={{
-                                keys: keys,
-                                headers: headers,
-                                rows: this.props.existingPages,
-                            }}
-                        />
-                    </>
+                {(this.props.newPages.length > 0 || this.props.existingPages.length > 0) &&
+                    <Table
+                        tableType="pages"
+                        data={{
+                            keys,
+                            headers,
+                            newRows: this.props.newPages,
+                            existingRows: this.props.existingPages,
+                            newOrExistingColumn,
+                        }}
+                    />
                 }
             </>
         );

@@ -35,9 +35,9 @@ class CookiesPage extends React.Component {
                 <Table
                     tableType='cookies'
                     data={{
-                        keys: keys,
-                        headers: headers,
-                        rows: this.props.cookies,
+                        keys,
+                        headers,
+                        existingRows: this.props.cookies,
                     }}
                 />
             </>
