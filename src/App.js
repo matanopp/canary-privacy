@@ -160,31 +160,26 @@ class App extends React.Component {
         }
     }
 
+    async fetchDashboardDataFromS3() {
+        const username = this.state.user.username;
+        let path = `https://canary-scan-results.s3.us-east-2.amazonaws.com/${username}.json`
+        let res = await fetch(path)
+        .then((res) => res.json())
+        .then(
+            (result) => {
+                return result;
+            },
+            (error) => {
+                console.log(error);
+                throw error.response.data;
+            }
+        );
+        return res;
+    }
+
     async getDashboardData() {
         if (!this.state.dashboardData) {
-            let dashboardData = await this.fetchDashboardDataFromAPI();
-            // for (let i = 0; i < 9; i++) {
-            //     dashboardData.domains.push({
-            //         domainName: 'domain' + (i + 1) + '.com',
-            //         tests: {
-            //             emails: [],
-            //             changeDetection: {
-            //                 scripts: [],
-            //                 forms: [],
-            //                 pages: [],
-            //             },
-            //             cookies: {
-            //                 nonCompliantCookiesAfterRejection: [],
-            //                 nonCompliantCookiesOnPageLoad: [],
-            //                 nonCompliantCookiesPerCategory: {
-            //                     Functional: [],
-            //                     Marketing: [],
-            //                     Analytics: [],
-            //                 },
-            //             },
-            //         },
-            //     });
-            // }
+            let dashboardData = await this.fetchDashboardDataFromS3();
             this.setState({ dashboardData: dashboardData });
         }
 
@@ -223,10 +218,10 @@ class App extends React.Component {
 
         var formattedCookies = [];
         cookiesData.nonCompliantCookiesAfterRejection.forEach(c => formattedCookies.push(_formatCookie(c)));
-        cookiesData.nonCompliantCookiesOnPageLoad.forEach(c => formattedCookies.push(_formatCookie(c, true)));
         cookiesData.nonCompliantCookiesPerCategory.Functional.forEach(c => formattedCookies.push(_formatCookie(c)));
         cookiesData.nonCompliantCookiesPerCategory.Analytics.forEach(c => formattedCookies.push(_formatCookie(c)));
         cookiesData.nonCompliantCookiesPerCategory.Marketing.forEach(c => formattedCookies.push(_formatCookie(c)));
+        if(cookiesData.nonCompliantCookiesOnPageLoad) cookiesData.nonCompliantCookiesOnPageLoad.forEach(c => formattedCookies.push(_formatCookie(c, true)));
         return formattedCookies;
     }
 
