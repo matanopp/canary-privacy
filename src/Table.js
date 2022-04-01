@@ -45,11 +45,17 @@ class Table extends React.Component {
         let newLabel = <b className="new-label">NEW </b>;
         return (
             <td className={key}>
-                {typeof row[key] === 'string' &&
+                {typeof row[key] === 'string' && (key !== "url") &&
                     <p className={(row[key]).toLowerCase().replaceAll(' ', '-')}>
                         {key === newOrExistingColumn ? newLabel : null}
                         {row[key]}
                     </p>
+                }
+                {typeof row[key] === 'string' && (key === "url") &&
+                    <a className={(row[key]).toLowerCase().replaceAll(' ', '-')} href={row[key]} target = "_blank" rel='noreferrer'>
+                        {key === newOrExistingColumn ? newLabel : null}
+                        {row[key]}
+                    </a>
                 }
                 {typeof row[key] === 'number' &&
                     <p className={"number-" + row[key]}>
@@ -68,11 +74,16 @@ class Table extends React.Component {
                 }
                 {row[key] instanceof Array &&
                     <div className='array'>
-                        {row[key].length === 1 ?
+                        {row[key].length === 1 && (key !== "urls") && 
                             <p>{row[key][0]}</p>
-                            :
+                        }
+                        {row[key].length === 1 && (key === "urls") && 
+                            <a href={row[key]} target = "_blank" rel='noreferrer'>
+                                {row[key][0]}
+                            </a>
+                        }
+                        {row[key].length > 1 &&
                             <TableList items={row[key]} />
-                            // <p>{row[key].length} Pages</p>
                         }
                     </div>
                 }
