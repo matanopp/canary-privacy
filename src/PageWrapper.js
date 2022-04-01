@@ -17,7 +17,7 @@ function PageWrapper(props) {
                 <div className="page-content">
                     {props.page}
                 </div>
-                {/* <ToDoList /> */}
+                <ToDoList actionItems={props.domains[props.selectedDomain].actionItems} />
             </div>
         </>
     );
