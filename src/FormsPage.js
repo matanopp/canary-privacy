@@ -3,8 +3,8 @@ import Table from './Table.js';
 import './ChangeDetection.css';
 
 let keys = [
-    'url',
     'formId',
+    'urls',
     'formText',
     'dateDetected',
     // 'formId',
@@ -12,11 +12,11 @@ let keys = [
 ];
 
 let headers = {
-    'dateDetected': 'Date Detected',
     'formId': 'Form ID',
+    'urls': 'Pages',
     'formText': 'Form Text',
-    'url': 'URL',
-    'policyExists': 'Privacy Policy Exists',
+    'dateDetected': 'Date Detected',
+    // 'policyExists': 'Privacy Policy Exists',
 };
 
 let newOrExistingColumn = 'dateDetected';

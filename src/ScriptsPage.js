@@ -3,16 +3,18 @@ import Table from './Table.js';
 import './ChangeDetection.css';
 
 let keys = [
-    // 'scriptURL',
-    'pageURL',
+    'scriptName',
     'baseDomain',
+    'scriptUrl',
+    'urls',  
     'dateDetected',
 ];
 
 let headers = {
-    'scriptURL': 'Script URL',
-    'pageURL': 'Page URL',
+    'scriptName' : 'Script Name',
     'baseDomain': 'Base Domain',
+    'scriptUrl': 'Script URL',
+    'urls': 'Pages',
     'dateDetected': 'Date Detected',
 };
 

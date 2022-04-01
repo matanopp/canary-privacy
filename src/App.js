@@ -17,7 +17,7 @@ import PagesPage from './PagesPage.js';
 import ScriptsPage from './ScriptsPage.js';
 import FormsPage from './FormsPage.js';
 import logoOnlyBlue from './images/logo/logo-only-blue.png';
-
+import _ from 'lodash';
 
 Amplify.configure(awsExports);
 class App extends React.Component {
@@ -250,33 +250,41 @@ class App extends React.Component {
             };
         }
 
-        let _formatScript = (s) => {
+        let _formatScriptsList = (scriptBaseDomain, scripts) => {
             return {
-                'dateDetected': new Date(s.dateDetected * 1000).toLocaleDateString(),
-                'scriptURL': s.scriptUrl,
-                'pageURL': s.pageUrl instanceof Array ? s.pageUrl : [s.pageUrl],  //TODO: this should be updated to list of pages once updated in database
-                'baseDomain': s.scriptBaseDomain, //TODO: this doesn't exist yet but will soon
-            };
+                'baseDomain': scriptBaseDomain,
+                'urls': scripts.map(s => s.pageUrl),
+                'scriptName': _.first(scripts).scriptName,
+                'scriptUrl': _.first(scripts).scriptUrl.substring(0, 50) + "...",
+                'dateDetected': new Date(_.first(scripts).dateDetected * 1000).toLocaleDateString(),
+            }
         }
 
-        let _formatForm = (f) => {
+        let _formatFormsList = (formId, forms) => {
             return {
-                'dateDetected': new Date(f.dateDetected * 1000).toLocaleDateString(),
-                'formId': f.formID,
-                'formText': f.formText, //TODO: this doesn't exist yet but will soon
-                'url': f.url,
-                'policyExists': f.privacyPolicyExists,
-            };
+                'formId': formId,
+                'urls': forms.map(f => f.url),
+                'formText': _.first(forms).formText,
+                'dateDetected': new Date(_.first(forms).dateDetected * 1000).toLocaleDateString(),
+            }
+        }
+
+        let groupBy = (items, field, formatFunc) => {
+            let groupedItems = _.groupBy(items, field)
+            return Object.keys(groupedItems).map(function (itemId) {
+                let itemInnerList = groupedItems[itemId]
+                return formatFunc(itemId, itemInnerList);
+            });
         }
 
         let existingPages = changeDetectionData.pages.filter(p => p.status === "existing").map(_formatPage);
         let newPages = changeDetectionData.pages.filter(p => p.status === "new").map(_formatPage);
 
-        let existingScripts = changeDetectionData.scripts.filter(p => p.status === "existing").map(_formatScript);
-        let newScripts = changeDetectionData.scripts.filter(p => p.status === "new").map(_formatScript);
+        let existingScripts = groupBy(changeDetectionData.scripts.filter(p => p.status === "existing"), "scriptBaseDomain", _formatScriptsList);
+        let newScripts = groupBy(changeDetectionData.scripts.filter(p => p.status === "new"), "scriptBaseDomain", _formatScriptsList);
 
-        let existingForms = changeDetectionData.forms.filter(p => p.status === "existing").map(_formatForm);
-        let newForms = changeDetectionData.forms.filter(p => p.status === "new").map(_formatForm);
+        let existingForms = groupBy(changeDetectionData.forms.filter(p => p.status === "existing"), "formID", _formatFormsList);
+        let newForms = groupBy(changeDetectionData.forms.filter(p => p.status === "new"), "formID", _formatFormsList);
 
         return {
             existingPages: existingPages,

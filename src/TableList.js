@@ -17,17 +17,18 @@ class TableListItem extends React.Component {
                     <div>
                         <button className="array-button" onClick={() => this.setState({ showItems: true })}>
                             <img className="icon" src={expandIcon} />
+                            {this.props.items.length} Pages
                         </button>
-                        {this.props.items.length} Pages
                     </div>
                 }
                 {this.state.showItems &&
                     <>
-                        <button className="array-button" onClick={() => this.setState({ showItems: false })}>
-                            Close
+                        <button className="array-items" onClick={() => this.setState({ showItems: false })}>
+                            <p><b>{this.props.items.length} Pages (click anywhere on list to close)</b></p>
+                            <br />
+                            {this.props.items.map(s => <><p>{s}</p><br /></>)}
+                            <p><b>{this.props.items.length} Pages (click anywhere on list to close)</b></p>
                         </button>
-                        <br />
-                        {this.props.items.map(s => <p>{s}</p>)}
                     </>
                 }
             </>

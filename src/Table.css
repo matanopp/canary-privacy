@@ -19,6 +19,9 @@
 .table-wrapper td,
 .table-wrapper th {
     padding: 8px;
+    word-break: break-word;
+    min-width: 100px;
+    max-width: 1000px;
 }
 
 .table-wrapper thead {
@@ -50,6 +53,7 @@
     font-weight: bold;
     padding: 2px 10px;
     width: 100%;
+    min-width: max-content;
 }
 
 .cookies-table-wrapper .risk .high,
@@ -76,12 +80,24 @@
     background-color: rgb(141, 151, 155);
 }
 
-.icon {
-    height: 100%;
-}
-
 .array-button {
     background-color: transparent;
     border: none;
     cursor: pointer;
+    text-align: left;
+}
+
+.array-button .icon {
+    height: 100%;
+    margin-right: 10px;
+}
+
+.array-items {
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background-color: transparent;
+
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
 }

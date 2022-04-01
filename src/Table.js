@@ -60,12 +60,8 @@ class Table extends React.Component {
                 {typeof row[key] === 'boolean' &&
                     <div className={(row[key]).toString()} >
                         {row[key] ?
-                            // placeholder for green checkmark or something
-                            // <div style={{ 'width': '10px', 'height': '10px', 'backgroundColor': 'green', 'borderRadius': '50%' }} />
                             <img className="icon" src={alertIcon} alt="alert" />
                             :
-                            // placeholder for red X or something
-                            // <div style={{ 'width': '10px', 'height': '10px', 'backgroundColor': 'red', 'borderRadius': '50%' }} />
                             '-'
                         }
                     </div>
