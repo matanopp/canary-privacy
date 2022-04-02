@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from './Table.js';
 import './ChangeDetection.css';
+import _ from 'lodash'
 
 let keys = [
     // 'done',
@@ -35,8 +36,8 @@ class PagesPage extends React.Component {
                         data={{
                             keys,
                             headers,
-                            newRows: this.props.newPages,
-                            existingRows: this.props.existingPages,
+                            newRows: _.orderBy(this.props.newPages, (s)=>s.url),
+                            existingRows: _.orderBy(this.props.existingPages, (s)=>s.url),
                             newOrExistingColumn,
                         }}
                     />

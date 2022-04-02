@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from './Table.js';
 import './ChangeDetection.css';
+import _ from 'lodash';
 
 let keys = [
     'scriptName',
@@ -35,8 +36,8 @@ class ScriptsPage extends React.Component {
                         data={{
                             keys,
                             headers,
-                            newRows: this.props.newScripts,
-                            existingRows: this.props.existingScripts,
+                            newRows: _.orderBy(this.props.newScripts, (s)=>s.urls.length, "desc"),
+                            existingRows: _.orderBy(this.props.existingScripts, (s)=>s.urls.length, "desc"),
                             newOrExistingColumn,
                         }}
                     />

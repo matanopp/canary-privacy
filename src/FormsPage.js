@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from './Table.js';
 import './ChangeDetection.css';
+import _ from 'lodash'
 
 let keys = [
     'formId',
@@ -36,8 +37,8 @@ class FormsPage extends React.Component {
                         data={{
                             keys,
                             headers,
-                            newRows: this.props.newForms,
-                            existingRows: this.props.existingForms,
+                            newRows: _.orderBy(this.props.newForms, (s)=>s.urls.length, "desc"),
+                            existingRows: _.orderBy(this.props.existingForms, (s)=>s.urls.length, "desc"),
                             newOrExistingColumn,
                         }}
                     />
