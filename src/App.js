@@ -191,6 +191,34 @@ class App extends React.Component {
     async getDashboardData() {
         if (!this.state.dashboardData) {
             let dashboardData = await this.fetchDashboardDataFromS3();
+            // dashboardData.domains[0].actionItems[0].description = dashboardData.domains[0].actionItems[0].desctipion;
+            // dashboardData.domains[0].actionItems[0].type = "cookie";
+            // dashboardData.domains[0].actionItems.push({
+            //     title: 'Title 2',
+            //     priority: 'Medium',
+            //     description: 'This is the description of the second to do item in the list. It is medium important, worry about it but not too much',
+            //     type: 'email',
+            // });
+            // dashboardData.domains[0].actionItems.push({
+            //     title: 'Title 3',
+            //     priority: 'Low',
+            //     description: 'This is the description of the third to do item in the list. It is low important, worry about it but not too much',
+            //     type: 'page',
+            // });
+            // dashboardData.domains[0].actionItems.push({
+            //     title: 'Title 4',
+            //     priority: 'High',
+            //     description: 'This is the description of the fourth to do item in the list. It is high important, worry about it but not too much',
+            //     type: 'script',
+            // });
+            // dashboardData.domains[0].actionItems.push({
+            //     title: 'Title 5',
+            //     priority: 'Medium',
+            //     description: 'This is the description of the fifth to do item in the list. It is medium important, worry about it but not too much',
+            //     type: 'form',
+            // });
+
+            console.log(dashboardData.domains[0].actionItems);
             this.setState({ dashboardData: dashboardData });
         }
 
@@ -213,11 +241,11 @@ class App extends React.Component {
     }
     getMismanagedCookies(nonCompliantCookiesPerCategory) {
         let mismanagedCookies = []
-        for(let category of Object.keys(nonCompliantCookiesPerCategory)) {
+        for (let category of Object.keys(nonCompliantCookiesPerCategory)) {
             let cookiesForCategory = nonCompliantCookiesPerCategory[category];
-            for(let cookie of cookiesForCategory) {
-                if(this.isCookieInOtherCategory(cookie, category, nonCompliantCookiesPerCategory)) {
-                    if(!this.isCookieInList(cookie, mismanagedCookies)){
+            for (let cookie of cookiesForCategory) {
+                if (this.isCookieInOtherCategory(cookie, category, nonCompliantCookiesPerCategory)) {
+                    if (!this.isCookieInList(cookie, mismanagedCookies)) {
                         mismanagedCookies.push(cookie)
                     }
                 }
@@ -227,44 +255,44 @@ class App extends React.Component {
     }
 
     isCookieInOtherCategory(cookie, category, nonCompliantCookiesPerCategory) {
-        for(let cat of Object.keys(nonCompliantCookiesPerCategory).filter(c=>c!==category)) {
+        for (let cat of Object.keys(nonCompliantCookiesPerCategory).filter(c => c !== category)) {
             let cookiesInCategory = nonCompliantCookiesPerCategory[cat];
-            if(this.isCookieInList(cookie, cookiesInCategory)) {
+            if (this.isCookieInList(cookie, cookiesInCategory)) {
                 return true;
             }
         }
     }
 
     isCookieInList(cookie, cookiesList) {
-        return (cookiesList.filter(c=>this.cookiesEqual(c,cookie)).length > 0)
+        return (cookiesList.filter(c => this.cookiesEqual(c, cookie)).length > 0)
     }
     cookiesEqual(cookie1, cookie2) {
         return cookie1.name === cookie2.name && cookie1.domain === cookie2.domain
     }
 
     setCookiesRisk(cookies) {
-        for(let cookie of cookies) {
-            if(
-            (cookie.beforeOptIn) ||
-            (cookie.classificationExpected === MARKETING_CATEGORY && (cookie.status === MISMANAGED_STATUS || cookie.status === MISCLASSIFIED_STATUS)) ||
-            (cookie.classificationExpected === ANALYTICS_CATEGORY && 
-                (cookie.status === MISMANAGED_STATUS || 
-                (cookie.status === MISCLASSIFIED_STATUS && [FUNCTIONAL_CATEGORY, STRICTLY_NECESSARY_CATEGORY].includes(cookie.classificationActual))))) {
+        for (let cookie of cookies) {
+            if (
+                (cookie.beforeOptIn) ||
+                (cookie.classificationExpected === MARKETING_CATEGORY && (cookie.status === MISMANAGED_STATUS || cookie.status === MISCLASSIFIED_STATUS)) ||
+                (cookie.classificationExpected === ANALYTICS_CATEGORY &&
+                    (cookie.status === MISMANAGED_STATUS ||
+                        (cookie.status === MISCLASSIFIED_STATUS && [FUNCTIONAL_CATEGORY, STRICTLY_NECESSARY_CATEGORY].includes(cookie.classificationActual))))) {
                 cookie.risk = HIGH_RISK;
                 continue;
             }
 
-            if(
-            (cookie.classificationExpected === FUNCTIONAL_CATEGORY && 
-            (cookie.status === MISMANAGED_STATUS || (cookie.status === MISCLASSIFIED_STATUS && cookie.classificationActual === STRICTLY_NECESSARY_CATEGORY)))) {
+            if (
+                (cookie.classificationExpected === FUNCTIONAL_CATEGORY &&
+                    (cookie.status === MISMANAGED_STATUS || (cookie.status === MISCLASSIFIED_STATUS && cookie.classificationActual === STRICTLY_NECESSARY_CATEGORY)))) {
                 cookie.risk = MEDIUM_RISK;
                 continue;
             }
 
-            if(
-            (cookie.classificationExpected === ANALYTICS_CATEGORY && 
-                (cookie.status === MISCLASSIFIED_STATUS && cookie.classificationActual === STRICTLY_NECESSARY_CATEGORY)) ||
-            (cookie.classificationExpected === FUNCTIONAL_CATEGORY && cookie.status === MISCLASSIFIED_STATUS && [ANALYTICS_CATEGORY, MARKETING_CATEGORY].includes(cookie.classificationActual))) {
+            if (
+                (cookie.classificationExpected === ANALYTICS_CATEGORY &&
+                    (cookie.status === MISCLASSIFIED_STATUS && cookie.classificationActual === STRICTLY_NECESSARY_CATEGORY)) ||
+                (cookie.classificationExpected === FUNCTIONAL_CATEGORY && cookie.status === MISCLASSIFIED_STATUS && [ANALYTICS_CATEGORY, MARKETING_CATEGORY].includes(cookie.classificationActual))) {
                 cookie.risk = LOW_RISK;
                 continue;
             }
@@ -275,13 +303,13 @@ class App extends React.Component {
     getCookies() {
         let cookiesData = this.state.dashboardData.domains[this.state.selectedDomain].tests.cookies;
 
-        let _formatCookie = (c, classificationActual, status, nonCompliantCookiesOnPageLoad) => {    
+        let _formatCookie = (c, classificationActual, status, nonCompliantCookiesOnPageLoad) => {
             return {
                 risk: c.priority.toUpperCase(),
                 name: c.name,
                 status: status,
                 classificationExpected: c.type,
-                classificationActual:  status === MISCLASSIFIED_STATUS ? classificationActual : '',
+                classificationActual: status === MISCLASSIFIED_STATUS ? classificationActual : '',
                 beforeOptIn: nonCompliantCookiesOnPageLoad && this.isCookieInList(c, nonCompliantCookiesOnPageLoad),
                 domain: c.domain,
             };
@@ -291,13 +319,13 @@ class App extends React.Component {
         cookiesData.nonCompliantCookiesPerCategory[STRICTLY_NECESSARY_CATEGORY] = cookiesData.nonCompliantCookiesAfterRejection;
         let mismangedCookies = this.getMismanagedCookies(cookiesData.nonCompliantCookiesPerCategory);
         mismangedCookies.forEach(c => formattedCookies.push(_formatCookie(c, "", MISMANAGED_STATUS, cookiesData.nonCompliantCookiesOnPageLoad)));
-        cookiesData.nonCompliantCookiesAfterRejection.filter(c=>!this.isCookieInList(c,mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, STRICTLY_NECESSARY_CATEGORY, MISCLASSIFIED_STATUS, cookiesData.nonCompliantCookiesOnPageLoad)));
-        cookiesData.nonCompliantCookiesPerCategory.Functional.filter(c=>!this.isCookieInList(c,mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, FUNCTIONAL_CATEGORY, MISCLASSIFIED_STATUS, cookiesData.nonCompliantCookiesOnPageLoad)));
-        cookiesData.nonCompliantCookiesPerCategory.Analytics.filter(c=>!this.isCookieInList(c,mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, ANALYTICS_CATEGORY, MISCLASSIFIED_STATUS, cookiesData.nonCompliantCookiesOnPageLoad)));
-        cookiesData.nonCompliantCookiesPerCategory.Marketing.filter(c=>!this.isCookieInList(c,mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, MARKETING_CATEGORY, MISCLASSIFIED_STATUS, cookiesData.nonCompliantCookiesOnPageLoad)));
-        if(cookiesData.nonCompliantCookiesOnPageLoad) {
+        cookiesData.nonCompliantCookiesAfterRejection.filter(c => !this.isCookieInList(c, mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, STRICTLY_NECESSARY_CATEGORY, MISCLASSIFIED_STATUS, cookiesData.nonCompliantCookiesOnPageLoad)));
+        cookiesData.nonCompliantCookiesPerCategory.Functional.filter(c => !this.isCookieInList(c, mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, FUNCTIONAL_CATEGORY, MISCLASSIFIED_STATUS, cookiesData.nonCompliantCookiesOnPageLoad)));
+        cookiesData.nonCompliantCookiesPerCategory.Analytics.filter(c => !this.isCookieInList(c, mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, ANALYTICS_CATEGORY, MISCLASSIFIED_STATUS, cookiesData.nonCompliantCookiesOnPageLoad)));
+        cookiesData.nonCompliantCookiesPerCategory.Marketing.filter(c => !this.isCookieInList(c, mismangedCookies)).forEach(c => formattedCookies.push(_formatCookie(c, MARKETING_CATEGORY, MISCLASSIFIED_STATUS, cookiesData.nonCompliantCookiesOnPageLoad)));
+        if (cookiesData.nonCompliantCookiesOnPageLoad) {
             cookiesData.nonCompliantCookiesOnPageLoad.forEach(c => {
-                if(!this.isCookieInList(c,formattedCookies)) {
+                if (!this.isCookieInList(c, formattedCookies)) {
                     let formattedCookie = _formatCookie(c)
                     formattedCookie.beforeOptIn = true;
                     formattedCookies.push(formattedCookie)
