@@ -37,7 +37,7 @@ class CookiesPage extends React.Component {
                     data={{
                         keys,
                         headers,
-                        existingRows: this.props.cookies,
+                        existingRows: this.props.cookies
                     }}
                 />
             </>
