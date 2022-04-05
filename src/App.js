@@ -291,7 +291,7 @@ class App extends React.Component {
 
             if (
                 (cookie.classificationExpected === ANALYTICS_CATEGORY &&
-                    (cookie.status === MISCLASSIFIED_STATUS && cookie.classificationActual === STRICTLY_NECESSARY_CATEGORY)) ||
+                    (cookie.status === MISCLASSIFIED_STATUS && cookie.classificationActual === MARKETING_CATEGORY)) ||
                 (cookie.classificationExpected === FUNCTIONAL_CATEGORY && cookie.status === MISCLASSIFIED_STATUS && [ANALYTICS_CATEGORY, MARKETING_CATEGORY].includes(cookie.classificationActual))) {
                 cookie.risk = LOW_RISK;
                 continue;
