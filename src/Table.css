@@ -8,7 +8,7 @@
 }
 
 .table-wrapper table {
-    min-width: 800px;
+    min-width: 1000px;
     border-collapse: collapse;
 }
 
@@ -20,7 +20,7 @@
 .table-wrapper th {
     padding: 8px;
     word-break: break-word;
-    min-width: 100px;
+    min-width: 140px;
     max-width: 1000px;
 }
 
