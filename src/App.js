@@ -378,7 +378,7 @@ class App extends React.Component {
         let _formatScriptsList = (scriptBaseDomain, scripts) => {
             return {
                 'baseDomain': scriptBaseDomain,
-                'urls': scripts.map(s => s.pageUrl),
+                'urls': _.uniq(scripts.map(s => s.pageUrl)),
                 'scriptName': _.first(scripts).scriptName,
                 'scriptUrl': _.first(scripts).scriptUrl.substring(0, 50) + "...",
                 'dateDetected': new Date(_.first(scripts).dateDetected * 1000).toLocaleDateString(),
@@ -388,7 +388,7 @@ class App extends React.Component {
         let _formatFormsList = (formId, forms) => {
             return {
                 'formId': formId,
-                'urls': forms.map(f => f.url),
+                'urls': _.uniq(forms.map(f => f.url)),
                 'formText': _.first(forms).formText,
                 'dateDetected': new Date(_.first(forms).dateDetected * 1000).toLocaleDateString(),
             }
