@@ -1,6 +1,6 @@
 .table-wrapper {
     background-color: white;
-    /* width: 100%; */
+    width: 100%;
     padding: 20px;
     border-radius: 10px;
     text-align: left;
@@ -10,6 +10,7 @@
 .table-wrapper table {
     min-width: 1000px;
     border-collapse: collapse;
+    width: 100%;
 }
 
 .table-wrapper tbody {
