@@ -4,6 +4,9 @@ import caretDown from './images/caret-down.png';
 class Header extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            signOut : props.signOut
+        }
     }
 
     render() {
@@ -22,6 +25,9 @@ class Header extends React.Component {
                                 }}>{domain.domainName}</button>
                             ))}
                         </div>
+                    </div>
+                    <div className='logout'>
+                        <button onClick={this.state.signOut}>Log out</button>
                     </div>
                 </div>
             </>

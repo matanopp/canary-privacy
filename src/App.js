@@ -49,6 +49,7 @@ class App extends React.Component {
             companyName: null,
             selectedDomain: 0,
             user: props.user,
+            signOut: props.signOut
         };
     }
 
@@ -82,7 +83,9 @@ class App extends React.Component {
                                         cookies: this.state.cookies,
                                         emails: this.state.emails,
                                     }} />
-                                } />
+                                } 
+                                signOut = {this.state.signOut}
+                                />
                         } />
                         <Route path="cookies" element={
                             <PageWrapper
@@ -96,7 +99,10 @@ class App extends React.Component {
                                             cookies={this.state.cookies}
                                         />
                                     </>
-                                } />
+                                    
+                                } 
+                                signOut = {this.state.signOut}
+                                />
                         } />
                         <Route path="emails" element={
                             <PageWrapper
@@ -108,7 +114,9 @@ class App extends React.Component {
                                     <EmailsPage
                                         emails={this.state.emails}
                                     />
-                                } />
+                                }
+                                signOut = {this.state.signOut}
+                                />
                         } />
                         <Route path="pages" element={
                             <PageWrapper
@@ -121,7 +129,9 @@ class App extends React.Component {
                                         newPages={this.state.newPages}
                                         existingPages={this.state.existingPages}
                                     />
-                                } />
+                                } 
+                                signOut = {this.state.signOut}
+                                />
                         } />
                         <Route path="scripts" element={
                             <PageWrapper
@@ -134,7 +144,9 @@ class App extends React.Component {
                                         newScripts={this.state.newScripts}
                                         existingScripts={this.state.existingScripts}
                                     />
-                                } />
+                                }
+                                signOut = {this.state.signOut}
+                                />
                         } />
                         <Route path="forms" element={
                             <PageWrapper
@@ -147,7 +159,9 @@ class App extends React.Component {
                                         newForms={this.state.newForms}
                                         existingForms={this.state.existingForms}
                                     />
-                                } />
+                                } 
+                                signOut = {this.state.signOut}
+                                />
                         } />
                     </Routes>
                 </BrowserRouter>

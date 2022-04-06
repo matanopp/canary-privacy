@@ -10,7 +10,7 @@ const rootElement = document.getElementById("root");
 render(
     <Authenticator>
         {({ signOut, user }) => (
-            <App user={user} />
+            <App user={user} signOut={signOut} />
         )}
     </Authenticator>,
     rootElement
