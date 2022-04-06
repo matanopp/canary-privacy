@@ -60,6 +60,7 @@
     padding: 2px 10px;
     width: 100%;
     min-width: max-content;
+    max-width: 70%;
 }
 
 .cookies-table-wrapper .risk .high,
