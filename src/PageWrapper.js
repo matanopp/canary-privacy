@@ -1,7 +1,6 @@
 import React from "react";
 import Sidebar from './Sidebar.js';
 import Header from "./Header.js";
-import ToDoList from "./ToDoList.js";
 import './App.css';
 
 function PageWrapper(props) {
@@ -18,7 +17,6 @@ function PageWrapper(props) {
                 <div className="page-content">
                     {props.page}
                 </div>
-                <ToDoList actionItems={props.domains[props.selectedDomain].actionItems} />
             </div>
         </>
     );

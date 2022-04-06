@@ -82,6 +82,7 @@ class App extends React.Component {
                                         existingForms: this.state.existingForms,
                                         cookies: this.state.cookies,
                                         emails: this.state.emails,
+                                        actionItems: this.state.dashboardData.domains[this.state.selectedDomain].actionItems
                                     }} />
                                 } 
                                 signOut = {this.state.signOut}
