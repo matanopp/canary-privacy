@@ -46,7 +46,7 @@ class Table extends React.Component {
         return (
             <td className={key}>
                 {typeof row[key] === 'string' && (key !== "url") &&
-                    <p className={(row[key]).toLowerCase().replaceAll(' ', '-')}>
+                    <p className={(row[key]).toLowerCase().replaceAll(' ', '-')} tabindex="0">
                         {key === newOrExistingColumn ? newLabel : null}
                         {row[key]}
                     </p>

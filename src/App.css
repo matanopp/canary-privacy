@@ -287,3 +287,15 @@ button {
     transform: rotate(180deg);
 }
 
+.formText p{
+  width: 250px;
+  text-overflow: ellipsis;
+  overflow : hidden;
+  white-space: nowrap;
+}
+
+.formText p:focus {
+    text-overflow: clip;
+    white-space: normal;
+    word-break: break-all;
+}

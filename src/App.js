@@ -395,6 +395,12 @@ class App extends React.Component {
             }
         }
 
+        let _filterForms = (forms, pageCount) => { //TODO: move to backend
+            console.log("filtering forms with more than " + 0.9 * pageCount + " pages")
+            return forms.filter(f=>f.urls.length < (0.9 * pageCount));
+        }
+        
+
         let groupBy = (items, field, formatFunc) => {
             let groupedItems = _.groupBy(items, field)
             return Object.keys(groupedItems).map(function (itemId) {
@@ -409,8 +415,8 @@ class App extends React.Component {
         let existingScripts = groupBy(changeDetectionData.scripts.filter(p => p.status === "existing"), "scriptBaseDomain", _formatScriptsList);
         let newScripts = groupBy(changeDetectionData.scripts.filter(p => p.status === "new"), "scriptBaseDomain", _formatScriptsList);
 
-        let existingForms = groupBy(changeDetectionData.forms.filter(p => p.status === "existing"), "formID", _formatFormsList);
-        let newForms = groupBy(changeDetectionData.forms.filter(p => p.status === "new"), "formID", _formatFormsList);
+        let existingForms = _filterForms(groupBy(changeDetectionData.forms.filter(p => p.status === "existing"), "formID", _formatFormsList), existingPages.length + newPages.length);
+        let newForms = _filterForms(groupBy(changeDetectionData.forms.filter(p => p.status === "new"), "formID", _formatFormsList), existingPages.length + newPages.length);
 
         return {
             existingPages: existingPages,
