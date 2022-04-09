@@ -397,7 +397,7 @@ class App extends React.Component {
 
         let _filterForms = (forms, pageCount) => { //TODO: move to backend
             console.log("filtering forms with more than " + 0.9 * pageCount + " pages")
-            return forms.filter(f=>f.urls.length < (0.9 * pageCount));
+            return forms.filter(f=>f.urls.length < (0.6 * pageCount));
         }
         
 
