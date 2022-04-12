@@ -25,10 +25,10 @@ class TableListItem extends React.Component {
                 {this.state.showItems &&
                     <>
                         <button className="array-items" onClick={() => this.setState({ showItems: false })}>
-                            <p><b>{this.props.items.length} Pages (click anywhere on list to close)</b></p>
+                            {this.props.items.length > 1 && <p><b>{this.props.items.length} Pages (click anywhere on list to close)</b></p>}
                             <br />
                             {this.props.items.map(s => <><a href={s} target="_blank" rel='noreferrer'>{s}</a><br/><br/></>)}
-                            <p><b>{this.props.items.length} Pages (click anywhere on list to close)</b></p>
+                            {this.props.items.length > 1 &&<p><b>{this.props.items.length} Pages (click anywhere on list to close)</b></p>}
                         </button>
                     </>
                 }
