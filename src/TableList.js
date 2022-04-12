@@ -17,7 +17,8 @@ class TableListItem extends React.Component {
                     <div>
                         <button className="array-button" onClick={() => this.setState({ showItems: true })}>
                             <img className="icon" src={expandIcon} />
-                            {this.props.items.length} Pages
+                            {this.props.items.length > 1 && <>{this.props.items.length} Pages</>}
+                            {this.props.items.length === 1 && <> 1 Page</>}
                         </button>
                     </div>
                 }
