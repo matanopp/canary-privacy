@@ -409,8 +409,8 @@ class App extends React.Component {
             });
         }
 
-        let existingPages = changeDetectionData.pages.filter(p => p.status === "existing").map(_formatPage);
-        let newPages = changeDetectionData.pages.filter(p => p.status === "new").map(_formatPage);
+        let existingPages = _.uniq(changeDetectionData.pages.filter(p => p.status === "existing").map(_formatPage));
+        let newPages = _.uniq(changeDetectionData.pages.filter(p => p.status === "new").map(_formatPage));
 
         let existingScripts = groupBy(changeDetectionData.scripts.filter(p => p.status === "existing"), "scriptBaseDomain", _formatScriptsList);
         let newScripts = groupBy(changeDetectionData.scripts.filter(p => p.status === "new"), "scriptBaseDomain", _formatScriptsList);

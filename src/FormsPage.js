@@ -15,7 +15,7 @@ let keys = [
 let headers = {
     'formId': 'Form ID',
     'urls': 'Pages',
-    'formText': 'Form Text',
+    'formText': 'Data Elements',
     'dateDetected': 'Date Detected',
     // 'policyExists': 'Privacy Policy Exists',
 };
