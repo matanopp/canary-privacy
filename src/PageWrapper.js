@@ -18,8 +18,8 @@ function PageWrapper(props) {
                 <div className="page-content">
                     {props.page}
                 </div>
+                <Footer />
             </div>
-            <Footer />
         </>
     );
 }
