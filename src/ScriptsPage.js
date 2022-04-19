@@ -30,7 +30,7 @@ class ScriptsPage extends React.Component {
         return (
             <>
                 <h1>Scripts</h1>
-                <p>{this.props.newScripts.length} New Pages, {this.props.newScripts.length + this.props.existingScripts.length} Total Pages</p>
+                <p>{this.props.newScripts.length} New Scripts, {this.props.newScripts.length + this.props.existingScripts.length} Total Scripts</p>
                 {(this.props.newScripts.length > 0 || this.props.existingScripts.length > 0) &&
                     <Table
                         tableType="scripts"
