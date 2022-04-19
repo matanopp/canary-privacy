@@ -39,7 +39,7 @@ class Dashboard extends React.Component {
                         // activeTests={3}
                         />
                     </div>
-                    <ToDoList actionItems={this.props.data.actionItems} /> 
+                    <ToDoList actionItems={this.props.data.actionItems} />
                 </div>
             </>
 

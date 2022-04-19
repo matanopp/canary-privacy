@@ -15,21 +15,24 @@ class Table extends React.Component {
                 <table>
                     <thead>
                         <tr>
+                            <th></th>
                             {this.props.data && this.props.data.keys && this.props.data.keys.map(key =>
                                 <th>{this.props.data.headers && this.props.data.headers[key]}</th>
                             )}
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.data && this.props.data.newRows && this.props.data.newRows.map(row =>
+                        {this.props.data && this.props.data.newRows && this.props.data.newRows.map((row, index) =>
                             <tr>
+                                <td>{index + 1}</td>
                                 {this.props.data.keys && this.props.data.keys.map(key =>
                                     this.formatTableData(row, key, this.props.data.newOrExistingColumn)
                                 )}
                             </tr>
                         )}
-                        {this.props.data && this.props.data.existingRows && this.props.data.existingRows.map(row =>
+                        {this.props.data && this.props.data.existingRows && this.props.data.existingRows.map((row, index) =>
                             <tr>
+                                <td>{(this.props.data.newRows ? this.props.data.newRows.length : 0) + index + 1}</td>
                                 {this.props.data.keys && this.props.data.keys.map(key =>
                                     this.formatTableData(row, key)
                                 )}
@@ -52,7 +55,7 @@ class Table extends React.Component {
                     </p>
                 }
                 {typeof row[key] === 'string' && (key === "url") &&
-                    <a className={(row[key]).toLowerCase().replaceAll(' ', '-')} href={row[key]} target = "_blank" rel='noreferrer'>
+                    <a className={(row[key]).toLowerCase().replaceAll(' ', '-')} href={row[key]} target="_blank" rel='noreferrer'>
                         {key === newOrExistingColumn ? newLabel : null}
                         {row[key]}
                     </a>
@@ -74,17 +77,7 @@ class Table extends React.Component {
                 }
                 {row[key] instanceof Array &&
                     <div className='array'>
-                        {/* {row[key].length === 1 && (key !== "urls") && 
-                            <p>{row[key][0]}</p>
-                        }
-                        {row[key].length === 1 && (key === "urls") && 
-                            <a href={row[key]} target = "_blank" rel='noreferrer'>
-                                {row[key][0]}
-                            </a>
-                        } */}
-                        {/* {row[key].length > 1 && */}
                         <TableList items={row[key]} />
-                        {/* } */}
                     </div>
                 }
             </td>
