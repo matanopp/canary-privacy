@@ -8,16 +8,14 @@ class Footer extends React.Component {
 
     render() {
         return (
-            <>
-                <div className="footer">
-                    <a href="https://www.canaryprivacy.com/" target="_blank" rel="noopener noreferrer">
-                        Canary Privacy
-                    </a>
-                    <a href="https://www.canaryprivacy.com/privacy-policy" target="_blank" rel="noopener noreferrer">
-                        Privacy Policy
-                    </a>
-                </div>
-            </>
+            <div className="footer">
+                <a href="https://www.canaryprivacy.com/" target="_blank" rel="noopener noreferrer">
+                    Canary Privacy
+                </a>
+                <a href="https://www.canaryprivacy.com/privacy-policy" target="_blank" rel="noopener noreferrer">
+                    Privacy Policy
+                </a>
+            </div>
         );
     }
 }
