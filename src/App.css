@@ -213,7 +213,7 @@ button:-webkit-details-marker {
     align-items: center;
 }
 
-.header-auth-username {
+#header-auth-username {
     padding-right: 20px;
 }
 

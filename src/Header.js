@@ -13,6 +13,7 @@ class Header extends React.Component {
         this.showRescanPopup = this.showRescanPopup.bind(this);
         this.hideRescanPopup = this.hideRescanPopup.bind(this);
     }
+    
 
     render() {
         return (
@@ -41,7 +42,7 @@ class Header extends React.Component {
                         }
                     </div>
                     <div className='header-auth'>
-                        <div className='header-auth-username'>{this.state.username}</div>
+                        <div id='header-auth-username'>{this.state.username}</div>
                         <div className='logout'>
                             <button onClick={this.state.signOut}>Log out</button>
                         </div>
