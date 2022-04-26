@@ -5,7 +5,8 @@ class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            signOut : props.signOut
+            signOut : props.signOut,
+            username : props.username
         }
     }
 
@@ -26,8 +27,11 @@ class Header extends React.Component {
                             ))}
                         </div>
                     </div>
-                    <div className='logout'>
-                        <button onClick={this.state.signOut}>Log out</button>
+                    <div className='header-auth'>
+                        <div className='header-auth-username'>{this.state.username}</div>
+                        <div className='logout'>
+                            <button onClick={this.state.signOut}>Log out</button>
+                        </div>
                     </div>
                 </div>
             </>

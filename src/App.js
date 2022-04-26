@@ -86,6 +86,7 @@ class App extends React.Component {
                                     }} />
                                 } 
                                 signOut = {this.state.signOut}
+                                username = {this.state.user.username}
                                 />
                         } />
                         <Route path="cookies" element={
@@ -103,6 +104,7 @@ class App extends React.Component {
                                     
                                 } 
                                 signOut = {this.state.signOut}
+                                username = {this.state.user.username}
                                 />
                         } />
                         <Route path="emails" element={
@@ -117,6 +119,7 @@ class App extends React.Component {
                                     />
                                 }
                                 signOut = {this.state.signOut}
+                                username = {this.state.user.username}
                                 />
                         } />
                         <Route path="pages" element={
@@ -132,6 +135,7 @@ class App extends React.Component {
                                     />
                                 } 
                                 signOut = {this.state.signOut}
+                                username = {this.state.user.username}
                                 />
                         } />
                         <Route path="scripts" element={
@@ -147,6 +151,7 @@ class App extends React.Component {
                                     />
                                 }
                                 signOut = {this.state.signOut}
+                                username = {this.state.user.username}
                                 />
                         } />
                         <Route path="forms" element={
@@ -162,6 +167,7 @@ class App extends React.Component {
                                     />
                                 } 
                                 signOut = {this.state.signOut}
+                                username = {this.state.user.username}
                                 />
                         } />
                     </Routes>

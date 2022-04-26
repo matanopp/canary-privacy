@@ -12,6 +12,7 @@ function PageWrapper(props) {
                 selectedDomain={props.selectedDomain}
                 updateSelectedDomain={props.updateSelectedDomain}
                 signOut={props.signOut}
+                username = {props.username}
             />
             <Sidebar thisPage={props.thisPage} />
             <div className="page-wrapper">
