@@ -16,6 +16,7 @@ import formIconGray from './images/sidebar/gray/form.svg';
 import scriptIconBlue from './images/sidebar/blue/script-blue.svg';
 import scriptIconGray from './images/sidebar/gray/script.svg';
 import React from 'react';
+import { click } from '@testing-library/user-event/dist/click';
 
 class Sidebar extends React.Component {
     constructor(props) {
@@ -26,85 +27,110 @@ class Sidebar extends React.Component {
         return (
             <div className="sidebar">
                 <img className="logo" src={logoTextBlue} alt="Logo Text Blue" />
-                <Link className="icon-background" to="/">
+                <Link className="sidebar-item" to="/">
                     {this.props.thisPage === 'dashboard' ?
                         <>
-                            <img className="icon" src={dashboardIconBlue} alt="Dashboard Icon Blue" />
-                            <p className="sidebar-text-selected">Dashboard</p>
+                            <div className='icon-background-selected icon-background'>
+                                <img className="icon" src={dashboardIconBlue} alt="Dashboard Icon Blue" />
+                                <p className="sidebar-text-selected">Dashboard</p>
+                            </div>
                         </>
                         :
                         <>
-                            <img className="icon" src={dashboardIconGray} alt="Dashboard Icon Gray" />
-                            <p className="sidebar-text">Dashboard</p>
+                            <div className='icon-background'>
+                                <img className="icon" src={dashboardIconGray} alt="Dashboard Icon Gray" />
+                                <p className="sidebar-text">Dashboard</p>
+                            </div>
                         </>
                     }
                 </Link>
-                <div style={{ height: '2px', width: '90%', backgroundColor: 'lightgray' }} />
+                <div style={{ height: '2px', width: '100%', backgroundColor: '#F0F0F5' }} />
                 <h1>COMPLIANCE TESTING</h1>
-                <Link className="icon-background" to="/cookies">
+                <Link className="sidebar-item" to="/cookies" id="test">
                     {this.props.thisPage === 'cookies' ?
                         <>
-                            <img className="icon" src={cookieIconBlue} alt="Cookie Icon Blue" />
-                            <p className="sidebar-text-selected">Cookie Compliance</p>
+                            <div className='icon-background-selected icon-background'>
+                                <img className="icon" src={cookieIconBlue} alt="Cookie Icon Blue" />
+                                <p className="sidebar-text-selected">Cookie Compliance</p>
+                            </div>
+
                         </>
                         :
                         <>
-                            <img className="icon" src={cookieIconGray} alt="Cookie Icon Gray" />
-                            <p className="sidebar-text">Cookie Compliance</p>
+                            <div className='icon-background'>
+                                <img className="icon" src={cookieIconGray} alt="Cookie Icon Gray" />
+                                <p className="sidebar-text">Cookie Compliance</p>
+                            </div>
                         </>
                     }
                 </Link>
-                <Link className="icon-background" to="/emails">
+                <Link className="sidebar-item" to="/emails">
                     {this.props.thisPage === 'emails' ?
                         <>
+                            <div className='icon-background-selected icon-background'>
                             <img className="icon" src={emailIconBlue} alt="Email Icon Blue" />
                             <p className="sidebar-text-selected">Email Compliance</p>
+                            </div>
                         </>
                         :
                         <>
+                            <div className='icon-background'>
                             <img className="icon" src={emailIconGray} alt="Email Icon Gray" />
                             <p className="sidebar-text">Email Compliance</p>
+                            </div>
                         </>
                     }
                 </Link>
-                <div style={{ height: '2px', width: '90%', backgroundColor: 'lightgray' }} />
+                <div style={{ height: '2px', width: '100%', backgroundColor: '#F0F0F5' }} />
                 <h1>CHANGE DETECTION</h1>
-                <Link className="icon-background" to="/pages">
+                <Link className="sidebar-item" to="/pages">
                     {this.props.thisPage === 'pages' ?
                         <>
+                        <div className='icon-background icon-background-selected'>
                             <img className="icon" src={pageIconBlue} alt="Page Icon Blue" />
                             <p className="sidebar-text-selected">Pages</p>
+                        </div>
                         </>
                         :
                         <>
+                        <div className='icon-background'>
                             <img className="icon" src={pageIconGray} alt="Page Icon Blue" />
                             <p className="sidebar-text">Pages</p>
+                        </div>
                         </>
                     }
                 </Link>
-                <Link className="icon-background" to="/scripts">
+                <Link className="sidebar-item" to="/scripts">
                     {this.props.thisPage === 'scripts' ?
                         <>
+                        <div className='icon-background icon-background-selected'>
                             <img className="icon" src={scriptIconBlue} alt="Forms Icon Blue" />
                             <p className="sidebar-text-selected">Scripts</p>
+                        </div>
                         </>
                         :
                         <>
+                        <div className='icon-background'>
                             <img className="icon" src={scriptIconGray} alt="Forms Icon Blue" />
                             <p className="sidebar-text">Scripts</p>
+                        </div>
                         </>
                     }
                 </Link>
-                <Link className="icon-background" to="/forms">
+                <Link className="sidebar-item" to="/forms">
                     {this.props.thisPage === 'forms' ?
                         <>
+                        <div className='icon-background icon-background-selected'>
                             <img className="icon" src={formIconBlue} alt="Forms Icon Blue" />
                             <p className="sidebar-text-selected">Forms</p>
+                        </div>
                         </>
                         :
                         <>
+                        <div className='icon-background'>
                             <img className="icon" src={formIconGray} alt="Forms Icon Blue" />
                             <p className="sidebar-text">Forms</p>
+                        </div>
                         </>
                     }
                 </Link>
@@ -114,3 +140,7 @@ class Sidebar extends React.Component {
 }
 
 export default Sidebar;
+
+document.getElementsByClassName('test').addEventListener("click",function(){
+    console.log('work');
+})

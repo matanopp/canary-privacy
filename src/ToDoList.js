@@ -36,7 +36,7 @@ class ToDoList extends React.Component {
                     <b className={'to-do-' + itemData.priority.toLowerCase() + '-priority'}>{itemData.priority.toUpperCase()}</b>
                 </div>
                 <p><b>{itemData.title}</b></p>
-                <p className='to-do-desc' tabindex="0">{itemData.description}</p>
+                <p>{itemData.description}</p>
             </div>
         );
     }

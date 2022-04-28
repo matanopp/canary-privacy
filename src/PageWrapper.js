@@ -2,34 +2,29 @@ import React from "react";
 import Sidebar from './Sidebar.js';
 import Header from './Header.js';
 import Footer from './Footer.js';
+import ToDoList from "./ToDoList.js";
 import './App.css';
 
-class PageWrapper extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <>
+function PageWrapper(props) {
+    return (
+        <>
+            <div className="page-wrapper">
                 <Header
-                    domains={this.props.domains}
-                    selectedDomain={this.props.selectedDomain}
-                    updateSelectedDomain={this.props.updateSelectedDomain}
-                    showRescanPopup={this.showRescanPopup}
-                    signOut={this.props.signOut}
-                    username = {this.props.username}
+                    domains={props.domains}
+                    selectedDomain={props.selectedDomain}
+                    updateSelectedDomain={props.updateSelectedDomain}
+                    signOut={props.signOut}
                 />
-                <Sidebar thisPage={this.props.thisPage} />
-                <div className="page-wrapper">
-                    <div className="page-content">
-                        {this.props.page}
-                    </div>
-                    <Footer />
+                <Sidebar thisPage={props.thisPage} />
+                <div className="page-content">
+                    {props.page}
                 </div>
-            </>
-        );
-    }
+                {/* <ToDoList /> */}
+                <Footer />
+            </div>
+            {/* <ToDoList actionItems={props.data.actionItems} /> */}
+        </>
+    );
 }
 
 export default PageWrapper;
