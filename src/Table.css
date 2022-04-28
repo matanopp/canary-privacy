@@ -1,15 +1,17 @@
 .table-wrapper {
     background-color: white;
-    width: 100%;
+    width: 133%;
     padding: 20px;
     border-radius: 10px;
     text-align: left;
-    min-width: 1040px;
+    /* min-width: 1040px; */
     /* overflow-x: scroll; */
 }
-
+.page-content {
+    gap: 1rem;
+}
 .table-wrapper table {
-    min-width: 1000px;
+    /* min-width: 1000px; */
     border-collapse: collapse;
     width: 100%;
 }
@@ -17,20 +19,20 @@
 .table-wrapper tbody {
     width: 100%;
 }
-
 .table-wrapper td,
 .table-wrapper th {
     padding: 8px;
-    word-break: break-word;
-    min-width: 50px;
-    max-width: 1000px;
+    word-break: keep-all;
+    max-width: 100%;
+    /* min-width: 50px; */
+    /* max-width: 1000px; */
+    font-size: .8rem;
 }
 
 .table-wrapper thead {
     background-color: rgb(237, 241, 253);
-    border-radius: 10px;
+    height: 50px;
 }
-
 .table-wrapper thead th:first-child {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -40,10 +42,10 @@
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-
+/* 
 .table-wrapper tbody tr:nth-child(even) {
     background-color: #f0f0f0;
-}
+} */
 
 .new-label {
     color: rgb(51, 68, 213);
@@ -68,24 +70,29 @@
 .emails-table-wrapper .priority .alert,
 .pages-table-wrapper .privacyPolicy .absent {
     background-color: rgb(167, 66, 68);
+    font-size: 0.6rem;
 }
 
 .cookies-table-wrapper .risk .medium,
 .pages-table-wrapper .privacyPolicy .old-version {
     background-color: rgb(192, 111, 51);
+    font-size: 0.6rem;
 }
 
 .cookies-table-wrapper .risk .low {
     background-color: rgb(217, 182, 81);
+    font-size: 0.6rem;
 }
 
 .emails-table-wrapper .priority .ok,
 .pages-table-wrapper .privacyPolicy .ok {
     background-color: rgb(63, 163, 58);
+    font-size: 0.6rem;
 }
 
 .emails-table-wrapper .priority .no-data {
     background-color: rgb(141, 151, 155);
+    font-size: 0.6rem;
 }
 
 .cookies-table-wrapper .status .misclassified {
@@ -118,4 +125,13 @@
     padding: 10px;
     cursor: pointer;
     text-align: left;
+}
+tbody tr:hover {
+    background-color: #ECF9FF;
+    border-radius: 10px;
+}
+@media screen and (max-width:1100px) {
+    .table-wrapper {
+        width: 100%;
+    }    
 }

@@ -17,10 +17,11 @@ class Table extends React.Component {
                         <tr>
                             <th></th>
                             {this.props.data && this.props.data.keys && this.props.data.keys.map(key =>
-                                <th>{this.props.data.headers && this.props.data.headers[key]}</th>
+                                <th className='table-column-name'>{this.props.data.headers && this.props.data.headers[key]}</th>
                             )}
                         </tr>
                     </thead>
+                    <br></br>
                     <tbody>
                         {this.props.data && this.props.data.newRows && this.props.data.newRows.map((row, index) =>
                             <tr>

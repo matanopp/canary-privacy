@@ -8,8 +8,10 @@ function OverviewTile(props) {
                 <p className="overview-tile-data"><b>{props.data > 0 ? "+" : ""}{props.data}</b></p>
                 <img className="overview-tile-image" src={props.img} />
             </div>
-            <b className="overview-tile-message">{props.message}</b>
-            <b className="overview-tile-total">{props.total} Total</b>
+            <div className='overview-tile-mid-row'>
+                <b className="overview-tile-message">{props.message}</b><br></br>
+                <b className="overview-tile-total">{props.total} Total</b>
+            </div>
             <ViewDetailsLink to={props.linkTo} />
         </div>
     );
