@@ -22,7 +22,7 @@
 .table-wrapper th {
     padding: 8px;
     word-break: break-word;
-    min-width: 50px;
+    min-width: 65px;
     max-width: 1000px;
 }
 
