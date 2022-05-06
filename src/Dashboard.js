@@ -15,6 +15,7 @@ class Dashboard extends React.Component {
         <div className="dashboard-content">
           <div id="change-detection-container" className="db-container">
             <h1>Change Detection</h1>
+            <p className="title-description">Changes detected since the last scan</p>
             <Overview
               pages={this.props.data.newPages.length}
               pagesTotal={
@@ -31,6 +32,8 @@ class Dashboard extends React.Component {
                 this.props.data.newForms.length +
                 this.props.data.existingForms.length
               }
+              cookies={this.props.data.newRawCookies.length}
+              cookiesTotal={this.props.data.newRawCookies.length + this.props.data.existingRawCookies.length}
             />
           </div>
           <div id="compliance-tracking-container" className="db-container">

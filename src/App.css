@@ -172,6 +172,10 @@ button:-webkit-details-marker {
     max-width: calc(900px + 2rem);
 }
 
+.title-description {
+    font-size: 1.2rem;
+}
+
 .dashboard-content h1 {
     font-size: 1.5rem;
 }
@@ -442,7 +446,6 @@ button:-webkit-details-marker {
 
 .tests-wrapper {
     width: 100%;
-    min-height: 300px;
     display: flex;
     flex-direction: row;
     /* flex-flow: row wrap; */

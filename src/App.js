@@ -16,6 +16,7 @@ import EmailsPage from './EmailsPage.js';
 import PagesPage from './PagesPage.js';
 import ScriptsPage from './ScriptsPage.js';
 import FormsPage from './FormsPage.js';
+import RawCookiesPage from './RawCookiesPage'
 import logoOnlyBlue from './images/logo/logo-only-blue.png';
 import _ from 'lodash';
 
@@ -46,6 +47,8 @@ class App extends React.Component {
             newScripts: [],
             existingForms: [],
             newForms: [],
+            existingRawCookies: [],
+            newRawCookies: [],
             companyName: null,
             selectedDomain: 0,
             user: props.user,
@@ -80,6 +83,8 @@ class App extends React.Component {
                                         existingScripts: this.state.existingScripts,
                                         newForms: this.state.newForms,
                                         existingForms: this.state.existingForms,
+                                        existingRawCookies: this.state.existingRawCookies,
+                                        newRawCookies: this.state.newRawCookies,
                                         cookies: this.state.cookies,
                                         emails: this.state.emails,
                                         actionItems: this.state.dashboardData.domains[this.state.selectedDomain].actionItems
@@ -170,6 +175,22 @@ class App extends React.Component {
                                 username = {this.state.user.username}
                                 />
                         } />
+                        <Route path="allCookies" element={
+                            <PageWrapper
+                                thisPage="allCookies"
+                                domains={this.state.dashboardData.domains}
+                                selectedDomain={this.state.selectedDomain}
+                                updateSelectedDomain={this.updateSelectedDomain}
+                                page={
+                                    <RawCookiesPage
+                                        newRawCookies={this.state.newRawCookies}
+                                        existingRawCookies={this.state.existingRawCookies}
+                                    />
+                                } 
+                                signOut = {this.state.signOut}
+                                username = {this.state.user.username}
+                                />
+                        } />
                     </Routes>
                 </BrowserRouter>
         );
@@ -245,7 +266,7 @@ class App extends React.Component {
 
         let cookies = this.getCookies();
         let emails = this.getEmails();
-        let { existingPages, newPages, existingScripts, newScripts, existingForms, newForms } = this.getChanges();
+        let { existingPages, newPages, existingScripts, newScripts, existingForms, newForms, existingRawCookies, newRawCookies } = this.getChanges();
         let companyName = this.state.dashboardData.companyName;
 
         this.setState({
@@ -257,6 +278,8 @@ class App extends React.Component {
             newScripts: newScripts,
             existingForms: existingForms,
             newForms: newForms,
+            existingRawCookies: existingRawCookies,
+            newRawCookies : newRawCookies,
             companyName: companyName,
         });
     }
@@ -415,6 +438,11 @@ class App extends React.Component {
             });
         }
 
+        let _formatCookie = (c) => {
+            c.dateDetected = new Date(c.dateDetected * 1000).toLocaleDateString()
+            return c;
+        }
+
         let existingPages = _.uniq(changeDetectionData.pages.filter(p => p.status === "existing").map(_formatPage));
         let newPages = _.uniq(changeDetectionData.pages.filter(p => p.status === "new").map(_formatPage));
 
@@ -424,13 +452,22 @@ class App extends React.Component {
         let existingForms = _filterForms(groupBy(changeDetectionData.forms.filter(p => p.status === "existing"), "formID", _formatFormsList), existingPages.length + newPages.length);
         let newForms = _filterForms(groupBy(changeDetectionData.forms.filter(p => p.status === "new"), "formID", _formatFormsList), existingPages.length + newPages.length);
 
+        let existingRawCookies = [];
+        let newRawCookies = [];
+        if(changeDetectionData.cookies) {
+            existingRawCookies = [];
+            newRawCookies = changeDetectionData.cookies.map(_formatCookie);
+        }
+
         return {
             existingPages: existingPages,
             newPages: newPages,
             existingScripts: existingScripts,
             newScripts: newScripts,
             existingForms: existingForms,
-            newForms: newForms
+            newForms: newForms,
+            existingRawCookies: existingRawCookies,
+            newRawCookies: newRawCookies
         };
     }
 }
