@@ -2,20 +2,7 @@ import React from 'react';
 import Table from './Table.js';
 import './ChangeDetection.css';
 import _ from 'lodash'
-
-let keys = [
-    'name',
-    'domain',
-    'urls',
-    'dateDetected'
-];
-
-let headers = {
-    'name': 'Cookie Name',
-    'domain' : 'Domain',
-    'urls': 'Pages',
-    'dateDetected' : "Date Detected"
-};
+import { pageConstants } from './pageConstants.js';
 
 let newOrExistingColumn = 'dateDetected';
 
@@ -33,8 +20,9 @@ class RawCookiesPage extends React.Component {
                     <Table
                         tableType="allCookies"
                         data={{
-                            keys,
-                            headers,
+                            keys: pageConstants.rawCookies.keys,
+                            headers: pageConstants.rawCookies.headers,
+                            tooltipDescriptions: pageConstants.rawCookies.tooltipDescriptions,
                             newRows: _.orderBy(this.props.newRawCookies, (s) => s.urls.length, "desc"),
                             existingRows: _.orderBy(this.props.existingRawCookies, (s) => s.urls.length, "desc"),
                             newOrExistingColumn,

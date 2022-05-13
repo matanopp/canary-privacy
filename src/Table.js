@@ -1,8 +1,9 @@
 import "./Table.css";
-import { render } from "@testing-library/react";
 import React from "react";
+import ReactTooltip from 'react-tooltip';
 import TableList from "./TableList.js";
 import Popup from "./Popup.js";
+
 import alertIcon from "./images/alert.svg";
 import expandIcon from './images/expand.svg';
 
@@ -30,7 +31,7 @@ class Table extends React.Component {
                             {this.props.data &&
                                 this.props.data.keys &&
                                 this.props.data.keys.map((key) => (
-                                    <th className={key}>
+                                    <th className={key} data-tip={this.props.data.tooltipDescriptions && this.props.data.tooltipDescriptions[key]}>
                                         {this.props.data.headers && this.props.data.headers[key]}
                                     </th>
                                 ))}
@@ -67,6 +68,7 @@ class Table extends React.Component {
                             ))}
                     </tbody>
                 </table>
+                <ReactTooltip />
             </div>
         );
     }

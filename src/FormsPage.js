@@ -2,23 +2,7 @@ import React from 'react';
 import Table from './Table.js';
 import './ChangeDetection.css';
 import _ from 'lodash'
-
-let keys = [
-    'formId',
-    'urls',
-    'formText',
-    'dateDetected',
-    // 'formId',
-    // 'policyExists',
-];
-
-let headers = {
-    'formId': 'Form ID',
-    'urls': 'Pages',
-    'formText': 'Data Elements',
-    'dateDetected': 'Date Detected',
-    // 'policyExists': 'Privacy Policy Exists',
-};
+import { pageConstants } from './pageConstants.js';
 
 let newOrExistingColumn = 'dateDetected';
 
@@ -36,8 +20,9 @@ class FormsPage extends React.Component {
                     <Table
                         tableType="forms"
                         data={{
-                            keys,
-                            headers,
+                            keys: pageConstants.forms.keys,
+                            headers: pageConstants.forms.headers,
+                            tooltipDescriptions: pageConstants.forms.tooltipDescriptions,
                             newRows: _.orderBy(this.props.newForms, (s) => s.urls.length, "desc"),
                             existingRows: _.orderBy(this.props.existingForms, (s) => s.urls.length, "desc"),
                             newOrExistingColumn,

@@ -2,22 +2,7 @@ import React from 'react';
 import Table from './Table.js';
 import './ChangeDetection.css';
 import _ from 'lodash'
-
-let keys = [
-    // 'done',
-    'url',
-    // 'privacyPolicy',
-    // 'version',
-    'dateDetected',
-];
-
-let headers = {
-    'done': 'Done',
-    'url': 'Page URL',
-    'privacyPolicy': 'Privacy Policy',
-    'version': 'Version',
-    'dateDetected': 'Date Detected',
-};
+import { pageConstants } from './pageConstants.js';
 
 let newOrExistingColumn = 'dateDetected';
 
@@ -35,8 +20,9 @@ class PagesPage extends React.Component {
                     <Table
                         tableType="pages"
                         data={{
-                            keys,
-                            headers,
+                            keys: pageConstants.pages.keys,
+                            headers: pageConstants.pages.headers,
+                            tooltipDescriptions: pageConstants.pages.tooltipDescriptions,
                             newRows: _.orderBy(this.props.newPages, (s) => s.url),
                             existingRows: _.orderBy(this.props.existingPages, (s) => s.url),
                             newOrExistingColumn,
