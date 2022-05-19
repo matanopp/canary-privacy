@@ -4,16 +4,18 @@ h3,
 p {
     margin: 0;
 }
+
 html {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-  }
-  *,
-  *:before,
-  *:after {
+}
+
+*,
+*:before,
+*:after {
     box-sizing: inherit;
-  }
+}
 
 p {
     font-size: 12px;
@@ -68,7 +70,7 @@ button:focus {
     outline: 1px transparent;
 }
 
-button:before { 
+button:before {
     display: none;
 }
 
@@ -134,8 +136,8 @@ button:-webkit-details-marker {
     background-color: rgb(237, 241, 253);
     display: grid;
     width: 100vw;
-    grid-template-columns: minmax(250px,250px) minmax(632px,3fr) minmax(0,1fr);
-    grid-template-rows: 60px minmax(calc(100vh - 100px),1fr) 40px;
+    grid-template-columns: minmax(250px, 250px) minmax(632px, 3fr) minmax(0, 1fr);
+    grid-template-rows: 60px minmax(calc(100vh - 100px), 1fr) 40px;
 }
 
 .page-content {
@@ -149,6 +151,7 @@ button:-webkit-details-marker {
     overflow-x: visible;
     /* height: calc(100% - 200px); */
 }
+
 .page-content h1 {
     font-size: 1.5rem;
 }
@@ -160,6 +163,7 @@ button:-webkit-details-marker {
     align-items: flex-start;
     gap: 1rem;
 }
+
 .db-container {
     display: flex;
     flex-direction: column;
@@ -172,9 +176,10 @@ button:-webkit-details-marker {
     font-size: 1.2rem;
 }
 
-.dashboard-content h1{
+.dashboard-content h1 {
     font-size: 1.5rem;
 }
+
 .logo {
     width: 200px;
     margin-bottom: 30px;
@@ -201,9 +206,11 @@ button:-webkit-details-marker {
     color: #50535F;
     font-size: 0.8rem;
 }
+
 .sidebar-item {
     text-decoration: none;
 }
+
 .icon-background-selected {
     background-color: #D4E9F8;
 }
@@ -213,9 +220,11 @@ button:-webkit-details-marker {
     white-space: nowrap;
     /* background-color: rgb(172, 199, 246); */
 }
+
 .sidebar-text {
     font-size: 0.8rem;
 }
+
 .sidebar-text-selected {
     color: rgb(57, 73, 214);
     font-weight: bold;
@@ -365,7 +374,7 @@ button:-webkit-details-marker {
 
 .popup-content {
     background-color: white;
-    padding: 50px;
+    padding: 20px;
     width: 50vw;
     height: 50vh;
     min-width: 600px;
@@ -377,8 +386,23 @@ button:-webkit-details-marker {
     justify-content: space-between;
 }
 
-.popup-content h1 {
-    margin-bottom: 50px;
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.popup-page-content {
+    height: 90%;
+    overflow-y: scroll;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .popup-buttons {
@@ -395,6 +419,10 @@ button:-webkit-details-marker {
 .popup-button-primary:hover {
     color: white;
     background-color: rgb(97, 112, 245);
+}
+
+.popup-close-button {
+    width: 100px;
 }
 
 .header-auth {
@@ -431,3 +459,22 @@ button:-webkit-details-marker {
     }
 }
 
+.rescan-content {
+    /* min-height: 50%; */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rescan-content p {
+    font-size: 16px;
+}
+
+.rescan-content button {
+    min-width: 50%;
+    min-height: 60px;
+    font-size: 20px;
+    margin: 20px;
+}
