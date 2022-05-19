@@ -439,7 +439,7 @@ class App extends React.Component {
         }
 
         let _formatCookie = (c) => {
-            c.dateDetected = new Date(c.dateDetected * 1000).toLocaleDateString()
+            c.dateDetectedParsed = new Date(c.dateDetected * 1000).toLocaleDateString()
             return c;
         }
 

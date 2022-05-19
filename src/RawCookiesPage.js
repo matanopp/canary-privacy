@@ -7,17 +7,17 @@ let keys = [
     'name',
     'domain',
     'urls',
-    'dateDetected'
+    'dateDetectedParsed'
 ];
 
 let headers = {
     'name': 'Cookie Name',
     'domain' : 'Domain',
     'urls': 'Pages',
-    'dateDetected' : "Date Detected"
+    'dateDetectedParsed' : "Date Detected"
 };
 
-let newOrExistingColumn = 'dateDetected';
+let newOrExistingColumn = 'dateDetectedParsed';
 
 class RawCookiesPage extends React.Component {
     constructor(props) {
