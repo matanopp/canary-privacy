@@ -36,7 +36,7 @@ class Header extends React.Component {
                   ))}
               </div>
             </div>
-            <button onClick={this.props.showRescanPopup}>Request Rescan</button>
+            <button onClick={this.props.showRescanPopup}>Rescan</button>
           </div>
           <div className="header-auth">
             <div id="header-auth-username">{this.state.username}</div>

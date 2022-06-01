@@ -34,7 +34,7 @@ class PageWrapper extends React.Component {
                     {this.state.rescanPopupIsVisible &&
                         <Popup
                             closePopup={this.closeRescanPopup}
-                            title="Request Rescan"
+                            title="Rescan"
                             pageContent={
                                 <RescanRequestContent
                                     rescanDomain={this.props.domains[this.props.selectedDomain].domainName}
