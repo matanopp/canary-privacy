@@ -180,21 +180,25 @@ class Sidebar extends React.Component {
         <Link className="icon-background" to="/allCookies">
           {this.props.thisPage === "allCookies" ? (
             <>
-              <img
-                className="icon"
-                src={cookieIconBlue}
-                alt="Cookies Icon Blue"
-              />
-              <p className="sidebar-text-selected">Cookies</p>
+              <div className="icon-background icon-background-selected">
+                <img
+                  className="icon"
+                  src={cookieIconBlue}
+                  alt="Cookies Icon Blue"
+                />
+                <p className="sidebar-text-selected">Cookies</p>
+              </div>
             </>
           ) : (
             <>
-              <img
-                className="icon"
-                src={cookieIconGray}
-                alt="Cookies Icon Gray"
-              />
-              <p className="sidebar-text">Cookies</p>
+              <div className="icon-background">
+                <img
+                  className="icon"
+                  src={cookieIconGray}
+                  alt="Cookies Icon Gray"
+                />
+                <p className="sidebar-text">Cookies</p>
+              </div>
             </>
           )}
         </Link>
