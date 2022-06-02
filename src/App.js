@@ -346,7 +346,8 @@ class App extends React.Component {
 
     getCookies() {
         let cookiesData = this.state.dashboardData.domains[this.state.selectedDomain].tests.cookies;
-
+        if(_.isEmpty(cookiesData)) return [];
+        
         let _formatCookie = (c, classificationActual, status, nonCompliantCookiesOnPageLoad) => {
             return {
                 risk: c.priority.toUpperCase(),
