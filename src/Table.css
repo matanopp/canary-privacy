@@ -22,9 +22,9 @@
 .table-wrapper td,
 .table-wrapper th {
     padding: 8px;
-    word-break: break-all;
-    max-width: 500px;
-    min-width: 140px;
+    /* word-break: break-all; */
+    /* max-width: 500px;
+    min-width: 140px; */
     /* max-width: 1000px; */
     font-size: .8rem;
 }
@@ -36,6 +36,7 @@
 .table-wrapper thead th:first-child {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    width: 5%;
 }
 
 .table-wrapper thead th:last-child {
@@ -110,11 +111,14 @@
     border: none;
     cursor: pointer;
     text-align: left;
+    padding: 0;
+    box-shadow: none;
 }
 
 .array-button .icon {
     height: 100%;
-    margin-right: 10px;
+    margin-right: 10%;
+    width: 18px;
 }
 
 .array-items {
@@ -129,6 +133,73 @@
 tbody tr:hover {
     background-color: #ECF9FF;
     border-radius: 10px;
+}
+.pages-table-wrapper .url {
+    width: 85%;
+}
+.pages-table-wrapper .dateDetected {
+    width: 10%;
+}
+.pages-table-wrapper tbody .url {
+    word-break: break-all;
+}
+.scripts-table-wrapper .dateDetected {
+    width: 10%;
+}
+.scripts-table-wrapper .scriptName {
+    width: 20%;
+}
+.scripts-table-wrapper .baseDomain {
+    width: 20%;
+}
+.scripts-table-wrapper .scriptUrl {
+    width: 30%;
+    word-break: break-all;
+}
+.scripts-table-wrapper .urls {
+    width: 15%;
+}
+.forms-table-wrapper .dateDetected {
+    width: 10%;
+}
+.forms-table-wrapper .formId {
+    width: 30%;
+}
+.forms-table-wrapper .urls {
+    width: 15%;
+}
+.forms-table-wrapper .formText {
+    width: 40%;
+}
+.allCookies-table-wrapper .dateDetectedParsed {
+    width: 10%;
+}
+.allCookies-table-wrapper .name {
+    width: 10%;
+}
+.allCookies-table-wrapper .domain {
+    width: 10%;
+}
+.allCookies-table-wrapper .type {
+    width: 6%;
+}
+.allCookies-table-wrapper .platform {
+    width: 10%;
+}
+.allCookies-table-wrapper .description {
+    width: 20%;
+}
+.allCookies-table-wrapper .retention_period {
+    width: 7%;
+}
+.allCookies-table-wrapper .regulation_link {
+    width: 10%;
+}
+.allCookies-table-wrapper .urls {
+    width: 7%;
+}
+.allCookies-table-wrapper tbody .regulation_link {
+    word-break: break-all;
 }
 @media screen and (max-width:1100px) {
     .table-wrapper {

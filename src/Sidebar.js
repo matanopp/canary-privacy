@@ -177,7 +177,7 @@ class Sidebar extends React.Component {
             </>
           )}
         </Link>
-        <Link className="icon-background" to="/allCookies">
+        <Link className="sidebar-item" to="/allCookies">
           {this.props.thisPage === "allCookies" ? (
             <>
               <div className="icon-background icon-background-selected">

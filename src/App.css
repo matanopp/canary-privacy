@@ -345,17 +345,17 @@ button:-webkit-details-marker {
 }
 
 .formText p {
-    width: 250px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+    /* width: 250px; */
+    /* text-overflow: ellipsis;
+    overflow: hidden; */
+
+    /* white-space: nowrap; */
 }
 
-.formText p:focus {
+/* .formText p:focus {
     text-overflow: clip;
     white-space: normal;
-    word-break: break-all;
-}
+} */
 
 .popup-wrapper {
     position: fixed;
