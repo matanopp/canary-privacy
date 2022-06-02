@@ -115,14 +115,25 @@ export const pageConstants = {
         keys: [
             'name',
             'domain',
+            'type',
+            'platform',
+            'description',
+            'retention_period', // TODO: Take from cookie and not from DB.
+            'dateDetectedParsed',
+            'regulation_link',
             'urls',
-            'dateDetected'
+            // 'dateDetectedParsed'
         ],
         headers: {
             'name': 'Cookie Name',
-            'domain': 'Domain',
+            'domain' : 'Domain',
+            'type' : 'Classification',
+            'platform' : 'Platform',
+            'description' : 'Description',
+            'retention_period' : 'Duration',
+            'regulation_link' : 'User Privacy Portals', //& GDPR Rights 
             'urls': 'Pages',
-            'dateDetected': 'Date Detected'
+            'dateDetectedParsed' : 'Date Detected'
         },
         tooltipDescriptions: {
             'name': 'Cookie Name Description...',
