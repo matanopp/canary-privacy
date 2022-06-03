@@ -55,153 +55,181 @@ class Sidebar extends React.Component {
         <div
           style={{ height: "2px", width: "100%", backgroundColor: "#F0F0F5" }}
         />
-        <h1>COMPLIANCE TESTING</h1>
-        <Link className="sidebar-item" to="/cookies" id="test">
-          {this.props.thisPage === "cookies" ? (
-            <>
-              <div className="icon-background-selected icon-background">
-                <img
-                  className="icon"
-                  src={cookieIconBlue}
-                  alt="Cookie Icon Blue"
-                />
-                <p className="sidebar-text-selected">Cookie Compliance</p>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="icon-background">
-                <img
-                  className="icon"
-                  src={cookieIconGray}
-                  alt="Cookie Icon Gray"
-                />
-                <p className="sidebar-text">Cookie Compliance</p>
-              </div>
-            </>
-          )}
-        </Link>
-        <Link className="sidebar-item" to="/emails">
-          {this.props.thisPage === "emails" ? (
-            <>
-              <div className="icon-background-selected icon-background">
-                <img
-                  className="icon"
-                  src={emailIconBlue}
-                  alt="Email Icon Blue"
-                />
-                <p className="sidebar-text-selected">Email Compliance</p>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="icon-background">
-                <img
-                  className="icon"
-                  src={emailIconGray}
-                  alt="Email Icon Gray"
-                />
-                <p className="sidebar-text">Email Compliance</p>
-              </div>
-            </>
-          )}
-        </Link>
+        {(this.props.featureFlags.isCookieComplianceEnabled === true ||
+          this.props.featureFlags.isEmailComplianceEnabled === true) && (
+          <h1>COMPLIANCE TESTING</h1>
+        )}
+        {this.props.featureFlags.isCookieComplianceEnabled === true && (
+          <Link className="sidebar-item" to="/cookies" id="test">
+            {this.props.thisPage === "cookies" ? (
+              <>
+                <div className="icon-background-selected icon-background">
+                  <img
+                    className="icon"
+                    src={cookieIconBlue}
+                    alt="Cookie Icon Blue"
+                  />
+                  <p className="sidebar-text-selected">Cookie Compliance</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="icon-background">
+                  <img
+                    className="icon"
+                    src={cookieIconGray}
+                    alt="Cookie Icon Gray"
+                  />
+                  <p className="sidebar-text">Cookie Compliance</p>
+                </div>
+              </>
+            )}
+          </Link>
+        )}
+        {this.props.featureFlags.isEmailComplianceEnabled === true && (
+          <Link className="sidebar-item" to="/emails">
+            {this.props.thisPage === "emails" ? (
+              <>
+                <div className="icon-background-selected icon-background">
+                  <img
+                    className="icon"
+                    src={emailIconBlue}
+                    alt="Email Icon Blue"
+                  />
+                  <p className="sidebar-text-selected">Email Compliance</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="icon-background">
+                  <img
+                    className="icon"
+                    src={emailIconGray}
+                    alt="Email Icon Gray"
+                  />
+                  <p className="sidebar-text">Email Compliance</p>
+                </div>
+              </>
+            )}
+          </Link>
+        )}
         <div
           style={{ height: "2px", width: "100%", backgroundColor: "#F0F0F5" }}
         />
-        <h1>CHANGE DETECTION</h1>
-        <Link className="sidebar-item" to="/pages">
-          {this.props.thisPage === "pages" ? (
-            <>
-              <div className="icon-background icon-background-selected">
-                <img className="icon" src={pageIconBlue} alt="Page Icon Blue" />
-                <p className="sidebar-text-selected">Pages</p>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="icon-background">
-                <img className="icon" src={pageIconGray} alt="Page Icon Blue" />
-                <p className="sidebar-text">Pages</p>
-              </div>
-            </>
-          )}
-        </Link>
-        <Link className="sidebar-item" to="/scripts">
-          {this.props.thisPage === "scripts" ? (
-            <>
-              <div className="icon-background icon-background-selected">
-                <img
-                  className="icon"
-                  src={scriptIconBlue}
-                  alt="Forms Icon Blue"
-                />
-                <p className="sidebar-text-selected">Scripts</p>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="icon-background">
-                <img
-                  className="icon"
-                  src={scriptIconGray}
-                  alt="Forms Icon Blue"
-                />
-                <p className="sidebar-text">Scripts</p>
-              </div>
-            </>
-          )}
-        </Link>
-        <Link className="sidebar-item" to="/forms">
-          {this.props.thisPage === "forms" ? (
-            <>
-              <div className="icon-background icon-background-selected">
-                <img
-                  className="icon"
-                  src={formIconBlue}
-                  alt="Forms Icon Blue"
-                />
-                <p className="sidebar-text-selected">Forms</p>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="icon-background">
-                <img
-                  className="icon"
-                  src={formIconGray}
-                  alt="Forms Icon Blue"
-                />
-                <p className="sidebar-text">Forms</p>
-              </div>
-            </>
-          )}
-        </Link>
-        <Link className="sidebar-item" to="/allCookies">
-          {this.props.thisPage === "allCookies" ? (
-            <>
-              <div className="icon-background icon-background-selected">
-                <img
-                  className="icon"
-                  src={cookieIconBlue}
-                  alt="Cookies Icon Blue"
-                />
-                <p className="sidebar-text-selected">Cookies</p>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="icon-background">
-                <img
-                  className="icon"
-                  src={cookieIconGray}
-                  alt="Cookies Icon Gray"
-                />
-                <p className="sidebar-text">Cookies</p>
-              </div>
-            </>
-          )}
-        </Link>
+        {(this.props.featureFlags.isPagesEnabled === true ||
+          this.props.featureFlags.isScriptsEnabled === true || 
+          this.props.featureFlags.isFormsEnabled === true ||
+          this.props.featureFlags.isAllCookiesEnabled === true) && (
+          <h1>CHANGE DETECTION</h1>
+        )}
+        {this.props.featureFlags.isPagesEnabled === true && (
+          <Link className="sidebar-item" to="/pages">
+            {this.props.thisPage === "pages" ? (
+              <>
+                <div className="icon-background icon-background-selected">
+                  <img
+                    className="icon"
+                    src={pageIconBlue}
+                    alt="Page Icon Blue"
+                  />
+                  <p className="sidebar-text-selected">Pages</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="icon-background">
+                  <img
+                    className="icon"
+                    src={pageIconGray}
+                    alt="Page Icon Blue"
+                  />
+                  <p className="sidebar-text">Pages</p>
+                </div>
+              </>
+            )}
+          </Link>
+        )}
+        {this.props.featureFlags.isScriptsEnabled === true && (
+          <Link className="sidebar-item" to="/scripts">
+            {this.props.thisPage === "scripts" ? (
+              <>
+                <div className="icon-background icon-background-selected">
+                  <img
+                    className="icon"
+                    src={scriptIconBlue}
+                    alt="Forms Icon Blue"
+                  />
+                  <p className="sidebar-text-selected">Scripts</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="icon-background">
+                  <img
+                    className="icon"
+                    src={scriptIconGray}
+                    alt="Forms Icon Blue"
+                  />
+                  <p className="sidebar-text">Scripts</p>
+                </div>
+              </>
+            )}
+          </Link>
+        )}
+        {this.props.featureFlags.isFormsEnabled === true && (
+          <Link className="sidebar-item" to="/forms">
+            {this.props.thisPage === "forms" ? (
+              <>
+                <div className="icon-background icon-background-selected">
+                  <img
+                    className="icon"
+                    src={formIconBlue}
+                    alt="Forms Icon Blue"
+                  />
+                  <p className="sidebar-text-selected">Forms</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="icon-background">
+                  <img
+                    className="icon"
+                    src={formIconGray}
+                    alt="Forms Icon Blue"
+                  />
+                  <p className="sidebar-text">Forms</p>
+                </div>
+              </>
+            )}
+          </Link>
+        )}
+        {this.props.featureFlags.isAllCookiesEnabled === true && (
+          <Link className="sidebar-item" to="/allCookies">
+            {this.props.thisPage === "allCookies" ? (
+              <>
+                <div className="icon-background icon-background-selected">
+                  <img
+                    className="icon"
+                    src={cookieIconBlue}
+                    alt="Cookies Icon Blue"
+                  />
+                  <p className="sidebar-text-selected">Cookies</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="icon-background">
+                  <img
+                    className="icon"
+                    src={cookieIconGray}
+                    alt="Cookies Icon Gray"
+                  />
+                  <p className="sidebar-text">Cookies</p>
+                </div>
+              </>
+            )}
+          </Link>
+        )}
       </div>
     );
   }

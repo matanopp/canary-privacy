@@ -52,7 +52,16 @@ class App extends React.Component {
             companyName: null,
             selectedDomain: 0,
             user: props.user,
-            signOut: props.signOut
+            signOut: props.signOut,
+            featureFlags : {
+                isCookieComplianceEnabled: true,
+                isEmailComplianceEnabled: true,
+                isPagesEnabled: true,
+                isScriptsEnabled: true,
+                isFormsEnabled: true,
+                isAllCookiesEnabled: true,
+                isToDoListEnabled: true
+            }
         };
     }
 
@@ -76,7 +85,9 @@ class App extends React.Component {
                                 selectedDomain={this.state.selectedDomain}
                                 updateSelectedDomain={this.updateSelectedDomain}
                                 page={
-                                    <Dashboard data={{
+                                    <Dashboard 
+                                    featureFlags={this.state.featureFlags} 
+                                    data={{
                                         newPages: this.state.newPages,
                                         existingPages: this.state.existingPages,
                                         newScripts: this.state.newScripts,
@@ -87,11 +98,12 @@ class App extends React.Component {
                                         newRawCookies: this.state.newRawCookies,
                                         cookies: this.state.cookies,
                                         emails: this.state.emails,
-                                        actionItems: this.state.dashboardData.domains[this.state.selectedDomain].actionItems
+                                        actionItems: this.state.dashboardData.domains[this.state.selectedDomain].actionItems,
                                     }} />
                                 } 
                                 signOut = {this.state.signOut}
                                 username = {this.state.user.username}
+                                featureFlags = {this.state.featureFlags}
                                 />
                         } />
                         <Route path="cookies" element={
@@ -110,6 +122,7 @@ class App extends React.Component {
                                 } 
                                 signOut = {this.state.signOut}
                                 username = {this.state.user.username}
+                                featureFlags = {this.state.featureFlags}
                                 />
                         } />
                         <Route path="emails" element={
@@ -125,6 +138,7 @@ class App extends React.Component {
                                 }
                                 signOut = {this.state.signOut}
                                 username = {this.state.user.username}
+                                featureFlags = {this.state.featureFlags}
                                 />
                         } />
                         <Route path="pages" element={
@@ -141,6 +155,7 @@ class App extends React.Component {
                                 } 
                                 signOut = {this.state.signOut}
                                 username = {this.state.user.username}
+                                featureFlags = {this.state.featureFlags}
                                 />
                         } />
                         <Route path="scripts" element={
@@ -157,6 +172,7 @@ class App extends React.Component {
                                 }
                                 signOut = {this.state.signOut}
                                 username = {this.state.user.username}
+                                featureFlags = {this.state.featureFlags}
                                 />
                         } />
                         <Route path="forms" element={
@@ -173,6 +189,7 @@ class App extends React.Component {
                                 } 
                                 signOut = {this.state.signOut}
                                 username = {this.state.user.username}
+                                featureFlags = {this.state.featureFlags}
                                 />
                         } />
                         <Route path="allCookies" element={
@@ -189,6 +206,7 @@ class App extends React.Component {
                                 } 
                                 signOut = {this.state.signOut}
                                 username = {this.state.user.username}
+                                featureFlags = {this.state.featureFlags}
                                 />
                         } />
                     </Routes>
@@ -233,6 +251,9 @@ class App extends React.Component {
     async getDashboardData() {
         if (!this.state.dashboardData) {
             let dashboardData = await this.fetchDashboardDataFromS3();
+            if(dashboardData.featureFlags) {
+                this.setState({featureFlags: dashboardData.featureFlags})
+            }
             // dashboardData.domains[0].actionItems[0].description = dashboardData.domains[0].actionItems[0].desctipion;
             // dashboardData.domains[0].actionItems[0].type = "cookie";
             // dashboardData.domains[0].actionItems.push({
@@ -347,7 +368,7 @@ class App extends React.Component {
     getCookies() {
         let cookiesData = this.state.dashboardData.domains[this.state.selectedDomain].tests.cookies;
         if(_.isEmpty(cookiesData)) return [];
-        
+
         let _formatCookie = (c, classificationActual, status, nonCompliantCookiesOnPageLoad) => {
             return {
                 risk: c.priority.toUpperCase(),

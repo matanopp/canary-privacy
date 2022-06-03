@@ -42,7 +42,7 @@ class PageWrapper extends React.Component {
                             }
                         />
                     }
-                    <Sidebar thisPage={this.props.thisPage} />
+                    <Sidebar thisPage={this.props.thisPage} featureFlags={this.props.featureFlags}/>
                     <div className="page-content">{this.props.page}</div>
                     <Footer />
                 </div>
