@@ -41,9 +41,9 @@ class ToDoList extends React.Component {
   makeToDoItem(itemData) {
     return (
       <div className="to-do-item">
-        <h1>
+        <h2>
           <b>{itemData.title}</b>
-        </h1>
+        </h2>
         <div>
           <img src={this._getImageSource(itemData.type)} />
           <b
