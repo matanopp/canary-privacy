@@ -176,6 +176,7 @@ tbody tr:hover {
 }
 .allCookies-table-wrapper .name {
     width: 10%;
+    word-break: keep-all;
 }
 .allCookies-table-wrapper .domain {
     width: 10%;

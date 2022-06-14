@@ -41,6 +41,9 @@ class ToDoList extends React.Component {
   makeToDoItem(itemData) {
     return (
       <div className="to-do-item">
+        <h1>
+          <b>{itemData.title}</b>
+        </h1>
         <div>
           <img src={this._getImageSource(itemData.type)} />
           <b
@@ -49,9 +52,7 @@ class ToDoList extends React.Component {
             {itemData.priority.toUpperCase()}
           </b>
         </div>
-        <p>
-          <b>{itemData.title}</b>
-        </p>
+
         <p className="to-do-desc" tabIndex="0">
           {itemData.description}
         </p>

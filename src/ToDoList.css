@@ -12,7 +12,7 @@
     overflow: scroll;
 }
 .to-do-list h1 {
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 .to-do-item {
     width: 100%;
@@ -23,22 +23,27 @@
     margin: 10px 0;
     text-overflow: ellipsis;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .to-do-item img {
     width: 25px;
+    display: none;
 }
 
 .to-do-item div b {
     display: inline-block;
-    margin-left: 10px;
+    /* margin-left: 10px; */
+    font-size: 0.8em;
 }
 
 .to-do-high-priority {
     background-color: #B43940;
     color: white;
     width: max-content;
-    padding: 2px 10px;
+    padding: 1px 5px;
     border-radius: 5px;
 }
 
@@ -46,7 +51,7 @@
     background-color: #CC6B1F;
     color: white;
     width: max-content;
-    padding: 2px 10px;
+    padding: 1px 5px;
     border-radius: 5px;
 }
 
@@ -54,7 +59,7 @@
     background-color: #C99700;
     color: white;
     width: max-content;
-    padding: 2px 10px;
+    padding: 1px 5px;
     border-radius: 5px;
 }
 
