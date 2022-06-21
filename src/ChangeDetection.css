@@ -27,3 +27,29 @@
     color: white;
     background-color: rgb(57, 73, 214);
 }
+.inventory-overview {
+    display: flex;
+    width: 133%;
+    background-color: white;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #D0D3DE;
+}
+.new ,.total {
+    width: 50%;
+}
+
+.new .title, .total .title {
+    color: #50535F;
+}
+.new .number, .total .number {
+    font-size: 2rem;
+    color: rgb(57, 73, 214);
+}
+@media screen and (max-width:1100px) {
+    .inventory-overview {
+        width: 100%;
+        min-width: 800px;
+    }    
+}

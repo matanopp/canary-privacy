@@ -1,8 +1,9 @@
 .table-wrapper {
     background-color: white;
     width: 133%;
-    padding: 20px;
+    /* padding: 10px; */
     border-radius: 10px;
+    border: 1px solid #D0D3DE;
     text-align: left;
     /* min-width: 1040px; */
     /* overflow-x: scroll; */
@@ -26,12 +27,13 @@
     /* max-width: 500px;
     min-width: 140px; */
     /* max-width: 1000px; */
-    font-size: .8rem;
+    font-size: 1rem;
 }
 
 .table-wrapper thead {
-    background-color: rgb(237, 241, 253);
-    height: 50px;
+    /* background-color: rgb(237, 241, 253); */
+    border-bottom: 1px solid #D0D3DE;
+    height: 3rem;
 }
 .table-wrapper thead th:first-child {
     border-top-left-radius: 10px;
@@ -66,7 +68,12 @@
     min-width: max-content;
     max-width: 70%;
 }
-
+.cookies-table-wrapper .name,
+.scripts-table-wrapper .scriptName,
+.forms-table-wrapper .formId,
+.allCookies-table-wrapper .name {
+    font-weight: bold;
+}
 .cookies-table-wrapper .risk .high,
 .emails-table-wrapper .priority .alert,
 .pages-table-wrapper .privacyPolicy .absent {
@@ -113,6 +120,7 @@
     text-align: left;
     padding: 0;
     box-shadow: none;
+    font-size: .8rem;
 }
 
 .array-button .icon {

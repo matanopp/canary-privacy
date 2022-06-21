@@ -1,0 +1,32 @@
+.how-to {
+  width: 133%;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #D0D3DE;
+  display: flex;
+  justify-content: space-between;
+}
+.how-to-steps-cookies {
+  width: 23%;
+}
+.how-to-steps-email {
+  width: 30%;
+}
+.how-to-steps-top {
+  display: flex;
+  align-items: center;
+}
+.how-to-steps-top hr {
+  width: 80%;
+  height: 1px;
+  border: none;
+  border-bottom: 1px solid #989BA5;;
+}
+
+@media screen and (max-width:1100px) {
+  .how-to {
+      width: 100%;
+      min-width: 800px;
+  }    
+}

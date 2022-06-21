@@ -14,9 +14,11 @@ function OverviewTile(props) {
         <img className="overview-tile-image" src={props.img} />
       </div>
       <div className="overview-tile-mid-row">
-        <b className="overview-tile-message">{props.message}</b>
-        <br></br>
-        <b className="overview-tile-total">{props.total} Total</b>
+        <p className="overview-tile-message">{props.message}</p>
+        {/* <br></br> */}
+        <p className="overview-tile-total">
+          <b>{props.total}</b> Total
+        </p>
       </div>
       <ViewDetailsLink to={props.linkTo} />
     </div>

@@ -14,16 +14,17 @@ class Dashboard extends React.Component {
       <>
         <div className="dashboard-content">
           <div id="change-detection-container" className="db-container">
-            {(this.props.featureFlags.isPagesEnabled === true ||
-              this.props.featureFlags.isScriptsEnabled === true ||
-              this.props.featureFlags.isFormsEnabled === true ||
-              this.props.featureFlags.isAllCookiesEnabled === true) ===
-              true && (
-              <h1>Change Detection</h1>
-              )}
-            <p className="title-description">
-              Changes detected since the last scan
-            </p>
+            <div>
+              {(this.props.featureFlags.isPagesEnabled === true ||
+                this.props.featureFlags.isScriptsEnabled === true ||
+                this.props.featureFlags.isFormsEnabled === true ||
+                this.props.featureFlags.isAllCookiesEnabled === true) ===
+                true && <h1>Change Detection</h1>}
+              <p className="title-description">
+                Changes detected since the last scan
+              </p>
+            </div>
+
             <Overview
               pages={this.props.data.newPages.length}
               pagesTotal={
