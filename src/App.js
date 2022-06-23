@@ -432,7 +432,7 @@ class App extends React.Component {
                 'baseDomain': scriptBaseDomain,
                 'urls': _.uniq(scripts.map(s => s.pageUrl)),
                 'scriptName': _.first(scripts).scriptName,
-                'scriptUrl': _.first(scripts).scriptUrl.substring(0, 50) + "...",
+                'scriptUrl': _.first(scripts).scriptUrl,
                 'dateDetected': new Date(_.first(scripts).dateDetected * 1000).toLocaleDateString(),
             }
         }
