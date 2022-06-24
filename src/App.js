@@ -233,7 +233,8 @@ class App extends React.Component {
 
     async fetchDashboardDataFromS3() {
         const username = this.state.user.username;
-        let path = `https://canary-scan-results.s3.us-east-2.amazonaws.com/${username}.json`
+        // let path = `https://canary-scan-results.s3.us-east-2.amazonaws.com/${username}.json`
+        let path = `https://canary-payloads.s3.us-east-1.amazonaws.com/${username}.json`
         let res = await fetch(path)
             .then((res) => res.json())
             .then(
