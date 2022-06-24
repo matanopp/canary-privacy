@@ -71,7 +71,7 @@ class Table extends React.Component {
                             ))}
                     </tbody>
                 </table>
-                <ReactTooltip />
+                <ReactTooltip multiline={true}/>
             </div>
         );
     }
