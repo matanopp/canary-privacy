@@ -2,23 +2,11 @@ import React from "react";
 import Table from "./Table.js";
 import "./ChangeDetection.css";
 import _ from "lodash";
+import { pageConstants } from './pageConstants.js';
 
-let keys = [
-  "formId",
-  "urls",
-  "formText",
-  "dateDetected",
-  // 'formId',
-  // 'policyExists',
-];
+let keys = pageConstants.forms.keys;
 
-let headers = {
-  formId: "Form ID",
-  urls: "Pages",
-  formText: "Data Elements",
-  dateDetected: "Date Detected",
-  // 'policyExists': 'Privacy Policy Exists',
-};
+let headers = pageConstants.forms.headers;
 
 let newOrExistingColumn = "dateDetected";
 
@@ -63,6 +51,7 @@ class FormsPage extends React.Component {
             data={{
               keys,
               headers,
+              tooltipDescriptions: pageConstants.forms.tooltipDescriptions,
               newRows: _.orderBy(
                 this.props.newForms,
                 (s) => s.urls.length,

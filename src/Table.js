@@ -1,11 +1,13 @@
 import "./Table.css";
-import { render } from "@testing-library/react";
 import React from "react";
+import ReactTooltip from 'react-tooltip';
 import TableList from "./TableList.js";
 import Popup from "./Popup.js";
+
 import alertIcon from "./images/alert.svg";
 import okIcon from "./images/ok.svg";
 import expandIcon from "./images/expand.svg";
+import informationIcon from "./images/information.svg"
 
 class Table extends React.Component {
   constructor(props) {
@@ -21,61 +23,58 @@ class Table extends React.Component {
     this.updateSelectedPopup = this.updateSelectedPopup.bind(this);
   }
 
-  render() {
-    return (
-      <div className={this.props.tableType + "-table-wrapper table-wrapper"}>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              {this.props.data &&
-                this.props.data.keys &&
-                this.props.data.keys.map((key) => (
-                  <th className={key}>
-                    {this.props.data.headers && this.props.data.headers[key]}
-                  </th>
-                ))}
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.data &&
-              this.props.data.newRows &&
-              this.props.data.newRows.map((row, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  {this.props.data.keys &&
-                    this.props.data.keys.map((key) =>
-                      this.formatTableData(
-                        row,
-                        key,
-                        index,
-                        this.props.data.newOrExistingColumn
-                      )
-                    )}
-                </tr>
-              ))}
-            {this.props.data &&
-              this.props.data.existingRows &&
-              this.props.data.existingRows.map((row, index) => (
-                <tr key={index}>
-                  <td>
-                    {(this.props.data.newRows
-                      ? this.props.data.newRows.length
-                      : 0) +
-                      index +
-                      1}
-                  </td>
-                  {this.props.data.keys &&
-                    this.props.data.keys.map((key) =>
-                      this.formatTableData(row, key, index)
-                    )}
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className={this.props.tableType + "-table-wrapper table-wrapper"}>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            {this.props.data &&
+                                this.props.data.keys &&
+                                this.props.data.keys.map((key) => (
+                                    <th className={key} data-tip={this.props.data.tooltipDescriptions && this.props.data.tooltipDescriptions[key]}>
+                                      {this.props.data.headers && this.props.data.headers[key]}
+                                      {this.props.data.tooltipDescriptions[key] != null && (<img class = "tooltip-icon" alt = '' src= {informationIcon}></img>)}
+                                    </th>
+                                ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.props.data &&
+                            this.props.data.newRows &&
+                            this.props.data.newRows.map((row, index) => (
+                                <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    {this.props.data.keys && this.props.data.keys.map((key) =>
+                                        this.formatTableData(
+                                            row,
+                                            key,
+                                            index,
+                                            this.props.data.newOrExistingColumn
+                                        )
+                                    )}
+                                </tr>
+                            ))}
+                        {this.props.data &&
+                            this.props.data.existingRows &&
+                            this.props.data.existingRows.map((row, index) => (
+                                <tr key={index}>
+                                    <td>
+                                        {(this.props.data.newRows ? this.props.data.newRows.length : 0) + index + 1}
+                                    </td>
+                                    {this.props.data.keys &&
+                                        this.props.data.keys.map((key) =>
+                                            this.formatTableData(row, key, index)
+                                        )}
+                                </tr>
+                            ))}
+                    </tbody>
+                </table>
+                <ReactTooltip />
+            </div>
+        );
+    }
 
   formatTableData(row, key, rowIndex, newOrExistingColumn = null) {
     let newLabel = <b className="new-label">NEW </b>;

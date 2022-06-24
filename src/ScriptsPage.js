@@ -2,16 +2,7 @@ import React from "react";
 import Table from "./Table.js";
 import "./ChangeDetection.css";
 import _ from "lodash";
-
-let keys = ["scriptName", "baseDomain", "scriptUrl", "urls", "dateDetected"];
-
-let headers = {
-  scriptName: "Script Name",
-  baseDomain: "Base Domain",
-  scriptUrl: "Script URL",
-  urls: "Pages",
-  dateDetected: "Date Detected",
-};
+import { pageConstants } from './pageConstants.js';
 
 let newOrExistingColumn = "dateDetected";
 
@@ -51,8 +42,9 @@ class ScriptsPage extends React.Component {
           <Table
             tableType="scripts"
             data={{
-              keys,
-              headers,
+              keys: pageConstants.scripts.keys,
+              headers: pageConstants.scripts.headers,
+              tooltipDescriptions: pageConstants.scripts.tooltipDescriptions,
               newRows: _.orderBy(
                 this.props.newScripts,
                 (s) => s.urls.length,

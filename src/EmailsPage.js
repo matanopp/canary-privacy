@@ -1,23 +1,7 @@
 import React from "react";
 import Table from "./Table.js";
 import "./Howto.css";
-
-let keys = [
-  "priority",
-  "testAddress",
-  "testDate",
-  "testPage",
-  "emailsReceived",
-  "senderAddress",
-];
-let headers = {
-  priority: "Priority",
-  testAddress: "Test Address",
-  testDate: "Test Date",
-  testPage: "Opt-In Page",
-  emailsReceived: "Emails Received After Opt-Out",
-  senderAddress: "Sender Address",
-};
+import { pageConstants } from './pageConstants.js';
 
 class EmailsPage extends React.Component {
   render() {
@@ -69,8 +53,9 @@ class EmailsPage extends React.Component {
         <Table
           tableType="emails"
           data={{
-            keys: keys,
-            headers: headers,
+            keys: pageConstants.emails.keys,
+            headers: pageConstants.emails.headers,
+            tooltipDescriptions: pageConstants.emails.tooltipDescriptions,
             existingRows: this.props.emails,
           }}
         />

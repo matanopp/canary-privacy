@@ -3,26 +3,7 @@ import Table from "./Table.js";
 import "./App.css";
 import "./Howto.css";
 import { IconTexture } from "@aws-amplify/ui-react";
-
-let keys = [
-  "risk",
-  "name",
-  "status",
-  "classificationExpected",
-  "classificationActual",
-  "beforeOptIn",
-  "domain",
-];
-
-let headers = {
-  risk: "Risk",
-  name: "Name",
-  status: "Status",
-  classificationExpected: "Expected Classification",
-  classificationActual: "Actual Classification",
-  beforeOptIn: "Served Before Opt-In",
-  domain: "Domain",
-};
+import { pageConstants } from './pageConstants.js';
 
 class CookiesPage extends React.Component {
   constructor(props) {
@@ -84,8 +65,9 @@ class CookiesPage extends React.Component {
         <Table
           tableType="cookies"
           data={{
-            keys,
-            headers,
+            keys: pageConstants.cookies.keys,
+            headers: pageConstants.cookies.headers,
+            tooltipDescriptions: pageConstants.cookies.tooltipDescriptions,
             existingRows: this.props.cookies,
           }}
         />

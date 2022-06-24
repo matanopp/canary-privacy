@@ -212,6 +212,10 @@ tbody tr:hover {
 .allCookies-table-wrapper tbody {
     word-break: break-word;
 }
+
+.tooltip-icon {
+    width: 20px;
+}
 @media screen and (max-width:1100px) {
     .table-wrapper {
         width: 100%;
