@@ -47,9 +47,11 @@ export const pageConstants = {
         tooltipDescriptions: {
             'risk': 'This is a potential issue with your site that raises your risk of complaint, investigation or fine.',
             'name': "The cookie's name.",
+            'status': 'Mismanaged - Users will still be served this cookie after they opt out of cookies on your website. This cookie may not be properly integrated with your cookie consent management tool. <br/>Misclassified - Users may be served this cookie when they opt into a different category of cookies. For example, sometimes advertising cookies are accidentally misclassified as analytics cookies and are served when the user opts into analytics only.',
             'classificationExpected': 'The classification category that we expected based on the Canary Privacy cookie database.<br/>If Expected Classification differs from Actual Classification, you may consider reclassifying the cookie so your cookie consent management tool is able to control the cookie.',
             'classificationActual': 'The classification category that was observed for a cookie at the time of testing.<br/>If Actual Classification differs from Expected Classification, you may consider reclassifying the cookie so your cookie consent management tool is able to control the cookie.',
-            'beforeOptIn': 'This cookie is served before the visitor accepts cookies on your site. Generally, sites cannot serve cookies to visitors from the European Union until the user consents to the cookie. <br/>Only cookies that are “strictly necessary”, or essential for you to browse the website and use its features per the GDPR (Subject to change) may be allowed before opt-in.'
+            'beforeOptIn': 'This cookie is served before the visitor accepts cookies on your site. Generally, sites cannot serve cookies to visitors from the European Union until the user consents to the cookie. <br/>Only cookies that are “strictly necessary”, or essential for you to browse the website and use its features per the GDPR (Subject to change) may be allowed before opt-in.',
+            'domain': 'The source domain of a cookie.'
         },
     },
     pages: {
@@ -84,7 +86,7 @@ export const pageConstants = {
         tooltipDescriptions: {
             'scriptName': 'The name of the script.',
             'baseDomain': 'The base domain of a script.',
-            'scriptUrl': 'The full script URL, including all domain prefixes, ',
+            'scriptUrl': 'The full script URL.',
             'urls': 'The page or pages where Canary Privacy detected the script. Click to expand. Highlight and drag to copy.',
             'dateDetected': 'The date when Canary Privacy scanned and detected a new script on your website.',
         },
@@ -95,7 +97,7 @@ export const pageConstants = {
             'urls',
             'formText',
             'dateDetected',
-        ],
+        ],``
         headers: {
             'formId': 'Form ID',
             'urls': 'Pages',
@@ -134,6 +136,8 @@ export const pageConstants = {
             'dateDetectedParsed' : 'Date Detected'
         },
         tooltipDescriptions: {
+            'name': "The cookie's name.",
+            'domain': 'The source domain of a cookie.',
             'type' : 'The cookie category that was observed at the time of testing. Cookie classifications indicate the purpose of a cookie and include: <br/>Strictly Necessary, Preference (also known as “Functional”), Statistics (also known as “Performance”), and Marketing (also known as “Advertising”).',
             'platform' : 'The platform that is the source of this cookie. Often, this platform also receives the data associated with this cookie.',
             'description': 'A brief description that explains the purpose of the cookie and if served by a 3rd party, <br/>more information about the 3rd party entity.',
