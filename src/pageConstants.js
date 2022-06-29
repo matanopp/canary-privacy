@@ -97,7 +97,7 @@ export const pageConstants = {
             'urls',
             'formText',
             'dateDetected',
-        ],``
+        ],
         headers: {
             'formId': 'Form ID',
             'urls': 'Pages',
