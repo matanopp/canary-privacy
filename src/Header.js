@@ -18,7 +18,7 @@ class Header extends React.Component {
         <div className="header">
           <div className="header-left">
             <div className="domain-dropdown">
-              <div className="domain-dropdown-button">
+              <div className="domain-dropdown-button" onClick={this.toggleDropdown}>
                 <h1>
                   {this.props.domains[this.props.selectedDomain].domainName}
                 </h1>
