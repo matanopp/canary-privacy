@@ -443,12 +443,6 @@ button:-webkit-details-marker {
     gap: 20px;
 }
 
-@media screen and (max-width:1100px) {
-    .page-content {
-        grid-area: 2/2/3/4;
-    }
-}
-
 .rescan-content {
     /* min-height: 50%; */
 
@@ -467,4 +461,16 @@ button:-webkit-details-marker {
     min-height: 60px;
     font-size: 20px;
     margin: 20px;
+}
+.__react_component_tooltip {
+    max-width: 30vw;
+}
+.__react_component_tooltip .multi-line {
+    text-align: left;
+}
+
+@media screen and (max-width:1100px) {
+    .page-content {
+        grid-area: 2/2/3/4;
+    }
 }
