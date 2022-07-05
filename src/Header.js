@@ -1,5 +1,6 @@
 import React from "react";
 import caretDown from "./images/caret-down.png";
+import caretUp from "./images/caret-up.png";
 
 class Header extends React.Component {
   constructor(props) {
@@ -7,9 +8,10 @@ class Header extends React.Component {
     this.state = {
       signOut: props.signOut,
       username: props.username,
+      showDropdown: false
     };
   }
-
+  
   render() {
     return (
       <>
@@ -20,8 +22,13 @@ class Header extends React.Component {
                 <h1>
                   {this.props.domains[this.props.selectedDomain].domainName}
                 </h1>
-                <img className="dropdown-caret" src={caretDown} />
+                {this.state.showDropdown ? (
+                    <img alt='' className="dropdown-caret" src={caretUp} onClick={this.toggleDropdown} />
+                  ) :
+                  <img alt='' className="dropdown-caret" src={caretDown} onClick={this.toggleDropdown} />
+                }
               </div>
+              {this.state.showDropdown === true && (
               <div className={"domain-dropdown-content"}>
                 {this.props.domains &&
                   this.props.domains.map((domain, index) => (
@@ -35,6 +42,7 @@ class Header extends React.Component {
                     </button>
                   ))}
               </div>
+               )}
             </div>
             <button onClick={this.props.showRescanPopup}>Rescan</button>
           </div>
@@ -47,6 +55,10 @@ class Header extends React.Component {
         </div>
       </>
     );
+  }
+
+  toggleDropdown = () => {
+    this.setState({showDropdown : !this.state.showDropdown})
   }
 }
 

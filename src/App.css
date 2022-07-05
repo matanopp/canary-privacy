@@ -306,10 +306,6 @@ button:-webkit-details-marker {
 }
 
 .domain-dropdown-content {
-    display: none;
-}
-
-.domain-dropdown:hover .domain-dropdown-content {
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -336,10 +332,6 @@ button:-webkit-details-marker {
 
 .dropdown-caret {
     width: 20px;
-}
-
-.domain-dropdown:hover .dropdown-caret {
-    transform: rotate(180deg);
 }
 
 .formText p {
