@@ -120,7 +120,7 @@ export const pageConstants = {
             'description',
             'retention_period', // TODO: Take from cookie and not from DB.
             'dateDetectedParsed',
-            'regulation_link',
+            // 'regulation_link',
             'urls',
             // 'dateDetectedParsed'
         ],
@@ -131,7 +131,7 @@ export const pageConstants = {
             'platform' : 'Platform',
             'description' : 'Description',
             'retention_period' : 'Duration',
-            'regulation_link' : 'User Privacy Portals', //& GDPR Rights 
+            // 'regulation_link' : 'User Privacy Portals', //& GDPR Rights 
             'urls': 'Pages',
             'dateDetectedParsed' : 'Date Detected'
         },
