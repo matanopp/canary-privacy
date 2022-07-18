@@ -153,7 +153,7 @@ button:-webkit-details-marker {
     /* height: calc(100% - 200px); */
 }
 
-.page-content h1 {
+h1 {
     font-size: 1.5rem;
 }
 
@@ -366,11 +366,9 @@ button:-webkit-details-marker {
     background-color: white;
     padding: 20px;
     width: 50vw;
-    height: 50vh;
+    max-height: 60vh;
     min-width: 600px;
-    min-height: 400px;
     border-radius: 10px;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -445,7 +443,6 @@ button:-webkit-details-marker {
 
 .rescan-content {
     /* min-height: 50%; */
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -457,10 +454,10 @@ button:-webkit-details-marker {
 }
 
 .rescan-content button {
-    min-width: 50%;
-    min-height: 60px;
-    font-size: 20px;
-    margin: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 5px 10px;
+    margin-top: 10vh;
 }
 .__react_component_tooltip {
     max-width: 30vw;

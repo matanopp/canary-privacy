@@ -8,41 +8,54 @@ class Header extends React.Component {
     this.state = {
       signOut: props.signOut,
       username: props.username,
-      showDropdown: false
+      showDropdown: false,
     };
   }
-  
+
   render() {
     return (
       <>
         <div className="header">
           <div className="header-left">
             <div className="domain-dropdown">
-              <div className="domain-dropdown-button" onClick={this.toggleDropdown}>
+              <div
+                className="domain-dropdown-button"
+                onClick={this.toggleDropdown}
+              >
                 <h1>
                   {this.props.domains[this.props.selectedDomain].domainName}
                 </h1>
                 {this.state.showDropdown ? (
-                    <img alt='' className="dropdown-caret" src={caretUp} onClick={this.toggleDropdown} />
-                  ) :
-                  <img alt='' className="dropdown-caret" src={caretDown} onClick={this.toggleDropdown} />
-                }
+                  <img
+                    alt=""
+                    className="dropdown-caret"
+                    src={caretUp}
+                    onClick={this.toggleDropdown}
+                  />
+                ) : (
+                  <img
+                    alt=""
+                    className="dropdown-caret"
+                    src={caretDown}
+                    onClick={this.toggleDropdown}
+                  />
+                )}
               </div>
               {this.state.showDropdown === true && (
-              <div className={"domain-dropdown-content"}>
-                {this.props.domains &&
-                  this.props.domains.map((domain, index) => (
-                    <button
-                      className="domain-link"
-                      onClick={() => {
-                        this.props.updateSelectedDomain(index);
-                      }}
-                    >
-                      {domain.domainName}
-                    </button>
-                  ))}
-              </div>
-               )}
+                <div className={"domain-dropdown-content"}>
+                  {this.props.domains &&
+                    this.props.domains.map((domain, index) => (
+                      <button
+                        className="domain-link"
+                        onClick={() => {
+                          this.props.updateSelectedDomain(index);
+                        }}
+                      >
+                        {domain.domainName}
+                      </button>
+                    ))}
+                </div>
+              )}
             </div>
             <button onClick={this.props.showRescanPopup}>Rescan</button>
           </div>
@@ -58,8 +71,8 @@ class Header extends React.Component {
   }
 
   toggleDropdown = () => {
-    this.setState({showDropdown : !this.state.showDropdown})
-  }
+    this.setState({ showDropdown: !this.state.showDropdown });
+  };
 }
 
 export default Header;
