@@ -92,7 +92,6 @@ class Table extends React.Component {
           multiline={true}
           event="click"
           type="dark"
-          effect="solid"
           className="tooltip-class"
         />
       </div>

@@ -372,8 +372,14 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    animation-name: scale;
+    animation-duration: .3s;
+    
 }
-
+@keyframes scale {
+    from {transform: scale(0);}
+    to {transform: scale(1);}
+  }
 .popup-header {
     display: flex;
     justify-content: space-between;
