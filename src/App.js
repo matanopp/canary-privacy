@@ -24,7 +24,7 @@ const STRICTLY_NECESSARY_CATEGORY = "Stricly Necessary";
 const FUNCTIONAL_CATEGORY = "Functional";
 const ANALYTICS_CATEGORY = "Analytics";
 const MARKETING_CATEGORY = "Marketing";
-const MISMANAGED_STATUS = "Mismanaged";
+const UNMANAGED_STATUS = "Unmanaged";
 const MISCLASSIFIED_STATUS = "Misclassified";
 
 Amplify.configure(awsExports);
@@ -327,8 +327,8 @@ class App extends React.Component {
       companyName: companyName,
     });
   }
-  getMismanagedCookies(nonCompliantCookiesPerCategory) {
-    let mismanagedCookies = [];
+  getUnmanagedCookies(nonCompliantCookiesPerCategory) {
+    let unmanagedCookies = [];
     for (let category of Object.keys(nonCompliantCookiesPerCategory)) {
       let cookiesForCategory = nonCompliantCookiesPerCategory[category];
       for (let cookie of cookiesForCategory) {
@@ -339,13 +339,13 @@ class App extends React.Component {
             nonCompliantCookiesPerCategory
           )
         ) {
-          if (!this.isCookieInList(cookie, mismanagedCookies)) {
-            mismanagedCookies.push(cookie);
+          if (!this.isCookieInList(cookie, unmanagedCookies)) {
+            unmanagedCookies.push(cookie);
           }
         }
       }
     }
-    return mismanagedCookies;
+    return unmanagedCookies;
   }
 
   isCookieInOtherCategory(cookie, category, nonCompliantCookiesPerCategory) {
@@ -371,10 +371,10 @@ class App extends React.Component {
       if (
         cookie.beforeOptIn ||
         (cookie.classificationExpected === MARKETING_CATEGORY &&
-          (cookie.status === MISMANAGED_STATUS ||
+          (cookie.status === UNMANAGED_STATUS ||
             cookie.status === MISCLASSIFIED_STATUS)) ||
         (cookie.classificationExpected === ANALYTICS_CATEGORY &&
-          (cookie.status === MISMANAGED_STATUS ||
+          (cookie.status === UNMANAGED_STATUS ||
             (cookie.status === MISCLASSIFIED_STATUS &&
               [FUNCTIONAL_CATEGORY, STRICTLY_NECESSARY_CATEGORY].includes(
                 cookie.classificationActual
@@ -386,7 +386,7 @@ class App extends React.Component {
 
       if (
         cookie.classificationExpected === FUNCTIONAL_CATEGORY &&
-        (cookie.status === MISMANAGED_STATUS ||
+        (cookie.status === UNMANAGED_STATUS ||
           (cookie.status === MISCLASSIFIED_STATUS &&
             cookie.classificationActual === STRICTLY_NECESSARY_CATEGORY))
       ) {
@@ -439,7 +439,7 @@ class App extends React.Component {
     var formattedCookies = [];
     cookiesData.nonCompliantCookiesPerCategory[STRICTLY_NECESSARY_CATEGORY] =
       cookiesData.nonCompliantCookiesAfterRejection;
-    let mismangedCookies = this.getMismanagedCookies(
+    let mismangedCookies = this.getUnmanagedCookies(
       cookiesData.nonCompliantCookiesPerCategory
     );
     mismangedCookies.forEach((c) =>
@@ -447,7 +447,7 @@ class App extends React.Component {
         _formatCookie(
           c,
           "",
-          MISMANAGED_STATUS,
+          UNMANAGED_STATUS,
           cookiesData.nonCompliantCookiesOnPageLoad
         )
       )

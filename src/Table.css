@@ -111,7 +111,7 @@
     background-color: rgb(254, 207, 222);
 }
 
-.cookies-table-wrapper .status .mismanaged {
+.cookies-table-wrapper .status .unmanaged {
     color: rgb(43, 40, 117);
     background-color: rgb(198, 194, 249);
 }
