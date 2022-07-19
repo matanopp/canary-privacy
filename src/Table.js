@@ -88,7 +88,13 @@ class Table extends React.Component {
               ))}
           </tbody>
         </table>
-        <ReactTooltip multiline={true} />
+        <ReactTooltip
+          multiline={true}
+          event="click"
+          type="dark"
+          effect="solid"
+          className="tooltip-class"
+        />
       </div>
     );
   }

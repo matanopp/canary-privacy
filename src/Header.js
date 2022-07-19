@@ -47,7 +47,8 @@ class Header extends React.Component {
                     this.props.domains.map((domain, index) => (
                       <button
                         className="domain-link"
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.stopPropagation();
                           this.props.updateSelectedDomain(index);
                         }}
                       >
@@ -73,6 +74,24 @@ class Header extends React.Component {
   toggleDropdown = () => {
     this.setState({ showDropdown: !this.state.showDropdown });
   };
+
+  close = () => {
+    this.setState({
+      showDropdown: false,
+    });
+  };
+
+  componentDidUpdate() {
+    const { showDropdown } = this.state;
+
+    setTimeout(() => {
+      if (showDropdown) {
+        window.addEventListener("click", this.close);
+      } else {
+        window.removeEventListener("click", this.close);
+      }
+    }, 0);
+  }
 }
 
 export default Header;
