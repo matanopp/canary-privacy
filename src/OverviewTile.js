@@ -1,9 +1,10 @@
 import "./Overview.css";
-import ViewDetailsLink from "./ViewDetailsLink.js";
+// import ViewDetailsLink from "./ViewDetailsLink.js";
+import { Link } from "react-router-dom";
 
 function OverviewTile(props) {
   return (
-    <div className="overview-tile">
+    <Link className="overview-tile" to={props.linkTo}>
       <div className="overview-tile-top-row">
         <p className="overview-tile-data">
           <b>
@@ -11,7 +12,6 @@ function OverviewTile(props) {
             {props.data}
           </b>
         </p>
-        <img className="overview-tile-image" src={props.img} />
       </div>
       <div className="overview-tile-mid-row">
         <p className="overview-tile-message">{props.message}</p>
@@ -20,8 +20,8 @@ function OverviewTile(props) {
           <b>{props.total}</b> Total
         </p>
       </div>
-      <ViewDetailsLink to={props.linkTo} />
-    </div>
+      {/* <ViewDetailsLink to={props.linkTo} /> */}
+    </Link>
   );
 }
 

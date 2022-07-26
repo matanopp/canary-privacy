@@ -5,7 +5,7 @@ import ViewDetailsLink from "./ViewDetailsLink.js";
 
 function EmailTile(props) {
   return (
-    <div className="email-tile tile">
+    <Link className="email-tile tile" to="/emails">
       <div>
         <h1>Email Opt-Out</h1>
         <p className="tile-subhead">
@@ -25,8 +25,8 @@ function EmailTile(props) {
                     priorityLabel={"Active Email Tests"}
                 /> */}
       </div>
-      <ViewDetailsLink to="/emails" />
-    </div>
+      {/* <ViewDetailsLink to="/emails" /> */}
+    </Link>
   );
 }
 
