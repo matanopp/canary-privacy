@@ -25,10 +25,10 @@ class ScriptsPage extends React.Component {
           greater coverage, upgrade to a Business or Enterprise account.
         </p>
         <div className="inventory-overview">
-          <div className="new">
+          {/* <div className="new">
             <p className="title">New Scripts</p>
             <p className="number">{this.props.newScripts.length}</p>
-          </div>
+          </div> */}
           <div className="total">
             <p className="title">Total Scripts</p>
             <p className="number">

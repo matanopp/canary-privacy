@@ -589,25 +589,32 @@ class App extends React.Component {
 
     let existingPages = _.uniq(
       changeDetectionData.pages
-        .filter((p) => p.status === "existing")
+        // .filter((p) => p.status === "existing")
         .map(_formatPage)
     );
-    let newPages = _.uniq(
-      changeDetectionData.pages
-        .filter((p) => p.status === "new")
-        .map(_formatPage)
-    );
+    let newPages = []; 
+    // let newPages = _.uniq(
+    //   changeDetectionData.pages
+    //     .filter((p) => p.status === "new")
+    //     .map(_formatPage)
+    // );
 
     let existingScripts = groupBy(
-      changeDetectionData.scripts.filter((p) => p.status === "existing"),
+      changeDetectionData.scripts,
       "scriptBaseDomain",
       _formatScriptsList
     );
-    let newScripts = groupBy(
-      changeDetectionData.scripts.filter((p) => p.status === "new"),
-      "scriptBaseDomain",
-      _formatScriptsList
-    );
+    let newScripts = [];
+    // let existingScripts = groupBy(
+    //   changeDetectionData.scripts.filter((p) => p.status === "existing"),
+    //   "scriptBaseDomain",
+    //   _formatScriptsList
+    // );
+    // let newScripts = groupBy(
+    //   changeDetectionData.scripts.filter((p) => p.status === "new"),
+    //   "scriptBaseDomain",
+    //   _formatScriptsList
+    // );
 
     let existingForms = _filterForms(
       groupBy(
@@ -629,8 +636,8 @@ class App extends React.Component {
     let existingRawCookies = [];
     let newRawCookies = [];
     if (changeDetectionData.cookies) {
-      existingRawCookies = [];
-      newRawCookies = changeDetectionData.cookies.map(_formatCookie);
+      newRawCookies = [];
+      existingRawCookies = changeDetectionData.cookies.map(_formatCookie);
     }
 
     return {

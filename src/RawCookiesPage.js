@@ -22,10 +22,10 @@ class RawCookiesPage extends React.Component {
           Cookie Compliance page.
         </p>
         <div className="inventory-overview">
-          <div className="new">
+          {/* <div className="new">
             <p className="title">New Cookies</p>
             <p className="number">{this.props.newRawCookies.length}</p>
-          </div>
+          </div> */}
           <div className="total">
             <p className="title">Total Cookies</p>
             <p className="number">

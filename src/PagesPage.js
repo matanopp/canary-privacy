@@ -22,10 +22,10 @@ class PagesPage extends React.Component {
           pages for privacy compliance.
         </p>
         <div className="inventory-overview">
-          <div className="new">
+          {/* <div className="new">
             <p className="title">New Pages</p>
             <p className="number">{this.props.newPages.length}</p>
-          </div>
+          </div> */}
           <div className="total">
             <p className="title">Total Pages</p>
             <p className="number">
