@@ -26,6 +26,8 @@ const ANALYTICS_CATEGORY = "Analytics";
 const MARKETING_CATEGORY = "Marketing";
 const UNMANAGED_STATUS = "Unmanaged";
 const MISCLASSIFIED_STATUS = "Misclassified";
+const BASE_BUCKET_PATH = "https://canary-payloads.s3.us-east-1.amazonaws.com/"; 
+const FORM_LIMIT_RATE = 0.6;
 
 Amplify.configure(awsExports);
 class App extends React.Component {
@@ -246,8 +248,7 @@ class App extends React.Component {
 
   async fetchDashboardDataFromS3() {
     const username = this.state.user.username;
-    // let path = `https://canary-scan-results.s3.us-east-2.amazonaws.com/${username}.json`
-    let path = `https://canary-payloads.s3.us-east-1.amazonaws.com/${username}.json`;
+    let path = BASE_BUCKET_PATH + `${username}.json`;
     let res = await fetch(path)
       .then((res) => res.json())
       .then(
@@ -268,33 +269,6 @@ class App extends React.Component {
       if (dashboardData.featureFlags) {
         this.setState({ featureFlags: dashboardData.featureFlags });
       }
-      // dashboardData.domains[0].actionItems[0].description = dashboardData.domains[0].actionItems[0].desctipion;
-      // dashboardData.domains[0].actionItems[0].type = "cookie";
-      // dashboardData.domains[0].actionItems.push({
-      //     title: 'Title 2',
-      //     priority: 'Medium',
-      //     description: 'This is the description of the second to do item in the list. It is medium important, worry about it but not too much',
-      //     type: 'email',
-      // });
-      // dashboardData.domains[0].actionItems.push({
-      //     title: 'Title 3',
-      //     priority: 'Low',
-      //     description: 'This is the description of the third to do item in the list. It is low important, worry about it but not too much',
-      //     type: 'page',
-      // });
-      // dashboardData.domains[0].actionItems.push({
-      //     title: 'Title 4',
-      //     priority: 'High',
-      //     description: 'This is the description of the fourth to do item in the list. It is high important, worry about it but not too much',
-      //     type: 'script',
-      // });
-      // dashboardData.domains[0].actionItems.push({
-      //     title: 'Title 5',
-      //     priority: 'Medium',
-      //     description: 'This is the description of the fifth to do item in the list. It is medium important, worry about it but not too much',
-      //     type: 'form',
-      // });
-
       console.log(dashboardData.domains[0].actionItems);
       this.setState({ dashboardData: dashboardData });
     }
@@ -565,11 +539,8 @@ class App extends React.Component {
     };
 
     let _filterForms = (forms, pageCount) => {
-      //TODO: move to backend
-      console.log(
-        "filtering forms with more than " + 0.9 * pageCount + " pages"
-      );
-      return forms.filter((f) => f.urls.length < 0.6 * pageCount);
+      //TODO: move to backend, make configurable      
+      return forms.filter((f) => f.urls.length < FORM_LIMIT_RATE * pageCount);
     };
 
     let groupBy = (items, field, formatFunc) => {
@@ -589,15 +560,9 @@ class App extends React.Component {
 
     let existingPages = _.uniq(
       changeDetectionData.pages
-        // .filter((p) => p.status === "existing")
         .map(_formatPage)
     );
     let newPages = []; 
-    // let newPages = _.uniq(
-    //   changeDetectionData.pages
-    //     .filter((p) => p.status === "new")
-    //     .map(_formatPage)
-    // );
 
     let existingScripts = groupBy(
       changeDetectionData.scripts,
@@ -605,16 +570,6 @@ class App extends React.Component {
       _formatScriptsList
     );
     let newScripts = [];
-    // let existingScripts = groupBy(
-    //   changeDetectionData.scripts.filter((p) => p.status === "existing"),
-    //   "scriptBaseDomain",
-    //   _formatScriptsList
-    // );
-    // let newScripts = groupBy(
-    //   changeDetectionData.scripts.filter((p) => p.status === "new"),
-    //   "scriptBaseDomain",
-    //   _formatScriptsList
-    // );
 
     let existingForms = _filterForms(
       groupBy(
